@@ -1,40 +1,43 @@
 <html>
 
-<head>
-   <title> Creation </title>
-   <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
-   <link rel="stylesheet" href="style.css">
-   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-</head>
+   <head>
+      <title> Creation </title>
+      <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
+      <link rel="stylesheet" href="style.css">
+      <script  src="creation.js" charset="utf-8" defer></script>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+   </head>
+
    <body>
 
+      <form action="***">
+         <fieldset>
 
-   <form action="***">
-      
-      <h1>Product creation</h1><br>
+            <legend><strong>Product creation</strong></legend>
 
-      <label>Select date: </label>
-      <input type="date" id="date" required>
-      <br><br>
+            <br><label>Select date: </label>
+            <input type="date" id="date" required>
+            <br><br>
 
-      <label> Insert the name of the product of the day:</label>
-      <input type="text" required>
-      <br><br>
+            <label> Insert the name of the product of the day:</label>
+            <input type="text" required>
+            <br><br>
 
-      <label for="img">Select image:</label>
-      <input type="file" id="img" name="img" accept="image/*" required>
-      <br><br>
+            <label for="img">Select image:</label>
+            <input type="file" id="img" name="img" accept="image/*" required>
+            <br><br>
 
-      <label> Insert a marketing question:</label>
-      <input type="text" required>
+            <div id="questions-container">
+               <label> Insert a marketing question:</label>
+               <input type="text" required>
+            </div>
 
+            <button type="button" id="add-question-button">Add another question</button>
+            <br><br><br><br>
 
-      <button type="send" class="add-question-button">Add another question</button>
-      <br><br><br><br>
-
-      <button type="send" id="send-button">Send</button>
-
-   </form>
+            <button type="send" id="send-button">Send</button>
+         </fieldset>
+      </form>
 
    </body>
 </html>

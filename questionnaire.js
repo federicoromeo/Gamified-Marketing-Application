@@ -10,12 +10,11 @@ window.onload = function() { // avoid variables ending up in the global scope
   var cancelButton = document.getElementById("submit-button");
   var goBackButton = document.getElementById("go-back-button");
 
-  var marketingFormCopy;
-
   nextButton.addEventListener("click", (e) => {
 
     var marketingForm = document.getElementById("marketing-form");
     inputs = marketingForm.querySelectorAll('input');
+    //form validity
     for (i = 0; i < inputs.length; ++i) {
       if(inputs[i].value.length==0){
          alert("The fields must not be empty!");
@@ -27,13 +26,21 @@ window.onload = function() { // avoid variables ending up in the global scope
     statisticalForm.classList.add("visible");
   });
 
-
   goBackButton.addEventListener("click", (e) => {
 
     var statisticalForm = document.getElementById("statistical-form");
     statisticalForm.classList.remove("visible");
     var marketingForm = document.getElementById("marketing-form");
     marketingForm.classList.remove("masked");
+  });
+
+
+  cancelButton.addEventListener("click", (e) => {
+     //send a post.. go the home
+  });
+
+  submitButton.addEventListener("click", (e) => {
+     //send a post.. go to greeting page
   });
 
 };

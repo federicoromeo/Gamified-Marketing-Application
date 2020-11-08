@@ -1,0 +1,29 @@
+<html>
+
+   <head>
+      <title> Deletion </title>
+      <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
+      <link rel="stylesheet" href="style.css">
+      <script  src="deletion.js" charset="utf-8" defer></script>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+   </head>
+
+   <body>
+
+      <fieldset>
+
+         <legend><strong> Select questionnaire to inspect  </strong></legend><br>
+
+         <div th:each"q: {******}" id="radio-container">
+            <input value="${q.name}" type="radio" name="quest" checked="checked"> Quest1 <br><br>
+            <input value="mockup2" type="radio" name="quest">   Quest2 <br><br>
+            <input value="mockup1" type="radio" name="quest">   Quest3 <br><br>
+            <button id="delete-questionnaire"> Delete questionnaire</button>
+         </div>
+
+      </fieldset>
+
+
+   </body>
+
+</html>

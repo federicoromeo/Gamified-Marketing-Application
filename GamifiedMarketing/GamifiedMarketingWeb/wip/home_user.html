@@ -1,6 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
    <head>
+      <meta charset="ISO-8859-1">
       <title>  Home Page  </title>
       <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
        <script src="************.js"></script>
@@ -28,13 +30,14 @@
       		    <th>Username</th>
       		    <th>Review</th>
       	    </tr>
-      	    <tr th:each="q: ${**********}">
-      		    <td th:text="${************}">fra</td>
-                <td th:text="${***********}">caspita bellissima</td>
+             <!-- da levare-->
+      	    <tr>
+      		    <td>fra</td>
+                <td>caspita bellissima</td>
       	    </tr>
-             <tr th:each="q: ${**********}">
-              <td th:text="${************}">fede</td>
-              <td th:text="${***********}">male</td>
+             <tr th:each="r: ${reviews}">
+              <td th:text="${r.userId}">fede</td>
+              <td th:text="${r.description}">male</td>
            </tr>
          </table>
 

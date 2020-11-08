@@ -1,9 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
    <head>
+      <meta charset="ISO-8859-1">
       <title> Deletion </title>
-      <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
-      <link rel="stylesheet" href="style.css">
+      <a th:href="@{/Logout}" class="logout-button" > Logout </a>
+      <link rel="stylesheet" href="style.css"  th:href="@{/css/style.css}">
       <script  src="deletion.js" charset="utf-8" defer></script>
       <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
    </head>
@@ -14,10 +16,11 @@
 
          <legend><strong> Select questionnaire to inspect  </strong></legend><br>
 
-         <div th:each"q: {******}" id="radio-container">
-            <input value="${q.name}" type="radio" name="quest" checked="checked"> Quest1 <br><br>
-            <input value="mockup2" type="radio" name="quest">   Quest2 <br><br>
-            <input value="mockup1" type="radio" name="quest">   Quest3 <br><br>
+         <div th:each"q: {myQuestionnaires}" id="radio-container">
+            <input value="${q.name}" type="radio" name="questionnaire" checked="checked"> Quest1 <br><br>
+            <!-- da levare-->
+            <input value="mockup2" type="radio" name="questionnaire">   Quest2 <br><br>
+            <input value="mockup1" type="radio" name="questionnaire">   Quest3 <br><br>
             <button id="delete-questionnaire"> Delete questionnaire</button>
          </div>
 

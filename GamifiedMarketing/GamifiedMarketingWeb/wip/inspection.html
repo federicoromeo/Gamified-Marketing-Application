@@ -1,6 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
    <head>
+      <meta charset="ISO-8859-1">
       <title> Inspection </title>
       <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
       <link rel="stylesheet" href="style.css">
@@ -14,8 +16,9 @@
 
          <legend><strong> Select questionnaire to inspect  </strong></legend><br>
 
-         <div th:each"q: {******}" id="radio-container">
-            <input value="${q.name}" type="radio" name="quest" checked="checked"> Quest1 <br><br>
+         <div th:each"q: {myQuestionnaires}" id="radio-container">
+            <input value="${q.name}" type="radio" name="questionnaire" checked="checked"> Quest1 <br><br>
+            <!-- da levare-->
             <input value="mockup2" type="radio" name="quest">   Quest2 <br><br>
             <input value="mockup1" type="radio" name="quest">   Quest3 <br><br>
          </div>
@@ -36,11 +39,11 @@
                  <th> Answers </th>
                </tr>
                <tr>
-                 <td th:text="${************}">marco</td>
+                 <td>marco</td>
                  <td th:text="${***********}">paolo</td>
                  <td id="answers">
-                    <ul th:each"r: {******}" id="list-reviews">
-                       <li th:text="${r.text}">
+                    <ul th:each"r: {reviews}" id="list-reviews">
+                       <li th:text="${r.description}">
                           marco: nice
                        </li>
                     </ul>

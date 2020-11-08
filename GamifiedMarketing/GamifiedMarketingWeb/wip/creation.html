@@ -1,26 +1,28 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
    <head>
+      <meta charset="ISO-8859-1">
       <title> Creation </title>
       <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
-      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="style.css"  th:href="@{/css/style.css}">
       <script  src="creation.js" charset="utf-8" defer></script>
       <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
    </head>
 
    <body>
 
-      <form action="***">
+      <form action="CreateQuestionnaire" method="POST">
          <fieldset>
 
             <legend><strong>Product creation</strong></legend>
 
             <br><label>Select date: </label>
-            <input type="date" id="date" required>
+            <input type="date" id="date" name="date" required>
             <br><br>
 
             <label> Insert the name of the product of the day:</label>
-            <input type="text" required>
+            <input type="text" name="product" required>
             <br><br>
 
             <label for="img">Select image:</label>
@@ -29,7 +31,7 @@
 
             <div id="questions-container">
                <label> Insert a marketing question:</label>
-               <input type="text" required>
+               <input type="text" name="question" placeholder="Your question:" required>
             </div>
 
             <button type="button" id="add-question-button">Add another question</button>

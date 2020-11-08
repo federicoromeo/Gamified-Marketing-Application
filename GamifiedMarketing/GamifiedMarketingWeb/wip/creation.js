@@ -36,6 +36,7 @@ window.onload = function() { // avoid variables ending up in the global scope
       // Create an <input> element, set its type and name attributes
       var input = document.createElement("input");
       input.type = "text";
+      input.placeholder="Your question:"
       input.required = true;
       container.appendChild(input);
       // Append a line break

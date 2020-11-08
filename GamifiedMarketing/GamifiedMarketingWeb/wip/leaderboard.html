@@ -1,6 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
    <head>
+      <meta charset="ISO-8859-1">
       <title>  Leaderboard Page </title>
       <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
       <h1> Leaderboard </h1>
@@ -15,9 +17,9 @@
    		    <th>Username</th>
    		    <th>Points</th>
    	    </tr>
-   	    <tr th:each="q: ${**********}">
-   		    <td th:text="${************}">pippo</td>
-   		    <td th:text="${***********}">100</td>
+   	    <tr th:each="u: ${users}">
+   		    <td th:text="${u.name}">pippo</td>
+   		    <td th:text="${u.points}">100</td>
    	    </tr>
       </table>
    </body>

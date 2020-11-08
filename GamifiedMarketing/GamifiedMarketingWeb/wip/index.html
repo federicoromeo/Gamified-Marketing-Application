@@ -1,29 +1,32 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
    <head>
+      <meta charset="ISO-8859-1">
       <h1> Gamified Marketing Application </h1><br>
-      <title>  Gamified Marketing Application </title>
+      <title> Gamified Marketing Application </title>
+      <link rel="shortcut icon" type="image/x-icon" href=".\icon.ico" />
       <script  src="login.js" charset="utf-8" defer></script>
-       <link rel="stylesheet" href="style.css">
+       <link rel="stylesheet" href="style.css" th:href="@{/css/stye.css}" >
        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
    </head>
 
    <body>
 
-   	<form id="login-form">
+      <form action="CheckLogin" method="POST" id="login-form">
          <h3>Login Form</h3><br>
-   		Username: <input type="text" name="username" placeholder="Username:" required> <br>
-   		Password: <input type="password" name="psw" placeholder="Password:" required>   <br>
-   		<input id="login-button" type="button" value="Login">
+   		Username: <input type="text"     name="username" placeholder="Username:" required> <br>
+   		Password: <input type="password" name="password" placeholder="Password:" required>   <br>
+   		<input id="login-button"      type="button" value="Login">
    		<input id="show-registration" type="button" value="Register">
    		<p id="errormessage-login" class="errormessage"></p>
    	</form>
 
-   	<form id="registration-form" class="masked">
+   	<form action="CheckRegistration" method="POST"  id="registration-form" class="masked">
          <h3>Registration Form</h3><br>
-   		Email: 	 <input type="email" name="email" placeholder="Email:" required>   <br>
-   		Username: <input type="text" name="username" placeholder="Username:" required> <br>
-   		Password: <input type="password" name="psw" placeholder="Password:" required>  <br>
+   		Email: 	 <input type="email"    name="email"    placeholder="Email:"    required>   <br>
+   		Username: <input type="text"     name="username" placeholder="Username:" required> <br>
+   		Password: <input type="password" name="password" placeholder="Password:" required>  <br>
    		<input id="register-button" type="button" value="Register">
    		<input id="show-login" type="button" value="Back to login">
    		<p id="errormessage-registration" class="errormessage"></p>

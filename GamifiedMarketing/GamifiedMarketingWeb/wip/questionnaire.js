@@ -34,7 +34,6 @@ window.onload = function() { // avoid variables ending up in the global scope
     marketingForm.classList.remove("masked");
   });
 
-
   cancelButton.addEventListener("click", (e) => {
      //send a post.. go the home
   });

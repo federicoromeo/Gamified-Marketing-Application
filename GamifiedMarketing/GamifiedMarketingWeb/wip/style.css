@@ -10,6 +10,7 @@
 .visible{
   display: block;
 }
+
 /* Full-width inputs */
 input[type=text], input[type=password], input[type=email] {
   width: 100%;
@@ -41,7 +42,7 @@ button {
   width: 40%;
 }
 
-#add-question-button{
+#add-question-button, #delete-question-button{
    width: 15%;
 }
 

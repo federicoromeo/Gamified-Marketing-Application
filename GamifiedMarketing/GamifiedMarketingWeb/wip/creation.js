@@ -20,27 +20,61 @@ window.onload = function() { // avoid variables ending up in the global scope
          return;
       }
       else{
-
+         //////////
       }
+   });
+
+   var deleteQuestionButton = document.getElementById("delete-question-button");
+   deleteQuestionButton.addEventListener("click", (e) => {
+      var container = document.getElementById("questions-container");
+      var count = container.querySelectorAll("input").length;
+      var toBeDeleted = document.getElementById(count);
+      var countAux = count+1;
+      //var br = document.getElementById("br"+countAux);
+      //console.log(br);
+      if(count===1){
+         deleteQuestionButton.classList.add("masked");
+         alert("You must insert al least one marketing question");
+      }
+      else{
+         toBeDeleted.remove();
+         console.log("deleted: " + count);
+         //br.remove();
+      }
+
    });
 
    var addQuestionButton = document.getElementById("add-question-button");
    addQuestionButton.addEventListener("click", (e) => {
 
+      var deleteQuestionButton = document.getElementById("delete-question-button");
+      deleteQuestionButton.classList.add("visible");
+      /*var present = 0;
+      for(var el of deleteQuestionButton.classList.entries()) {
+         if (el === "visible"){
+            present = 1;
+         }
+      }
+      if(!present)
+         deleteQuestionButton.classList.add("visible");
+      */
       var container = document.getElementById("questions-container");
-      //var label = document.createElement("LABEL")
-      //var text = document.createTextNode("Insert another question:")
-      //label.text = text;
-      //container.appendChild(label);
-      //container.appendChild(document.createElement("br"));
-      // Create an <input> element, set its type and name attributes
+      var count = container.querySelectorAll("input").length;
+      var countAux = count+1;
+      console.log("added: " + countAux);
+
       var input = document.createElement("input");
       input.type = "text";
-      input.placeholder="Your question:"
+      input.placeholder = "Your question:"
+      input.name = "question"+countAux;
       input.required = true;
+      input.id = countAux;
       container.appendChild(input);
+      console.log(input);
       // Append a line break
-      container.appendChild(document.createElement("br"));
+      var br = document.createElement("br");
+      br.id = "br"+countAux;
+      container.appendChild(br);
 
    });
 

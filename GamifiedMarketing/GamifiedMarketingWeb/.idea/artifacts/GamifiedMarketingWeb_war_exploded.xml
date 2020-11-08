@@ -13,6 +13,11 @@
         <element id="directory" name="classes">
           <element id="module-output" name="GamifiedMarketingWeb" />
         </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="GamifiedMarketingEJB-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="GamifiedMarketingEJB" />
+          </element>
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/GamifiedMarketingWeb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />

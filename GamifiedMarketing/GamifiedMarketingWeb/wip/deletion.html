@@ -11,11 +11,8 @@
    </head>
 
    <body>
-
       <fieldset>
-
-         <legend><strong> Select questionnaire to inspect  </strong></legend><br>
-
+         <legend><strong> Select questionnaire to delete  </strong></legend><br>
          <div th:each"q: {myQuestionnaires}" id="radio-container">
             <input value="${q.name}" type="radio" name="questionnaire" checked="checked"> Quest1 <br><br>
             <!-- da levare-->
@@ -23,10 +20,7 @@
             <input value="mockup1" type="radio" name="questionnaire">   Quest3 <br><br>
             <button id="delete-questionnaire"> Delete questionnaire</button>
          </div>
-
       </fieldset>
-
-
    </body>
 
 </html>

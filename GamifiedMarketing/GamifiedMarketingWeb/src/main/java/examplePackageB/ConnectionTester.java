@@ -14,20 +14,18 @@ public class ConnectionTester extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
-    {
-        final String DB_URL = "jdbc:mysql://localhost:3306/information_schema?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        final String DB_URL = "jdbc:mysql://localhost:3306/gamified_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         final String USER = "root";
-        final String PASS = "ciaociao";
+        final String PASS = "Mmmmmmmmmmeo98";
 
         String result = "Connection worked";
-        try
-        {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             DriverManager.getConnection(DB_URL, USER, PASS);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             result = "Connection failed";
             e.printStackTrace();
         }

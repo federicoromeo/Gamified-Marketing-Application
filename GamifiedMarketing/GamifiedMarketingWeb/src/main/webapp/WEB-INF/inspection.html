@@ -5,8 +5,8 @@
       <meta charset="ISO-8859-1">
       <title> Inspection </title>
       <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
-      <link rel="stylesheet" href="style.css">
-      <script  src="inspection.js" charset="utf-8" defer></script>
+      <link rel="stylesheet" href="../css/style.css">
+      <script src="../js/inspection.js" charset="utf-8" defer></script>
       <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
    </head>
 
@@ -16,7 +16,7 @@
 
          <legend><strong> Select questionnaire to inspect  </strong></legend><br>
 
-         <div th:each"q: {myQuestionnaires}" id="radio-container">
+         <div th:each="q: {myQuestionnaires}" id="radio-container">
             <input value="${q.name}" type="radio" name="questionnaire" checked="checked"> Quest1 <br><br>
             <!-- da levare-->
             <input value="mockup2" type="radio" name="questionnaire">   Quest2 <br><br>
@@ -42,7 +42,7 @@
                  <td>marco</td>
                  <td th:text="${***********}">paolo</td>
                  <td id="answers">
-                    <ul th:each"r: {reviews}" id="list-reviews">
+                    <ul th:each="r: {reviews}" id="list-reviews">
                        <li th:text="${r.description}">
                           marco: nice
                        </li>

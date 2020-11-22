@@ -17,6 +17,7 @@
           <element id="archive" name="GamifiedMarketingEJB-1.0-SNAPSHOT.jar">
             <element id="module-output" name="GamifiedMarketingEJB" />
           </element>
+          <element id="library" level="project" name="Maven: javax.persistence:javax.persistence-api:2.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

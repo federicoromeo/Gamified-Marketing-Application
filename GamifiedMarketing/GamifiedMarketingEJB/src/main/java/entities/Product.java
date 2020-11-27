@@ -7,6 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "product", schema = "gamified_db")
+@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product
 {
     @Id

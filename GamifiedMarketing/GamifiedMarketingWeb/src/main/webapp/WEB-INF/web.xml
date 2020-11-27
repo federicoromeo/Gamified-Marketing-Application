@@ -20,12 +20,12 @@
 
         <!--servlet>
             <servlet-name>CheckLogin</servlet-name>
-            <servlet-class>examplePackageB.CheckLogin</servlet-class>
+            <servlet-class>controllers.CheckLogin</servlet-class>
         </servlet>
 
         <servlet>
             <servlet-name>ConnectionTester</servlet-name>
-            <servlet-class>examplePackageB.ConnectionTester</servlet-class>
+            <servlet-class>controllers.ConnectionTester</servlet-class>
         </servlet>
 
         <servlet-mapping>

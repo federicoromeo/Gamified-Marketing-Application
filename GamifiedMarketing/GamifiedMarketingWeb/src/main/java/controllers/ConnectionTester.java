@@ -1,4 +1,4 @@
-package examplePackageB;
+package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;

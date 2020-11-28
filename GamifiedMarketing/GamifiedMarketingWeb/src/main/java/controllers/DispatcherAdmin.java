@@ -54,6 +54,7 @@ public class DispatcherAdmin extends HttpServlet {
 
         String choice=null;
         String path=null;
+        List<Product> pastProducts= null;
 
         ServletContext servletContext = getServletContext();
         final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
@@ -69,11 +70,16 @@ public class DispatcherAdmin extends HttpServlet {
                     path = "/WEB-INF/creation.html";
                     break;
                 case "inspect-button":
+
+                    pastProducts=productService.findPastProducts();
+
+                    ctx.setVariable("pastProducts", pastProducts);
+
                     path = "/WEB-INF/inspection.html";
                     break;
                 case "delete-button":
 
-                    List<Product> pastProducts=productService.findPastProducts();
+                    pastProducts=productService.findPastProducts();
 
                     ctx.setVariable("pastProducts", pastProducts);
 

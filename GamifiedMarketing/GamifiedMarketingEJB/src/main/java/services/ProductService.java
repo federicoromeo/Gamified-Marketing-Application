@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import entities.*;
 
-//TODO implement createProduct
-
 @Stateless
 public class ProductService
 {
@@ -47,6 +45,26 @@ public class ProductService
         return em
                 .createNamedQuery("Product.findAll", Product.class)
                 .getResultList();
+    }
+
+    /**
+     * Create a new product
+     * @param name the name of the product
+     * @param image the image associated to the product
+     * @param date the day in which the product is scheduled to be "product of the day"
+     * @return the id of the product just created
+     */
+    public int createProduct(String name, byte[] image, String date)
+    {
+        Product product = new Product();
+        product.setName(name);
+        product.setDate(date);
+        product.setImage(image);
+
+        em.persist(product);
+        em.flush();
+
+        return product.getId();
     }
 
     /**

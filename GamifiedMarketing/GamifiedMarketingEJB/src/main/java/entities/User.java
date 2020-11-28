@@ -27,15 +27,59 @@ public class User implements Serializable
 
     private String email;
 
+    //RELATIONS
+
     @OneToMany(mappedBy = "userId")
     private Collection<StatisticalAnswer> statisticalAnswers;
 
     @OneToMany(mappedBy = "userId")
     private Collection<MarketingAnswer> marketingAnswers;
 
-    @OneToOne
-    private Points points;
+    @OneToMany(mappedBy = "userId")
+    private Collection<Points> points;
 
     @OneToMany(mappedBy = "userId")
     private Collection<Log> logs;
+
+    //GETTERS AND SETTERS
+
+    public int getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

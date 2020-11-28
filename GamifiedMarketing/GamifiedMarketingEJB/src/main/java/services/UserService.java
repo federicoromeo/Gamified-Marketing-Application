@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.NonUniqueResultException;
 import java.util.List;
+import java.util.Optional;
 
 import entities.*;
 import exceptions.*;
@@ -46,5 +47,36 @@ public class UserService
         {
             throw new CredentialsException("Could not verify credentials");
         }
+    }
+
+    /**
+     * Create an user
+     * @param username the username
+     * @param password the password
+     * @param email the email address
+     * @return the id of the newly generated user
+     */
+    public int createUser(String username, String password, String email)
+    {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+
+        em.persist(user);
+        em.flush();
+
+        return user.getId();
+    }
+
+    /**
+     * Remove a user
+     * @param userId the Id of the user to remove
+     */
+    public void deleteUser(int userId)
+    {
+        Optional
+                .of(em.find(User.class, userId))
+                .ifPresent(u -> em.remove(u));
     }
 }

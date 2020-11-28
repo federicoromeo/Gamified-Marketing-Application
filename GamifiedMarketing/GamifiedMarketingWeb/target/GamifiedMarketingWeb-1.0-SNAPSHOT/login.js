@@ -23,12 +23,28 @@
     loginForm.classList.remove("masked");
   });
 
+    function makeCall(method, url, formElement, cback, reset = true) {
+        var req = new XMLHttpRequest(); // visible by closure
+        req.onreadystatechange = function() {
+            cback(req)
+        }; // closure
+        req.open(method, url);
+        if (formElement == null) {
+            req.send();
+        } else {
+            req.send(new FormData(formElement));
+        }
+        if (formElement !== null && reset === true) {
+            formElement.reset();
+        }
+    }
+
 
   function validateEmail(mail){
 
-     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+     //var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
      //checks if the mail fits the regular expression
-     if(mail.value.match(mailformat)) {
+     if(1) {
         return true;
      }
      else{
@@ -57,49 +73,35 @@
 
   // LOGIN SUBMIT
   document.getElementById("login-button").addEventListener('click', (e) => {
+
     var form = e.target.closest("form");
-    if (form.checkValidity()){
-      if(validateEmail(email)){
-         makeCall("POST", 'CheckLogin', e.target.closest("form"),
-           function(req) {
-             if (req.readyState == XMLHttpRequest.DONE) {
-               var message = req.responseText;
 
-               var user = JSON.parse(message);
-
-               if(user === "Account not existing"){
-                  document.getElementById("errormessage-login").textContent = user;
-                  return;
-               }
-
-               switch (req.status) {
-                 case 200:
-               	sessionStorage.setItem('user', user.username);
-                 if(user.role === "client"){
-                   window.location.href = "HomeClient.html";
-                 }else{
-                   window.location.href = "HomeEmployee.html";
-                 }
-                   break;
-                 case 400: // bad request
-                   document.getElementById("errormessage-login").textContent = message;
-                   break;
-                 case 401: // unauthorized
-                     document.getElementById("errormessage-login").textContent = message;
-                     break;
-                 case 500: // server error
-               	document.getElementById("errormessage-login").textContent = message;
-                   break;
-               }
-             }
-           }
-         );
-          }
-          else
-             alert("You entered an invalid email address!");
-       }
-       else
-    	     form.reportValidity();
+      if (form.checkValidity()) {
+          makeCall("POST", 'CheckLogin', e.target.closest("form"),
+              function(req) {
+                  if (req.readyState == XMLHttpRequest.DONE) {
+                      var message = req.responseText;
+                      switch (req.status) {
+                          case 200:
+                              sessionStorage.setItem('username', message);
+                              window.location.href = "home_user.html";
+                              break;
+                          case 400: // bad request
+                              document.getElementById("errormessage").textContent = message;
+                              break;
+                          case 401: // unauthorized
+                              document.getElementById("errormessage").textContent = message;
+                              break;
+                          case 500: // server error
+                              document.getElementById("errormessage").textContent = message;
+                              break;
+                      }
+                  }
+              }
+          );
+      } else {
+          form.reportValidity();
+      }
   });
 
   //var registerButton = document.getElementById("register-button");

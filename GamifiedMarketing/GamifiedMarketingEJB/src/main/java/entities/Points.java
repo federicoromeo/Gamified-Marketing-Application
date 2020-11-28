@@ -1,8 +1,6 @@
 package entities;
 
-import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "points", schema = "gamified_db")
@@ -15,7 +13,6 @@ public class Points
     @ManyToOne
     @JoinColumn(name = "id")
     private User userId;
-
 
     @ManyToOne
     @JoinColumn(name = "id")

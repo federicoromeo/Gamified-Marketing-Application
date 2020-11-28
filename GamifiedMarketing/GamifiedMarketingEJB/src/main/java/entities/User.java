@@ -79,6 +79,10 @@ public class User implements Serializable
         return email;
     }
 
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }

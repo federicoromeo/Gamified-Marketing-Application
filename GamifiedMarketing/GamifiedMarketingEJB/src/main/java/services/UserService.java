@@ -62,6 +62,7 @@ public class UserService
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
+        user.setAdmin(false);
 
         em.persist(user);
         em.flush();

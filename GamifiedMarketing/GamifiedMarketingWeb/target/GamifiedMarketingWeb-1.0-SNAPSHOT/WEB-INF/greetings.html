@@ -2,15 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
    <head>
-   <meta charset="ISO-8859-1">
+
+      <meta charset="ISO-8859-1">
       <h1> Gamified Marketing Application </h1><br>
       <title>  Gamified Marketing Application </title><br><br>
-       <link rel="stylesheet" href="../css/style.css">
-       <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="../css/style.css">
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
    </head>
 
    <body>
-      <h3>Thanks for your answer!</h3><br><br>
+
+      <h3>Thanks for your answer</h3> <span th:text="${' ' + session.user.username + '!'}"></span> <br><br>
       <a th:href="@{/***********}" class="home" href=""> Home </a>
 
    </body>

@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.IOException;
 import entities.User;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,10 +16,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-
 import services.*;
-import entities.*;
-import exceptions.*;
 import javax.persistence.NonUniqueResultException;
 import javax.naming.*;
 
@@ -114,7 +110,10 @@ public class CheckLogin extends HttpServlet
 
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("queryService", qService);
-            path = getServletContext().getContextPath() + "/GoToHomeUser";
+            if(user.isAdmin())
+                path = getServletContext().getContextPath() + "/GoToHomeAdmin";
+            else
+               path = getServletContext().getContextPath() + "/GoToHomeUser";
             response.sendRedirect(path);
         }
     }

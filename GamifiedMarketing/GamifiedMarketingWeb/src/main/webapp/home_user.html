@@ -19,7 +19,7 @@
       <fieldset>
          <h2>Image of the day</h2><br>
          <div class="product-of-the-day-container">
-            <p   th:text="${product.name}" id="image-description" name="image-name"> Universe </p><br>
+            <p   th:text="${product.name}" id="image-description" name="image-name"> No Product Of The Day </p><br>
             <img th:src="@{'data:image/png;base64,'+${product.image}}" name="image" alt="" /><br>
          </div>
       </fieldset>
@@ -31,22 +31,21 @@
       		<tr>
                <th>Username</th>
                <div th:each="mq: ${product.marketingQuestions}">
-                  <th th:text="${mq.text}">How did it go??</th>
+                  <th th:text="${mq.text}">No questions</th>
                </div>
       	   </tr>
             <tr th:each="mq: ${product.marketingQuestions}">
                <div th:each="ma: ${mq.marketingAnswers}">
-                  <td th:text="${ma.user.username}">fede</td>
+                  <td th:text="${ma.userId.username}">fede</td>
                   <td th:text="${ma.text}">bad</td>
                </div>
-
             </tr>
          </table>
 
       </div><br><br>
 
       <form th:action="@{GoToCompileQuestionnaire}">
-         <a th:href="@{/**********}" href=""> Compile the questionnaire! </a>
+         <a th:href="@{/non so come si scrive questionnaire.html}" href=""> Compile the questionnaire! </a>
       </form>
 
    </body>

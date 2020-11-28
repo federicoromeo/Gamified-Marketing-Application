@@ -1,9 +1,7 @@
 package entities;
 
-import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "marketingquestion", schema = "gamified_db")
@@ -21,4 +19,36 @@ public class MarketingQuestion
 
     @OneToMany(mappedBy = "marketinganswerId")
     private Collection<MarketingAnswer> marketingAnswers;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Product getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Product productId) {
+        this.productId = productId;
+    }
+
+    public Collection<MarketingAnswer> getMarketingAnswers() {
+        return marketingAnswers;
+    }
+
+    public void setMarketingAnswers(Collection<MarketingAnswer> marketingAnswers) {
+        this.marketingAnswers = marketingAnswers;
+    }
 }

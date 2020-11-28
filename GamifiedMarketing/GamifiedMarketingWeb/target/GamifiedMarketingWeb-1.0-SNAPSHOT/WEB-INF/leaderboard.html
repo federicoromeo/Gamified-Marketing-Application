@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
    <head>
+
       <meta charset="ISO-8859-1">
       <title>  Leaderboard Page </title>
       <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
@@ -9,19 +10,22 @@
        <script src="../js/********.js"></script>
        <link rel="stylesheet" href="../css/style.css">
        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
    </head>
 
    <body>
-      <table id="leaderboard-table">
+
+      <table class="table" id="leaderboard-table">
    		<tr>
    		    <th>Username</th>
    		    <th>Points</th>
    	    </tr>
-   	    <tr th:each="u: ${users}">
-   		    <td th:text="${u.name}">pippo</td>
-   		    <td th:text="${u.points}">100</td>
+   	    <tr th:each="u: ${#lists.sort(users, comparator)}"> <!--HERE IN JAVA WE WILL HAVE TO SORT THE LIST TROUGH COMPARATOR-->
+   		    <td th:text="${u.username}">pippo</td>
+   		    <td th:text="${#aggregates.sum(u.points)}">100</td>
    	    </tr>
       </table>
+
    </body>
 
 

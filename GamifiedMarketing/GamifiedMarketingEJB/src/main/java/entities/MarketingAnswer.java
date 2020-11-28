@@ -21,4 +21,36 @@ public class MarketingAnswer
     private MarketingQuestion marketingquestionId;
 
     private String text;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    public MarketingQuestion getMarketingquestionId() {
+        return marketingquestionId;
+    }
+
+    public void setMarketingquestionId(MarketingQuestion marketingquestionId) {
+        this.marketingquestionId = marketingquestionId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }

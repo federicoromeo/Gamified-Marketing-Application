@@ -54,10 +54,10 @@
    */
 
   var registerButton = document.getElementById("register-button");
-     var email = document.getElementById("email");
-     registerButton.addEventListener("click", (e) => {
-        if(!validateEmail(email))
-           alert("Not valid mail format!")
+    var email = document.getElementById("email");
+    registerButton.addEventListener("click", (e) => {
+    if(!validateEmail(email))
+       alert("Not valid mail format!")
   });
 
 })();

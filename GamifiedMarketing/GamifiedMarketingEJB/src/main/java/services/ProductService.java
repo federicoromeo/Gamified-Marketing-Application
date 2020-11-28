@@ -3,6 +3,7 @@ package services;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import entities.*;
@@ -20,6 +21,21 @@ public class ProductService
     {
         return em
                 .find(Product.class, productId);
+    }
+
+    /**
+     * Get the product of the day
+     * @param today date formatted like yyyy/mm/dd
+     * @return the product of the day correspondant to today if present,  "null"o therwise
+     */
+    public Product findProductOfTheDay(String today){
+        return em
+                .createNamedQuery("Product.findAll", Product.class)
+                .getResultList()
+                .stream()
+                .filter(x -> x.getDate().equals(today))
+                .findFirst()
+                .orElse(null);
     }
 
     /**

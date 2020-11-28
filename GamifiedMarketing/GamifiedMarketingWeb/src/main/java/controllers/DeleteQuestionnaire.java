@@ -1,6 +1,5 @@
 package controllers;
 
-
 import javax.ejb.EJB;
 
 import entities.Product;
@@ -24,9 +23,9 @@ import java.io.IOException;
 import java.util.List;
 
 
-@WebServlet("/DispatcherAdmin")
+@WebServlet("/DeleteQuestionnaire")
 @MultipartConfig
-public class DispatcherAdmin extends HttpServlet {
+public class DeleteQuestionnaire extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private TemplateEngine templateEngine;
@@ -34,7 +33,7 @@ public class DispatcherAdmin extends HttpServlet {
     @EJB(name = "services/ProductService")
     private ProductService productService;
 
-    public DispatcherAdmin() {
+    public DeleteQuestionnaire() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -52,46 +51,20 @@ public class DispatcherAdmin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String choice=null;
+        Integer productId=-1;
         String path=null;
 
         ServletContext servletContext = getServletContext();
         final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
-        if (request.getParameter("button") != "" && !request.getParameter("button").isEmpty()) {
-            choice= request.getParameter("button");
+        if (request.getParameter("productId") != "" && !request.getParameter("productId").isEmpty()) {
+            productId= Integer.parseInt(request.getParameter("productId"));
         }
 
-        if (choice != null) {
+        if (productId!=-1) {
 
-            switch(choice) {
-                case "insert-button":
-                    path = "/WEB-INF/creation.html";
-                    break;
-                case "inspect-button":
-                    path = "/WEB-INF/inspection.html";
-                    break;
-                case "delete-button":
-
-                    List<Product> pastProducts=productService.findPastProducts();
-
-                    ctx.setVariable("pastProducts", pastProducts);
-
-                    path = "/WEB-INF/deletion.html";
-                    break;
-                default:
-                    path = "/WEB-INF/home_admin.html";
-                    break;
-            }
-
-
-            templateEngine.process(path, ctx, response.getWriter());
+           productService.deleteProduct(productId);
         }
-        else{
-            path = "/WEB-INF/home_admin.html";
-            templateEngine.process(path, ctx, response.getWriter());
-        }
-
 
     }
 

@@ -36,6 +36,17 @@ public class ProductService
                 .orElse(null);
     }
 
+
+    //TODO
+    /**
+     * Get all products
+     * @return the list of all past products, possibly empty
+     */
+    public List<Product> findPastProducts()
+    {
+        return null;
+    }
+
     /**
      * Get all products
      * @return the list of all products, possibly empty

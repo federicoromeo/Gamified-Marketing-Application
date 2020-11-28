@@ -12,7 +12,7 @@
 
    <body>
 
-      <form action="CreateQuestionnaire" method="POST">
+      <form th:action="@{CreateQuestionnaire}" method="POST">
          <fieldset>
 
             <legend><strong>Product creation</strong></legend>
@@ -22,16 +22,17 @@
             <br><br>
 
             <label> Insert the name of the product of the day:</label>
-            <input type="text" name="product" required>
+            <input type="text" name="name" required>
             <br><br>
 
             <label for="img">Select image:</label>
-            <input type="file" id="img" name="img" accept="image/*" required>
+            <input type="file" id="img" name="image" accept="image/*" required>
             <br><br>
 
             <div id="questions-container">
                <label> Insert a marketing question:</label>
-               <input type="text" name="question1" placeholder="Your question:" required>
+               <input type="text" name="question1" placeholder="Your question:" required> <!--OTHER QUESTIONS HAVE INCREMENTAL NAME: es: questionN-->
+               <span name="numberofquestions" id="number-of-questions"></span>   <!--TO CYCLE IN THE SERVLET value TIMES-->
             </div>
 
             <button type="button" id="add-question-button">Add another question</button>

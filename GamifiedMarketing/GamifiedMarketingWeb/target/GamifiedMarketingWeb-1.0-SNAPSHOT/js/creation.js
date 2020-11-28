@@ -3,6 +3,12 @@ window.onload = function() { // avoid variables ending up in the global scope
    var sendButton = document.getElementById("send-button");
    sendButton.addEventListener("click", (e) => {
 
+      var numberofquestions = document.getElementById("number-of-questions");
+      var questionsContainer = document.getElementById("questions-container");
+      var numberOfChildren = questionsContainer.children.length - 2  //only questions
+      numberofquestions.value = numberOfChildren;
+      console.log(numberofquestions.value + " question(s)");
+
       var date = document.querySelector('input[type="date"]');
       var arrayDate = date.value.split("-",3);
       var selectedDate = new Date(arrayDate[0], arrayDate[1]-1, arrayDate[2]);
@@ -34,11 +40,11 @@ window.onload = function() { // avoid variables ending up in the global scope
       //console.log(br);
       if(count===1){
          deleteQuestionButton.classList.add("masked");
-         alert("You must insert al least one marketing question");
+         alert("You must insert at least one marketing question!");
       }
       else{
          toBeDeleted.remove();
-         console.log("deleted: " + count);
+         console.log("deleted: question" + count);
          //br.remove();
       }
 
@@ -61,7 +67,7 @@ window.onload = function() { // avoid variables ending up in the global scope
       var container = document.getElementById("questions-container");
       var count = container.querySelectorAll("input").length;
       var countAux = count+1;
-      console.log("added: " + countAux);
+      console.log("added: question" + countAux);
 
       var input = document.createElement("input");
       input.type = "text";
@@ -71,11 +77,6 @@ window.onload = function() { // avoid variables ending up in the global scope
       input.id = countAux;
       container.appendChild(input);
       console.log(input);
-      // Append a line break
-      var br = document.createElement("br");
-      br.id = "br"+countAux;
-      container.appendChild(br);
-
    });
 
 };

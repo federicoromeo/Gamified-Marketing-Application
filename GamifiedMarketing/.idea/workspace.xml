@@ -20,12 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f6871ad-8edd-46fe-917c-cdfbd48fb71e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/entities/MarketingQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/entities/MarketingQuestion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/creation.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/creation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/home_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/home_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/home_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/home_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/inspection.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/inspection.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/js/creation.js" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/js/creation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/entities/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/entities/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/entities/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/services/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/services/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/services/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/deletion.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/deletion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/creation.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/creation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/deletion.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/deletion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/home_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/home_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/inspection.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/inspection.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/lib/GamifiedMarketingEJB-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/lib/GamifiedMarketingEJB-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/home_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/home_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/js/creation.js" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/js/creation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../specifications.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../specifications.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +63,20 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="TomeeConfiguration" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment />
+      <server-settings />
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -62,7 +85,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606515052947</updated>
-      <workItem from="1606515054074" duration="5174000" />
+      <workItem from="1606515054074" duration="6417000" />
+      <workItem from="1606557102382" duration="380000" />
     </task>
     <servers />
   </component>
@@ -79,5 +103,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

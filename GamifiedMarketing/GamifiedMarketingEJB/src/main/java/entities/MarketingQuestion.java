@@ -19,6 +19,6 @@ public class MarketingQuestion
     @JoinColumn(name = "id")
     private Product productId;
 
-    @OneToMany(mappedBy = "marketingquestionId")
-    private Collection<MarketingQuestion> marketingQuestions;
+    @OneToMany(mappedBy = "marketinganswerId")
+    private Collection<MarketingAnswer> marketingAnswers;
 }

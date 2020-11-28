@@ -2,12 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
    <head>
+
       <meta charset="ISO-8859-1">
       <title>  Home Page  </title>
       <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
        <script src="../js/************.js"></script>
        <link rel="stylesheet" href="../css/style.css">
        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
    </head>
 
    <body>
@@ -17,35 +19,36 @@
       <fieldset>
          <h2>Image of the day</h2><br>
          <div class="product-of-the-day-container">
-            <p id="image-description" > Universe </p><br>
-            <img id="image" src="../../../../wip/img.jpg" alt="test-img" width="200" height="300"><br>
+            <p   th:text="${p.name}" id="image-description" name="image-name"> Universe </p><br>
+            <img th:src="@{'data:image/png;base64,'+${p.image}}" name="image" alt="" /><br>
          </div>
       </fieldset>
 
       <div class="reviews-container">
-         <h3>User's reviews</h3>
+         <h3>Users' reviews</h3>
 
          <table class="reviews">
       		<tr>
-      		    <th>Username</th>
-      		    <th>Review</th>
-      	    </tr>
-             <!-- da levare-->
-      	    <tr>
-      		    <td>fra</td>
-                <td>caspita bellissima</td>
-      	    </tr>
-             <tr th:each="r: ${reviews}">
-              <td th:text="${r.userId}">fede</td>
-              <td th:text="${r.description}">male</td>
-           </tr>
+               <th>Username</th>
+               <div th:each="mq: ${p.marketingQuestions}">
+                  <th th:text="${mq.text}">How did it go??</th>
+               </div>
+      	   </tr>
+            <tr th:each="mq: ${p.marketingQuestions}">
+               <div th:each="ma: ${mq.marketingAnswers}">
+                  <td th:text="${ma.user.username}">fede</td>
+                  <td th:text="${ma.text}">bad</td>
+               </div>
+
+            </tr>
          </table>
 
       </div><br><br>
 
-      <div class="questionnaire-container">
-         <a th:href="@{/**********}" id="questionnaire" href=""> Compile the questionnaire! </a>
-      </div>
+      <form th:action="@{GoToCompileQuestionnaire}">
+         <a th:href="@{/**********}" href=""> Compile the questionnaire! </a>
+      </form>
+
    </body>
 
 

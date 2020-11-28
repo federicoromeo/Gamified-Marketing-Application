@@ -20,38 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f6871ad-8edd-46fe-917c-cdfbd48fb71e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/.idea/webContexts.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/classes/controllers/Example.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/entities/MarketingAnswer.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/entities/MarketingAnswer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/entities/MarketingQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/entities/MarketingQuestion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/entities/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/java/controllers/DeleteQuestionnaire.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/java/controllers/DispatcherAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/GamifiedMarketingEJB.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/GamifiedMarketingEJB.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/services/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/services/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/src/main/java/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/entities/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/services/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/services/ProductService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingEJB/target/classes/services/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/java/controllers/CheckLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/java/controllers/CheckLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/java/controllers/ConnectionTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/java/controllers/ConnectionTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/java/controllers/GoToHomeUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/java/controllers/GoToHomeUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/java/controllers/exampleClassB.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/deletion.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/deletion.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/questionnaire.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/questionnaire.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/home_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/home_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/home_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/src/main/webapp/WEB-INF/home_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/deletion.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/deletion.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/greetings.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/greetings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/home_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/home_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/inspection.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/inspection.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/leaderboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/leaderboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/lib/GamifiedMarketingEJB-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/lib/GamifiedMarketingEJB-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/questionnaire.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/WEB-INF/questionnaire.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/home_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/home_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/js/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/js/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/GamifiedMarketingWeb-1.0-SNAPSHOT/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/classes/controllers/CheckLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/classes/controllers/CheckLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamifiedMarketingWeb/target/classes/controllers/GoToHomeUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/GamifiedMarketingWeb/target/classes/controllers/GoToHomeUser.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +63,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/GamifiedMarketingWeb" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -109,7 +91,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606515052947</updated>
       <workItem from="1606515054074" duration="6417000" />
-      <workItem from="1606557102382" duration="4697000" />
+      <workItem from="1606557102382" duration="4719000" />
     </task>
     <servers />
   </component>
@@ -140,5 +122,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="59" width="1089" height="765" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1606557580444" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1606587027758">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/1920.81.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1606587027758" />
   </component>
 </project>

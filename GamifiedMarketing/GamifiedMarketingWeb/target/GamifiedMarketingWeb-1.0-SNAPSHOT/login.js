@@ -54,10 +54,17 @@
    */
 
   var registerButton = document.getElementById("register-button");
+<<<<<<< HEAD
     var email = document.getElementById("email");
     registerButton.addEventListener("click", (e) => {
     if(!validateEmail(email))
        alert("Not valid mail format!")
+=======
+     var email = document.getElementById("email");
+     registerButton.addEventListener("click", (e) => {
+        if(!validateEmail(email))
+           alert("Not valid mail format!")
+>>>>>>> 9b7cc9ed44741251d18d4f7c19b053de2d2bec41
   });
 
 })();

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<!--
+     for accessing the data of a past questionnaire. The visualized data for a given questionnaire include
+      o List of users who submitted the questionnaire.
+      o List of users who cancelled the questionnaire.
+      o Questionnaire answers of each user.
+-->
    <head>
       <meta charset="ISO-8859-1">
       <title> Inspection </title>
@@ -12,46 +17,50 @@
 
    <body>
 
-      <fieldset>
+      <!--fieldset>
 
-         <legend><strong> Select questionnaire to inspect  </strong></legend><br>
+         <legend><strong> Here are the datas of the past questionnaires  </strong></legend><br>
 
-         <div th:each="q: {myQuestionnaires}" id="radio-container">
-            <input value="${q.name}" type="radio" name="questionnaire" checked="checked"> Quest1 <br><br>
-            <!-- da levare-->
+         <div th:each="p: ${pastProducts}" id="radio-container">
+            <input value="${p.name}" type="radio" name="questionnaire" checked="checked"> Quest1 <br><br>
             <input value="mockup2" type="radio" name="questionnaire">   Quest2 <br><br>
             <input value="mockup1" type="radio" name="questionnaire">   Quest3 <br><br>
          </div>
 
       </fieldset>
 
-      <br><br><br>
+      <br><br><br-->
 
-      <fieldset>
+         <h1> Here are the data of the past questionnaires </h1><br>
+         <!--span style="color:blue" id="selected-questionnaire"></span><br><br-->
 
-         <legend><strong> Selected questionnaire</strong></legend><br>
-         <span style="color:blue" id="selected-questionnaire"></span><br><br>
+            <div th:each="p: ${pastProducts}">
 
-            <table id="questionnaire-table">
-              <tr>
-                 <th> Users who submitted it </th>
-                 <th> Users who cancelled it </th>
-                 <th> Answers </th>
-               </tr>
-               <tr>
-                 <td>marco</td>
-                 <td th:text="${***********}">paolo</td>
-                 <td id="answers">
-                    <ul th:each="r: {reviews}" id="list-reviews">
-                       <li th:text="${r.description}">
-                          marco: nice
-                       </li>
-                    </ul>
-                 </td>
-               </tr>
-            </table>
+               <fieldset>
+                  <legend><strong th:text="${p.name}"></strong></legend>
+                  <table class="table">
+                     <tr>
+                        <th> Users who submitted it </th>
+                        <th> Users who cancelled it </th>
+                        <div th:each="mq: ${p.marketingQuestions}" id="answers">
+                           <th th:text="${mq.text}"> Answers </th>
+                        </div>
+                     </tr>
+                     <tr>
+                        <div th:each="l: ${p.logs}">
+                           <td th:text="${l.outcome} ? '${l.userId.username}'">marco</td>
+                           <td th:text="${!l.outcome} ? '${l.userId.username}'">paolo</td>
+                           <div th:each="mq: ${p.marketingQuestions}" id="answers">
+                              <div th:each="ma: ${mq.marketingAnswers}">
+                                 <td th:text="${ma.text}">nice</td>
+                              </div>
+                           </div>
+                        </div>
+                     </tr>
+                  </table>
+               </fieldset>
 
-         </fieldset>
+            </div>
 
    </body>
 

@@ -9,11 +9,16 @@ import java.util.List;
 public class Points
 {
     @Id
-    @OneToOne(mappedBy = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
     private User userId;
 
-    @Id
-    @OneToOne(mappedBy = "id")
+
+    @ManyToOne
+    @JoinColumn(name = "id")
     private Product productId;
 
     private int total;

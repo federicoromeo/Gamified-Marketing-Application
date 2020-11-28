@@ -2,23 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
    <head>
+
       <meta charset="ISO-8859-1">
       <title> Home Admin </title>
       <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
       <link rel="stylesheet" href="../css/style.css">
       <script  src="../js/adminManagement.js" charset="utf-8" defer></script>
       <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
    </head>
 
    <body>
 
-      <h1>Welcome to the Admin Home Page <span th:text="${' ' + session.user.code}"></span></h1><br>
+      <h1>Welcome to the Admin Home Page <span th:text="${' ' + session.user.username}"></span></h1><br>
       <br><h2>What do you want to do?</h2><br><br>
 
          <div id="button-container">
-            <button id="insert"> Insert product and create marketing questions</button><br>
-            <button id="inspect"> Access the data of a past questionnaire</button><br>
-            <button id="delete"> Delete questionnaires</button><br>
+            <form th:action="@{GoToInsertProduct}" method="POST">
+               <button id="insert-button"> Insert product and create marketing questions</button><br>
+            </form>
+            <form th:action="@{GoToInspectPastQuestionnaire}" method="POST">
+               <button id="inspect-button"> Access the data of a past questionnaire</button><br>
+            </form>
+            <form th:action="@{GoToDeleteQuestionnaire}" method="POST">
+               <button id="delete-button"> Delete questionnaires</button><br>
+            </form>
          </div>
 
    </body>

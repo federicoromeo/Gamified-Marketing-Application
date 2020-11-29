@@ -8,6 +8,23 @@
             <welcome-file>index.html</welcome-file>
         </welcome-file-list>
 
+
+
+        <!--servlet>
+            <servlet-name>ConnectionTester</servlet-name>
+            <servlet-class>controllers.ConnectionTester</servlet-class>
+        </servlet>
+
+                <servlet>
+            <servlet-name>CheckLogin</servlet-name>
+            <servlet-class>controllers.CheckLogin</servlet-class>
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>CheckLogin</servlet-name>
+            <url-pattern>/</url-pattern>
+        </servlet-mapping>
+
         <filter>
             <filter-name>Checker</filter-name>
             <filter-class>filters.LoggedIn</filter-class>
@@ -18,20 +35,6 @@
             <url-pattern>/CheckLogin</url-pattern>
         </filter-mapping>
 
-        <!--servlet>
-            <servlet-name>CheckLogin</servlet-name>
-            <servlet-class>controllers.CheckLogin</servlet-class>
-        </servlet>
-
-        <servlet>
-            <servlet-name>ConnectionTester</servlet-name>
-            <servlet-class>controllers.ConnectionTester</servlet-class>
-        </servlet>
-
-        <servlet-mapping>
-            <servlet-name>CheckLogin</servlet-name>
-            <url-pattern>/</url-pattern>
-        </servlet-mapping>
 
         <servlet-mapping>
             <servlet-name>ConnectionTester</servlet-name>

@@ -17,17 +17,18 @@
       <fieldset>
          <legend><strong> Select questionnaire to delete  </strong></legend><br>
 
-<<<<<<< HEAD
             <form th:action="@{/DeleteQuestionnaire}">
                <div th:each="p: ${pastProducts}" id="radio-container">
                   <input th:value="${p.name + '  [' + p.date + ']'}" type="radio" name="questionnaire" checked="checked"> Questionnaire1  [24/11/1998]<br><br>
-=======
-            <form th:action="@{DeleteQuestionnaire}">
-               <div th:each="p: {pastProducts}" id="radio-container">
-                  <input value="${p.name + '  [' + p.date + ']'}" type="radio" name="questionnaire" checked="checked"> Quest1  [24/11/1998]<br><br>
->>>>>>> 9b7cc9ed44741251d18d4f7c19b053de2d2bec41
                   <button id="delete-questionnaire"> Delete questionnaire </button>
                </div>
+            </form>
+            <form th:action="@{/DeleteQuestionnaire}" method="POST">
+               <div th:each="p: ${pastProducts}" id="radio-container">
+                  <input th:value="${p.name + '  [' + p.date + ']'}" type="radio" name="questionnaire" checked="checked"> Quest1  [24/11/1998]<br><br>
+                  <input type="hidden" name="productId" th:value="${p.id}"/>
+               </div>
+               <button id="delete-questionnaire"> Delete questionnaire </button>
             </form>
 
       </fieldset>

@@ -1,6 +1,6 @@
 package services;
 
-import javax.ejb.Stateless;
+import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
@@ -16,6 +16,12 @@ public class UserService
 {
     @PersistenceContext(unitName = "GamifiedMarketingEJB")
     private EntityManager em;
+
+
+    public UserService()
+    {
+
+    }
 
     /**
      * Check the credential of the user and eventually fetch the user object

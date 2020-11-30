@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="ISO-8859-1">
+    <title>  Home Page  </title>
+    <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
+    <script src="../js/************.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<h1>Welcome to the User Home Page <span th:text="${' ' + session.user.username}"></span></h1><br>
+
+<fieldset>
+    <h2>Image of the day</h2><br>
+    <div class="product-of-the-day-container">
+        <p   th:text="${product.name}" id="image-description" name="image-name"> No Product Of The Day </p><br>
+        <img th:src="@{'data:image/png;base64,'+${product.image}}" name="image" alt="" /><br>
+    </div>
+</fieldset>
+
+<div class="reviews-container">
+    <h3>Users' reviews</h3>
+
+    <table class="table" id="reviews">
+        <tr>
+            <th>Username</th>
+            <div th:each="mq: ${product.marketingQuestions}">
+                <th th:text="${mq.text}">No questions</th>
+            </div>
+        </tr>
+        <tr th:each="mq: ${product.marketingQuestions}">
+            <div th:each="ma: ${mq.marketingAnswers}">
+                <td th:text="${ma.userId.username}">fede</td>
+                <td th:text="${ma.text}">bad</td>
+            </div>
+        </tr>
+    </table>
+
+</div><br><br>
+
+<form th:action="@{GoToCompileQuestionnaire}">
+    <a th:href="@{/non so come si scrive questionnaire.html}" href=""> Compile the questionnaire! </a>
+</form>
+
+</body>
+
+
+</html>

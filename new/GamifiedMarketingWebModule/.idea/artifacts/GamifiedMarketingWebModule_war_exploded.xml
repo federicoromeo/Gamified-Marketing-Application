@@ -12,7 +12,6 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="GamifiedMarketingWebModule" />
-          <element id="jpa-descriptors" facet="GamifiedMarketingEJBModule/jpa/JPA" />
           <element id="jpa-descriptors" facet="GamifiedMarketingWebModule/jpa/JPA" />
         </element>
         <element id="directory" name="lib">
@@ -26,9 +25,7 @@
         <element id="file-copy" path="$PROJECT_DIR$/target/GamifiedMarketingWebModule-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="GamifiedMarketingWebModule/web/Web" />
-      <element id="module-output" name="GamifiedMarketingEJBModule" />
       <element id="module-output" name="GamifiedMarketingWebModule" />
-      <element id="module-source" name="GamifiedMarketingEJBModule" />
       <element id="module-source" name="GamifiedMarketingWebModule" />
       <element id="javaee-facet-resources" facet="GamifiedMarketingEJBModule/ejb/EJB" />
     </root>

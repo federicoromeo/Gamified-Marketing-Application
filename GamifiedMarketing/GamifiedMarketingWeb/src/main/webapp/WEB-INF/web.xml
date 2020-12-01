@@ -10,35 +10,27 @@
 
 
 
-        <!--servlet>
-            <servlet-name>ConnectionTester</servlet-name>
-            <servlet-class>controllers.ConnectionTester</servlet-class>
-        </servlet>
 
-                <servlet>
+        <servlet>
             <servlet-name>CheckLogin</servlet-name>
             <servlet-class>controllers.CheckLogin</servlet-class>
         </servlet>
 
         <servlet-mapping>
             <servlet-name>CheckLogin</servlet-name>
-            <url-pattern>/</url-pattern>
+            <url-pattern>/CheckLogin</url-pattern>
         </servlet-mapping>
 
-        <filter>
-            <filter-name>Checker</filter-name>
-            <filter-class>filters.LoggedIn</filter-class>
-        </filter>
+    <servlet>
+        <servlet-name>CheckRegistration</servlet-name>
+        <servlet-class>controllers.CheckRegistration</servlet-class>
+    </servlet>
 
-        <filter-mapping>
-            <filter-name>Checker</filter-name>
-            <url-pattern>/CheckLogin</url-pattern>
-        </filter-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckRegistration</servlet-name>
+        <url-pattern>/CheckRegistration</url-pattern>
+    </servlet-mapping>
 
 
-        <servlet-mapping>
-            <servlet-name>ConnectionTester</servlet-name>
-            <url-pattern>/connectionTest</url-pattern>
-        </servlet-mapping-->
 
 </web-app>

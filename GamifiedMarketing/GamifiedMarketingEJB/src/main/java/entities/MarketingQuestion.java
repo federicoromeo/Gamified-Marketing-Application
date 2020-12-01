@@ -14,10 +14,10 @@ public class MarketingQuestion
     private String text;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "productId")
     private Product productId;
 
-    @OneToMany(mappedBy = "marketinganswerId")
+    @OneToMany(mappedBy = "marketingquestionId")
     private Collection<MarketingAnswer> marketingAnswers;
 
     public int getId() {

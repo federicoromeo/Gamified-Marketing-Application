@@ -20,7 +20,7 @@ public class StatisticalAnswer
     private int productId;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "userId")
     private User userId;
 
     private Expertise expertise;

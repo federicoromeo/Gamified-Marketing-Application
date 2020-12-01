@@ -13,11 +13,11 @@ public class MarketingAnswer
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "userId")
     private User userId;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "marketingquestionId")
     private MarketingQuestion marketingquestionId;
 
     private String text;

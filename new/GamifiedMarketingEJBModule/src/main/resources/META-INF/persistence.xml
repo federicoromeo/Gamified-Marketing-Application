@@ -29,6 +29,7 @@
         <class>entities_auto.StatisticalAnswer</class>
         <class>entities_auto.User</class>
 
+        
         <properties>
             <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
             <property name="toplink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

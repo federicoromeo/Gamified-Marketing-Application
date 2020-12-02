@@ -1,7 +1,7 @@
 package controllers;
 
 import java.io.IOException;
-import entities.User;
+import entities_auto.User;
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -121,7 +121,7 @@ public class CheckLogin extends HttpServlet
 
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("queryService", qService);
-            if(user.isAdmin())
+            if(user.getAdmin())
                 path = getServletContext().getContextPath() + "/GoToHomeAdmin";
             else
                 path = getServletContext().getContextPath() + "/GoToHomeUser";

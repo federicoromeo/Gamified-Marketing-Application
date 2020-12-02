@@ -1,7 +1,7 @@
 
 package services;
 
-import entities.User;
+import entities_auto.User;
 import exceptions.CredentialsException;
 
 import javax.ejb.Stateless;
@@ -50,6 +50,9 @@ public class UserServiceBean {
         }
         catch (PersistenceException e)
         {
+            System.out.println(e.getCause());
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             throw new CredentialsException("Could not verify credentials");
         }
     }

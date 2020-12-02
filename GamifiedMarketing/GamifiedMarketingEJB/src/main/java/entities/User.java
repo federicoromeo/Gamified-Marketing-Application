@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
+
 @Entity
 @Table(name = "user", schema = "gamified_db")
 @NamedQuery(name = "User.checkCredentials", query = "SELECT r FROM User r  WHERE r.username = ?1 and r.password = ?2")

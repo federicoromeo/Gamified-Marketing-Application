@@ -18,10 +18,10 @@ public class Log
     private boolean outcome;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "userId")
     private User userId;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "productId")
     private Product productId;
 }

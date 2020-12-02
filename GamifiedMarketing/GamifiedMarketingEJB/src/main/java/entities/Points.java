@@ -11,11 +11,11 @@ public class Points
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "userId")
     private User userId;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "productId")
     private Product productId;
 
     private int total;

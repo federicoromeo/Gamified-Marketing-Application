@@ -70,7 +70,6 @@ public class CheckLogin extends HttpServlet
         try
         {
             user = userService.checkCredentials(username, password);
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(user.getUsername());
             System.out.println(user.getPassword());
 
@@ -91,7 +90,7 @@ public class CheckLogin extends HttpServlet
             ServletContext servletContext = getServletContext();
             final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
             ctx.setVariable("errormessage", "Incorrect username or password!");
-            path = "/index.jsp";
+            path = "/index.html";
             //path = "/index.html";
             templateEngine.process(path, ctx, response.getWriter());
         }

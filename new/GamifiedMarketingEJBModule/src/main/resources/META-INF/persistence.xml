@@ -20,22 +20,6 @@
         <class>entities.Product</class>
         <class>entities.User</class-->
 
-        <class>entities_auto.Log</class>
-        <class>entities_auto.MarketingAnswer</class>
-        <class>entities_auto.MarketingQuestion</class>
-        <class>entities_auto.OffensiveWord</class>
-        <class>entities_auto.Points</class>
-        <class>entities_auto.Product</class>
-        <class>entities_auto.StatisticalAnswer</class>
-        <class>entities_auto.User</class>
-        <class>new_entities.Log</class>
-        <class>new_entities.Marketinganswer</class>
-        <class>new_entities.Marketingquestion</class>
-        <class>new_entities.Offensiveword</class>
-        <class>new_entities.Points</class>
-        <class>new_entities.Product</class>
-        <class>new_entities.Statisticalanswer</class>
-        <class>new_entities.User</class>
         <class>entities.Log</class>
         <class>entities.MarketingAnswer</class>
         <class>entities.MarketingQuestion</class>
@@ -47,14 +31,16 @@
 
 
         <properties>
-            <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
+            <property name="javax.persistence.jdbc.driver" value="jdbc:mysql://localhost:3306/gamified_db"/>
+            <!--property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
             <property name="toplink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
             <property name="openjpa.ConnectionURL" value="jdbc:mysql://localhost:3306/gamified_db"/>
             <property name="openjpa.ConnectionDriverName" value="com.mysql.cj.jdbc.Driver"/>
             <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
-            <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/-->
         </properties>
 
     </persistence-unit>

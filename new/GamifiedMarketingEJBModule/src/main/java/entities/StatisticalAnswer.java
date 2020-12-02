@@ -1,18 +1,22 @@
-package entities_auto;
+package entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "statisticalanswer", schema = "gamified_db")
-public class StatisticalAnswer implements Serializable {
+public class StatisticalAnswer {
+
     private int id;
     private Integer age;
     private String sex;
     private String expertise;
+    private int userId;
+    private int productId;
+    private User userByUserId;
+    private Product productByProductId;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -22,7 +26,7 @@ public class StatisticalAnswer implements Serializable {
     }
 
     @Basic
-    @Column(name = "age")
+    @Column(name = "age", nullable = true)
     public Integer getAge() {
         return age;
     }
@@ -32,7 +36,7 @@ public class StatisticalAnswer implements Serializable {
     }
 
     @Basic
-    @Column(name = "sex")
+    @Column(name = "sex", nullable = true)
     public String getSex() {
         return sex;
     }
@@ -42,13 +46,33 @@ public class StatisticalAnswer implements Serializable {
     }
 
     @Basic
-    @Column(name = "expertise")
+    @Column(name = "expertise", nullable = true)
     public String getExpertise() {
         return expertise;
     }
 
     public void setExpertise(String expertise) {
         this.expertise = expertise;
+    }
+
+    @Basic
+    @Column(name = "userId", nullable = false)
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    @Basic
+    @Column(name = "productId", nullable = false)
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     /*@Override
@@ -59,6 +83,8 @@ public class StatisticalAnswer implements Serializable {
         StatisticalAnswer that = (StatisticalAnswer) o;
 
         if (id != that.id) return false;
+        if (userId != that.userId) return false;
+        if (productId != that.productId) return false;
         if (age != null ? !age.equals(that.age) : that.age != null) return false;
         if (sex != null ? !sex.equals(that.sex) : that.sex != null) return false;
         if (expertise != null ? !expertise.equals(that.expertise) : that.expertise != null) return false;
@@ -72,6 +98,28 @@ public class StatisticalAnswer implements Serializable {
         result = 31 * result + (age != null ? age.hashCode() : 0);
         result = 31 * result + (sex != null ? sex.hashCode() : 0);
         result = 31 * result + (expertise != null ? expertise.hashCode() : 0);
+        result = 31 * result + userId;
+        result = 31 * result + productId;
         return result;
+    }
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "userId", referencedColumnName = "id")//, nullable = false)
+    public User getUserByUserId() {
+        return userByUserId;
+    }
+
+    public void setUserByUserId(User userByUserId) {
+        this.userByUserId = userByUserId;
+    }
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "productId", referencedColumnName = "id")//, nullable = false)
+    public Product getProductByProductId() {
+        return productByProductId;
+    }
+
+    public void setProductByProductId(Product productByProductId) {
+        this.productByProductId = productByProductId;
     }
 }

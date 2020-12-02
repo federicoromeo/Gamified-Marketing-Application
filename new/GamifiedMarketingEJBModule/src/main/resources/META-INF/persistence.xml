@@ -28,8 +28,24 @@
         <class>entities_auto.Product</class>
         <class>entities_auto.StatisticalAnswer</class>
         <class>entities_auto.User</class>
+        <class>new_entities.Log</class>
+        <class>new_entities.Marketinganswer</class>
+        <class>new_entities.Marketingquestion</class>
+        <class>new_entities.Offensiveword</class>
+        <class>new_entities.Points</class>
+        <class>new_entities.Product</class>
+        <class>new_entities.Statisticalanswer</class>
+        <class>new_entities.User</class>
+        <class>entities.Log</class>
+        <class>entities.MarketingAnswer</class>
+        <class>entities.MarketingQuestion</class>
+        <class>entities.OffensiveWord</class>
+        <class>entities.Points</class>
+        <class>entities.Product</class>
+        <class>entities.StatisticalAnswer</class>
+        <class>entities.User</class>
 
-        
+
         <properties>
             <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
             <property name="toplink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

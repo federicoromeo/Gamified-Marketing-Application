@@ -1,7 +1,7 @@
 
 package services;
 
-import entities_auto.User;
+import entities.User;
 import exceptions.CredentialsException;
 
 import javax.ejb.Stateless;
@@ -70,7 +70,7 @@ public class UserServiceBean {
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
-        user.setAdmin(false);
+        user.setAdmin((byte) 0);
 
         em.persist(user);
         em.flush();

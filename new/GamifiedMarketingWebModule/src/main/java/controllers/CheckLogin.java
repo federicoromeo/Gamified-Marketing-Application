@@ -1,7 +1,7 @@
 package controllers;
 
 import java.io.IOException;
-import entities_auto.User;
+import entities.User;
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -66,15 +66,6 @@ public class CheckLogin extends HttpServlet
             return;
         }
 
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-
         User user = null;
         try
         {
@@ -121,7 +112,7 @@ public class CheckLogin extends HttpServlet
 
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("queryService", qService);
-            if(user.getAdmin())
+            if((int)user.getAdmin() != 0)
                 path = getServletContext().getContextPath() + "/GoToHomeAdmin";
             else
                 path = getServletContext().getContextPath() + "/GoToHomeUser";

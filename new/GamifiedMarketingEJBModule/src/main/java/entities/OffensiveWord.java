@@ -1,16 +1,16 @@
-package entities_auto;
+package entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "offensiveword", schema = "gamified_db")
-public class OffensiveWord implements Serializable {
+public class OffensiveWord {
+
     private int id;
     private String word;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -20,7 +20,7 @@ public class OffensiveWord implements Serializable {
     }
 
     @Basic
-    @Column(name = "word")
+    @Column(name = "word", nullable = false, length = 255)
     public String getWord() {
         return word;
     }

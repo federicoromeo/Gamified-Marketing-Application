@@ -1,21 +1,26 @@
-package entities_auto;
+package entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Table(name = "user", schema = "gamified_db")
 @NamedQuery(name = "User.checkCredentials", query = "SELECT r FROM User r  WHERE r.username = ?1 and r.password = ?2")
-public class User implements Serializable {
+public class User {
+
     private int id;
     private String username;
-    private boolean admin;
-    private boolean blocked;
+    private byte admin;
+    private byte blocked;
     private String email;
     private String password;
+    private Collection<Log> logsById;
+    private Collection<MarketingAnswer> marketinganswersById;
+    private Collection<Points> pointsById;
+    private Collection<StatisticalAnswer> statisticalanswersById;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -25,7 +30,7 @@ public class User implements Serializable {
     }
 
     @Basic
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, length = 255)
     public String getUsername() {
         return username;
     }
@@ -35,27 +40,27 @@ public class User implements Serializable {
     }
 
     @Basic
-    @Column(name = "admin")
-    public boolean getAdmin() {
+    @Column(name = "admin", nullable = false)
+    public byte getAdmin() {
         return admin;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setAdmin(byte admin) {
         this.admin = admin;
     }
 
     @Basic
-    @Column(name = "blocked")
-    public boolean getBlocked() {
+    @Column(name = "blocked", nullable = false)
+    public byte getBlocked() {
         return blocked;
     }
 
-    public void setBlocked(boolean blocked) {
+    public void setBlocked(byte blocked) {
         this.blocked = blocked;
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 255)
     public String getEmail() {
         return email;
     }
@@ -65,7 +70,7 @@ public class User implements Serializable {
     }
 
     @Basic
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 255)
     public String getPassword() {
         return password;
     }
@@ -91,7 +96,7 @@ public class User implements Serializable {
         return true;
     }
 
-    /*@Override
+    @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (username != null ? username.hashCode() : 0);
@@ -100,5 +105,41 @@ public class User implements Serializable {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
-    }*/
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<Log> getLogsById() {
+        return logsById;
+    }
+
+    public void setLogsById(Collection<Log> logsById) {
+        this.logsById = logsById;
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<MarketingAnswer> getMarketinganswersById() {
+        return marketinganswersById;
+    }
+
+    public void setMarketinganswersById(Collection<MarketingAnswer> marketinganswersById) {
+        this.marketinganswersById = marketinganswersById;
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<Points> getPointsById() {
+        return pointsById;
+    }
+
+    public void setPointsById(Collection<Points> pointsById) {
+        this.pointsById = pointsById;
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<StatisticalAnswer> getStatisticalanswersById() {
+        return statisticalanswersById;
+    }
+
+    public void setStatisticalanswersById(Collection<StatisticalAnswer> statisticalanswersById) {
+        this.statisticalanswersById = statisticalanswersById;
+    }
 }

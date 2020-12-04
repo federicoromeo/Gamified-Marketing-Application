@@ -20,7 +20,7 @@
     <h2>Image of the day</h2><br>
     <div class="product-of-the-day-container">
         <p   th:text="${product.name}" id="image-description" name="image-name"> No Product Of The Day </p><br>
-        <img th:src="@{'data:image/png;base64,'+${image}}" /><br>
+        <img th:src="@{'data:image/png;base64,'+${product.image}}" /><br>
     </div>
 </fieldset>
 

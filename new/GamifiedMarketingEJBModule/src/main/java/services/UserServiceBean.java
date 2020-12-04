@@ -48,21 +48,10 @@ public class UserServiceBean {
 
             throw new NonUniqueResultException("More than one user registered with same credentials");
         }
-        //catch (PersistenceException e)
-        catch (Exception e)
+        catch (PersistenceException e)
         {
-            System.out.println("\n\n\n");
-            System.out.println("CAUSE:\n\n\n");
-            System.out.println(e.getCause());
-
-            System.out.println("STACK TRACE:\n\n\n");
-            e.printStackTrace();
-
-            System.out.println("MEssage:\n\n\n");
-            System.out.println(e.getMessage());
-           //throw new CredentialsException("Could not verify credentials");
+            throw new CredentialsException("Could not verify credentials");
         }
-    return null;
     }
 
     /**

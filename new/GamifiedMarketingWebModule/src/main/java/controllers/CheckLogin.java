@@ -27,7 +27,7 @@ public class CheckLogin extends HttpServlet
 
     private TemplateEngine templateEngine;
 
-    @EJB(name="UserService")  //prima era services/UserService
+    @EJB(name="UserServiceEJB")  //prima era services/UserService
     private UserServiceBean userService;
 
     public CheckLogin()
@@ -70,9 +70,6 @@ public class CheckLogin extends HttpServlet
         try
         {
             user = userService.checkCredentials(username, password);
-            System.out.println(user.getUsername());
-            System.out.println(user.getPassword());
-
         }
         catch (CredentialsException | NonUniqueResultException e)
         {
@@ -87,11 +84,10 @@ public class CheckLogin extends HttpServlet
         String path;
         if (user == null)
         {
+            path = "/index.html";
             ServletContext servletContext = getServletContext();
             final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
             ctx.setVariable("errormessage", "Incorrect username or password!");
-            path = "/index.html";
-            //path = "/index.html";
             templateEngine.process(path, ctx, response.getWriter());
         }
         else
@@ -111,6 +107,7 @@ public class CheckLogin extends HttpServlet
 
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("queryService", qService);
+
             if((int)user.getAdmin() != 0)
                 path = getServletContext().getContextPath() + "/GoToHomeAdmin";
             else

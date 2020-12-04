@@ -5,7 +5,7 @@
 
     <meta charset="ISO-8859-1">
     <title>  Home Page  </title>
-    <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
+    <a th:href="@{/Logout}" class="logout-button">Logout</a>
     <script src="../js/************.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
     <h2>Image of the day</h2><br>
     <div class="product-of-the-day-container">
         <p   th:text="${product.name}" id="image-description" name="image-name"> No Product Of The Day </p><br>
-        <img th:src="@{'data:image/png;base64,'+${product.image}}" name="image" alt="" /><br>
+        <img th:src="@{'data:image/png;base64,'+${image}}" /><br>
     </div>
 </fieldset>
 
@@ -30,23 +30,26 @@
     <table class="table" id="reviews">
         <tr>
             <th>Username</th>
-            <div th:each="mq: ${product.marketingQuestions}">
-                <th th:text="${mq.text}">No questions</th>
+            <div th:each="mq: ${product.marketingquestionsById}">
+                <th th:text="${mq.getText()}">No questions</th>
             </div>
         </tr>
-        <tr th:each="mq: ${product.marketingQuestions}">
-            <div th:each="ma: ${mq.marketingAnswers}">
-                <td th:text="${ma.userId.username}">fede</td>
-                <td th:text="${ma.text}">bad</td>
+        <tr th:each="mq: ${product.marketingquestionsById}">
+            <div th:each="ma: ${mq.marketinganswersById}">
+                <td th:text="${ma.userByUserId.username}">fede</td>
+                <td th:text="${ma.getText()}">awful</td>
             </div>
         </tr>
     </table>
 
-</div><br><br>
+</div>
+<br><br>
 
-<form th:action="@{GoToCompileQuestionnaire}">
-    <a th:href="@{/non so come si scrive questionnaire.html}" href=""> Compile the questionnaire! </a>
+<form action="GoToCompileQuestionnaire" method="POST">
+    <input type="hidden" name="product" th:value="${product.getId()}">
+    <input id="compile-questionnaire-button" type="submit" value="Compile the questionnaire!">
 </form>
+<!--a href="../WEB-INF/questionnaire.html" th:href="@{GoToCompileQuestionnaire/${product}|}"> Compile the questionnaire! </a-->
 
 </body>
 

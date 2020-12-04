@@ -38,7 +38,7 @@ button {
     width: 100%;
 }
 
-#login-button, #register-button, #show-login, #show-registration{
+#login-button, #register-button, #show-login, #show-registration, #compile-questionnaire-button{
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -90,5 +90,5 @@ button {
 }
 */
 #errormessage{
-    color: red;
+    color: #ff0000;
 }

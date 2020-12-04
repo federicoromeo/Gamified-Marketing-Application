@@ -1,18 +1,18 @@
 package entities;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Arrays;
 import java.util.Collection;
 
 @Entity
 @Table(name = "product", schema = "gamified_db")
+@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product {
 
     private int id;
     private String name;
     private byte[] image;
-    private Date date;
+    private String date;
     private Collection<Log> logsById;
     private Collection<MarketingQuestion> marketingquestionsById;
     private Collection<Points> pointsById;
@@ -50,11 +50,11 @@ public class Product {
 
     @Basic
     @Column(name = "date", nullable = false)
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

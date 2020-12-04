@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
@@ -16,6 +18,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.*;
 import java.time.LocalDate;
+import java.util.Base64;
 
 @WebServlet("/GoToHomeUser")
 public class GoToHomeUser extends HttpServlet
@@ -59,11 +62,22 @@ public class GoToHomeUser extends HttpServlet
             productOfTheDay = this.productService.findDefault();
 
 
+
+        /*String image = null;
+        try {
+            byte[] imageBytes= productOfTheDay.getImage();;
+            imageBytes = blob.getBytes(1, (int) blob.length());
+            image = Base64.getEncoder().encodeToString(imageBytes);
+            productOfTheDay.setImage(image);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }*/
+
+
         String path = "/home_user.html";
         ServletContext servletContext = this.getServletContext();
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
         ctx.setVariable("product", productOfTheDay);
-        ctx.setVariable("image", productOfTheDay.getImage());
         this.templateEngine.process(path, ctx, response.getWriter());
     }
 

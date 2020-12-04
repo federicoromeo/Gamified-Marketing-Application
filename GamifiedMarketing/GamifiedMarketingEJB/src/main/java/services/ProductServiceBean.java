@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Optional;
 import entities.*;
 
-@Stateless
-public class ProductService
+@Stateless(name = "ProductServiceEJB")
+public class ProductServiceBean
 {
-    @PersistenceContext(unitName = "GamifiedMarketingEJB")
+    @PersistenceContext(unitName = "GamifiedDB")
     private EntityManager em;
+
+    public ProductServiceBean(){
+    }
 
     /**
      * Get a single product by Id
@@ -26,9 +29,10 @@ public class ProductService
     /**
      * Get the product of the day
      * @param today date formatted like yyyy/mm/dd
-     * @return the product of the day correspondant to today if present,  "null"o therwise
+     * @return the product of the day correspondent to today if present, possibly empty
      */
-    public Product findProductOfTheDay(String today){
+    public Product findProductOfTheDay(String today) {
+        // try {
         return em
                 .createNamedQuery("Product.findAll", Product.class)
                 .getResultList()
@@ -36,8 +40,11 @@ public class ProductService
                 .filter(x -> x.getDate().equals(today))
                 .findFirst()
                 .orElse(null);
+        // }
+        //catch(Exception e){
+        //  System.out.println(e.getMessage());
+        // }
     }
-
     /**
      * Get the default product
      * @return the default product (the first one) if present, "null" otherwise

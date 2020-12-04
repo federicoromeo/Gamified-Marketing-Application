@@ -7,6 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "log", schema = "gamified_db")
+@NamedQuery(name="Log.findAll", query="SELECT l FROM Log l")
 public class Log
 {
     @Id

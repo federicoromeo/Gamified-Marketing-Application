@@ -3,9 +3,16 @@ package services;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Callable;
+
 import entities.*;
 
 @Stateless(name = "ProductServiceEJB")
@@ -59,6 +66,13 @@ public class ProductServiceBean
                 .orElse(null);
     }
 
+    public static <T> T uncheckCall(Callable<T> callable) {
+        try { return callable.call(); }
+        catch (RuntimeException e) { throw e; }
+        catch (Exception e) { throw new RuntimeException(e); }
+    }
+
+
 
     //TODO
     /**
@@ -67,7 +81,20 @@ public class ProductServiceBean
      */
     public List<Product> findPastProducts()
     {
-        return null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
+        Date today = (Date) Calendar.getInstance().getTime();
+
+
+        return
+                em
+                .createNamedQuery("Product.findAll", Product.class)
+                .getResultList()
+                .stream()
+                .filter( x-> uncheckCall(
+                            dateFormat.parse(x.getDate()).before(today));
+
+
+
     }
 
     /**

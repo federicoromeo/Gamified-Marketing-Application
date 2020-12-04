@@ -42,7 +42,7 @@ public class PointsServiceBean
 
 
 
-    //TODO
+
     /**
      * Get points of a product
      * @param product the product for which we want to find the points
@@ -50,10 +50,15 @@ public class PointsServiceBean
      */
     public List<Points> findPointsByProduct(Product product)
     {
-        return null;
+        return em
+                .createNamedQuery("Points.findAll", Points.class)
+                .getResultList()
+                .stream()
+                .filter(x -> x.getProductId().equals(product.getId()))
+                .orElse(null);
     }
 
-    //TODO
+
     /**
      * Get points of a user
      * @param user the user for which we want to find the points
@@ -61,7 +66,12 @@ public class PointsServiceBean
      */
     public List<Points> findPointsByUser(Product user)
     {
-        return null;
+        return em
+                .createNamedQuery("Points.findAll", Points.class)
+                .getResultList()
+                .stream()
+                .filter(x -> x.getUserId().equals(user.getId()))
+                .orElse(null);
     }
 
 

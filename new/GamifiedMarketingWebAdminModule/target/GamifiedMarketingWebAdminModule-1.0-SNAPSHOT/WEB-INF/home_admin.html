@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+
+        <meta charset="ISO-8859-1">
+        <title> Home Admin </title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" th:href="@{/css/style.css}">
+        <!--script  src="../js/adminManagement.js" charset="utf-8" defer></script-->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
+
+        <h1>Welcome to the Admin Home Page <span class="usersession" th:text="${' ' + session.user.username}"></span></h1><br>
+        <br><h2>What do you want to do?</h2><br><br>
+
+        <div id="button-container">
+            <form action="DispatcherAdmin" method="POST">
+                <button id="insert-button" name="button" value="insert-button"> Create new product with associated marketing question(s)</button><br>
+            </form>
+            <form action="DispatcherAdmin" method="POST">
+                <button id="inspect-button" name="button" value="inspect-button"> Access the data of a past questionnaire</button><br>
+            </form>
+            <form action="DispatcherAdmin" method="POST">
+                <button id="delete-button" name="button" value="delete-button"> Delete questionnaires </button><br>
+            </form>
+        </div>
+
+    </body>
+
+</html>

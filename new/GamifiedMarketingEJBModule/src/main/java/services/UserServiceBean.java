@@ -61,18 +61,19 @@ public class UserServiceBean {
      * @param email the email address
      * @return the id of the newly generated user
      */
-    public int createUser(String username, String password, String email)
+    public User createUser(String username, String password, String email)
     {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
         user.setAdmin((byte) 0);
+        user.setBlocked((byte) 0);
 
         em.persist(user);
         em.flush();
 
-        return user.getId();
+        return user;    //.getId();
     }
 
     /**
@@ -84,6 +85,25 @@ public class UserServiceBean {
         Optional
                 .of(em.find(User.class, userId))
                 .ifPresent(u -> em.remove(u));
+    }
+
+    /**
+     * Register a new user
+     * @param username of user
+     * @param password of user
+     * @return registered User, null if there are some error
+     */
+    public User register(String username, String password, String email) {
+
+        List<User> users = em
+                .createNamedQuery("User.checkRegistration", User.class)
+                .setParameter(1, username)
+                .getResultList();
+
+        if(users.isEmpty())
+            return createUser(username,password,email);
+
+        return null;
     }
 
 }

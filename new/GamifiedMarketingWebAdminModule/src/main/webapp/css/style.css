@@ -38,7 +38,7 @@ button {
     width: 100%;
 }
 
-#login-button, #register-button, #show-login, #show-registration, #compile-questionnaire-button{
+#login-button{
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -89,6 +89,7 @@ button {
   text-align: center;
 }
 */
+
 .errormessage{
     color: #ff0000;
 }

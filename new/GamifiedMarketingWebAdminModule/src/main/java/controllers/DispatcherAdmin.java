@@ -1,8 +1,6 @@
 package controllers;
 
-
 import javax.ejb.EJB;
-
 import entities.Product;
 import org.thymeleaf.context.WebContext;
 import javax.servlet.ServletContext;
@@ -12,14 +10,10 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.ProductServiceBean;
-
-
 import java.io.IOException;
 import java.util.List;
 
@@ -39,8 +33,8 @@ public class DispatcherAdmin extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    public void init() throws ServletException {
-
+    public void init() throws ServletException
+    {
         ServletContext servletContext = getServletContext();
         ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
         templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -49,47 +43,47 @@ public class DispatcherAdmin extends HttpServlet {
         templateResolver.setSuffix(".html");
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String choice=null;
-        String path=null;
-        List<Product> pastProducts= null;
+        String choice = null;
+        String path = null;
+        List<Product> pastProducts = null;
 
         ServletContext servletContext = getServletContext();
         final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
-        if (request.getParameter("button") != "" && !request.getParameter("button").isEmpty()) {
-            choice= request.getParameter("button");
+        if ( !request.getParameter("button").equals("") &&
+             !request.getParameter("button").isEmpty() &&
+              request.getParameter("button") != null  )
+        {
+            choice = request.getParameter("button");
         }
 
         if (choice != null) {
 
             switch(choice) {
+
                 case "insert-button":
-                    path = "/WEB-INF/creation.html";
+                    path = "/WEB-INF/insertion.html";
                     break;
+
                 case "inspect-button":
-
-                    pastProducts=productService.findAll();
-
+                    //pastProducts = productService.findPastProducts(); todo
+                    pastProducts = productService.findAll();
                     ctx.setVariable("pastProducts", pastProducts);
-
                     path = "/WEB-INF/inspection.html";
                     break;
+
                 case "delete-button":
-
-                    pastProducts=productService.findAll();
-
+                    pastProducts = productService.findAll();
                     ctx.setVariable("pastProducts", pastProducts);
-
                     path = "/WEB-INF/deletion.html";
                     break;
+
                 default:
                     path = "/WEB-INF/home_admin.html";
                     break;
             }
-
 
             templateEngine.process(path, ctx, response.getWriter());
         }
@@ -98,11 +92,9 @@ public class DispatcherAdmin extends HttpServlet {
             templateEngine.process(path, ctx, response.getWriter());
         }
 
-
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 

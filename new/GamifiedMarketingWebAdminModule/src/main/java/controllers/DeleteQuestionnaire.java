@@ -1,7 +1,6 @@
 package controllers;
 
 import javax.ejb.EJB;
-
 import entities.Product;
 import org.thymeleaf.context.WebContext;
 import javax.servlet.ServletContext;
@@ -11,17 +10,12 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.ProductServiceBean;
-
-
 import java.io.IOException;
 import java.util.List;
-
 
 
 @WebServlet("/DeleteQuestionnaire")
@@ -49,37 +43,37 @@ public class DeleteQuestionnaire extends HttpServlet {
         templateResolver.setSuffix(".html");
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Integer productId=-1;
-        String path=null;
+        Integer productId = -1;
+        String path = null;
 
         ServletContext servletContext = getServletContext();
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
-        if (request.getParameter("product") != "" && !request.getParameter("product").isEmpty()) {
-            productId= Integer.parseInt(request.getParameter("product"));
+        if (!request.getParameter("product").equals("") &&
+            !request.getParameter("product").isEmpty() &&
+            request.getParameter("product") != null )
+        {
+            productId = Integer.parseInt(request.getParameter("product"));
         }
 
-        if (productId!=-1) {
-
+        if (productId!=-1 && productId!=2)      // 2 is default
+        {
             productService.deleteProduct(productId);
+            // TODO : MANCA DA CANCELLARE TUTTTE LE DOMANDE E I RELATIVI PUNTI
         }
 
-        List<Product> pastProducts= pastProducts=productService.findAll();
+        //List<Product> pastProducts = productService.findPastProducts(); todo
+        List<Product> pastProducts = productService.findAll();
 
         ctx.setVariable("pastProducts", pastProducts);
-
         path = "/WEB-INF/deletion.html";
         this.templateEngine.process(path, ctx, response.getWriter());
-
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
-
 
 }

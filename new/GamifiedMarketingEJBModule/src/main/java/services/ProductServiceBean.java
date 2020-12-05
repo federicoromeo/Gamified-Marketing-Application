@@ -67,9 +67,6 @@ public class ProductServiceBean
                 .orElse(null);
     }
 
-
-
-
    /* static <T, E extends Exception> Consumer<T>
     consumerWrapper(Consumer<T> consumer, Class<E> clazz) {
 
@@ -93,7 +90,8 @@ public class ProductServiceBean
      * Get all products
      * @return the list of all past products, possibly empty
      */
-    /*public List<Product> findPastProducts()
+    /* todo
+    public List<Product> findPastProducts()
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
         Date today = (Date) Calendar.getInstance().getTime();
@@ -101,10 +99,10 @@ public class ProductServiceBean
 
         return
                 em
-                        .createNamedQuery("Product.findAll", Product.class)
-                        .getResultList()
-                        .stream()
-                        .filter( consumerWrapper(x-> dateFormat.parse(((Product)x).getDate()).before(today), ParseException.class));
+                    .createNamedQuery("Product.findAll", Product.class)
+                    .getResultList()
+                    .stream()
+                    .filter( consumerWrapper(x-> dateFormat.parse(((Product)x).getDate()).before(today), ParseException.class));
 
 
 
@@ -140,6 +138,7 @@ public class ProductServiceBean
 
         return product.getId();
     }
+
 
     /**
      * Remove a product

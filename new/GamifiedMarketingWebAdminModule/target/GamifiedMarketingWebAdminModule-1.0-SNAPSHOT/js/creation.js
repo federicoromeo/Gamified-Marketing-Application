@@ -35,6 +35,7 @@ window.onload = function() { // avoid variables ending up in the global scope
         var container = document.getElementById("questions-container");
         var count = container.querySelectorAll("input").length;
         var toBeDeleted = document.getElementById(count);
+        console.log("tobedeleted: question" + count);
         var countAux = count+1;
         //var br = document.getElementById("br"+countAux);
         //console.log(br);

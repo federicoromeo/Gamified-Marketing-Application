@@ -17,9 +17,11 @@
 <fieldset>
     <legend><strong> Select questionnaire to delete  </strong></legend><br>
 
-    <form th:action="@{/DeleteQuestionnaire}">
+    <form action="DeleteQuestionnaire" method="POST">
         <div th:each="p: ${pastProducts}" id="radio-container">
-            <input th:value="${p.id}" type="radio" name="product" th:text="${ p.name }" checked="checked"><br><br>
+            <div th:if="${product.id != 2}">
+                <input th:value="${p.id}" type="radio" name="product" th:text="${p.name}" checked="checked"><br><br>
+            </div>
             <button id="delete-questionnaire"> Delete questionnaire </button>
         </div>
     </form>

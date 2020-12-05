@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!--
-     for accessing the data of a past questionnaire. The visualized data for a given questionnaire include
-      o List of users who submitted the questionnaire.
-      o List of users who cancelled the questionnaire.
-      o Questionnaire answers of each user.
--->
+
 <head>
     <meta charset="ISO-8859-1">
     <title> Inspection </title>
@@ -32,7 +27,6 @@
 <br><br><br-->
 
 <h1> Here are the data of the past questionnaires </h1><br>
-<!--span style="color:blue" id="selected-questionnaire"></span><br><br-->
 
 <div th:each="p: ${pastProducts}">
 
@@ -42,7 +36,7 @@
             <tr>
                 <th> Users who submitted it </th>
                 <th> Users who cancelled it </th>
-                <div th:each="mq: ${p.marketingQuestions}" id="answers">
+                <div th:each="mq: ${p.marketingquestionsById}" id="answers">
                     <th th:text="${mq.text}"> Answers </th>
                 </div>
             </tr>

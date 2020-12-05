@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../GamifiedMarketingEJBModule/GamifiedMarketingEJBModule.iml" filepath="$PROJECT_DIR$/../GamifiedMarketingEJBModule/GamifiedMarketingEJBModule.iml" />
+      <module fileurl="file://$USER_HOME$/Documents/polimi/db2/GamifiedMarketing/GamifiedMarketingWebAdminModule/GamifiedMarketingWebAdminModule.iml" filepath="$USER_HOME$/Documents/polimi/db2/GamifiedMarketing/GamifiedMarketingWebAdminModule/GamifiedMarketingWebAdminModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/GamifiedMarketingWebModule.iml" filepath="$PROJECT_DIR$/GamifiedMarketingWebModule.iml" />
     </modules>
   </component>

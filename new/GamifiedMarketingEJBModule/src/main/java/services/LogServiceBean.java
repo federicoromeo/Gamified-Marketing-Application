@@ -14,7 +14,7 @@ import entities.*;
 @Stateless(name = "LogServiceEJB")
 public class LogServiceBean
 {
-    @PersistenceContext(unitName = "GamifiedDB")
+    @PersistenceContext(unitName = "PersUn")
     private EntityManager em;
 
     public LogServiceBean(){

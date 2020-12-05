@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "statisticalanswer", schema = "gamified_db")
+@NamedQuery(name="StatisticalAnswer.findAll", query="SELECT sa FROM StatisticalAnswer sa")
 public class StatisticalAnswer {
 
     private int id;

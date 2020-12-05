@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "offensiveword", schema = "gamified_db")
+@NamedQuery(name="OffensiveWord.findAll", query="SELECT o FROM OffensiveWord o")
 public class OffensiveWord {
 
     private int id;

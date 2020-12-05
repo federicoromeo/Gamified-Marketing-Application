@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title> Creation </title>
+    <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
+    <link rel="stylesheet" href="../css/style.css" th:href="@{/css/style.css}">
+    <script src="../js/creation.js" charset="utf-8" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<form th:action="@{CreateQuestionnaire}" method="POST">
+    <fieldset>
+
+        <legend><strong>Product creation</strong></legend>
+
+        <br><label>Select date: </label>
+        <input type="date" id="date" name="date" required>
+        <br><br>
+
+        <label> Insert the name of the product of the day:</label>
+        <input type="text" name="name" required>
+        <br><br>
+
+        <label for="img">Select image:</label>
+        <input type="file" id="img" name="image" accept="image/*" required>
+        <br><br>
+
+        <div id="questions-container">
+            <label> Insert a marketing question:</label>
+            <input type="text" name="question1" placeholder="Your question:" required> <!--OTHER QUESTIONS HAVE INCREMENTAL NAME: es: questionN-->
+            <span name="numberofquestions" id="number-of-questions"></span>   <!--TO CYCLE IN THE SERVLET value TIMES-->
+        </div>
+
+        <button type="button" id="add-question-button">Add another question</button>
+        <button class="masked" type="button" id="delete-question-button">Delete a question</button>
+        <br><br><br>
+
+        <button type="send" id="send-button">Send</button>
+    </fieldset>
+</form>
+
+</body>
+</html>

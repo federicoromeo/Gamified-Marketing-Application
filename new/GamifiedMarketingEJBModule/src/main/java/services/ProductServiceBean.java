@@ -1,20 +1,29 @@
 package services;
 
 import javax.ejb.Stateless;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Callable;
+import java.util.function.Consumer;
+
 import entities.*;
 
 @Stateless(name = "ProductServiceEJB")
 public class ProductServiceBean
 {
-    @PersistenceContext(unitName = "PersUn3")
+    @PersistenceContext(unitName = "PersUn")
     private EntityManager em;
 
     public ProductServiceBean(){
     }
-
 
     /**
      * Get a single product by Id
@@ -28,45 +37,78 @@ public class ProductServiceBean
     /**
      * Get the product of the day
      * @param today date formatted like yyyy/mm/dd
-     * @return the product of the day correspondant to today if present,  "null"o therwise
+     * @return the product of the day correspondent to today if present, possibly empty
      */
     public Product findProductOfTheDay(String today) {
-
-            return em
-                    .createNamedQuery("Product.findAll", Product.class)
-                    .getResultList()
-                    .stream()
-                    .filter(x -> x.getDate().equals(today))
-                    .findFirst()
-                    .orElse(null);
+        // try {
+        return em
+                .createNamedQuery("Product.findAll", Product.class)
+                .getResultList()
+                .stream()
+                .filter(x -> x.getDate().equals(today))
+                .findFirst()
+                .orElse(null);
+        // }
+        //catch(Exception e){
+        //  System.out.println(e.getMessage());
+        // }
     }
-
     /**
-     * Get the default product, which in the database is stored with id = 2
-     * @return the default product when no image is present for the day
+     * Get the default product
+     * @return the default product (the first one) if present, "null" otherwise
      */
     public Product findDefault()
     {
         return em
-                .find(Product.class, 2);
-
-                /*.createNamedQuery("Product.findAll", Product.class)
+                .createNamedQuery("Product.findAll", Product.class)
                 .getResultList()
                 .stream()
                 .findFirst()
-                .orElse(null);*/
+                .orElse(null);
     }
 
 
-    //TODO
+
+
+   /* static <T, E extends Exception> Consumer<T>
+    consumerWrapper(Consumer<T> consumer, Class<E> clazz) {
+
+        return i -> {
+            try {
+                consumer.accept(i);
+            } catch (Exception ex) {
+                try {
+                    E exCast = clazz.cast(ex);
+                    System.err.println(
+                            "Exception occured : " + exCast.getMessage());
+                } catch (ClassCastException ccEx) {
+                    throw ex;
+                }
+            }
+        };
+    } */
+
+
     /**
      * Get all products
      * @return the list of all past products, possibly empty
      */
-    public List<Product> findPastProducts()
+    /*public List<Product> findPastProducts()
     {
-        return null;
-    }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
+        Date today = (Date) Calendar.getInstance().getTime();
+
+
+        return
+                em
+                        .createNamedQuery("Product.findAll", Product.class)
+                        .getResultList()
+                        .stream()
+                        .filter( consumerWrapper(x-> dateFormat.parse(((Product)x).getDate()).before(today), ParseException.class));
+
+
+
+    }*/
 
     /**
      * Get all products

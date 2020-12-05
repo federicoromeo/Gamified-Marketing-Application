@@ -7,6 +7,7 @@ import java.util.Collection;
 @Table(name = "user", schema = "gamified_db")
 @NamedQuery(name = "User.checkCredentials", query = "SELECT r FROM User r  WHERE r.username = ?1 and r.password = ?2")
 @NamedQuery(name = "User.checkRegistration", query = "SELECT r FROM User r  WHERE r.username = ?1")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User {
 
     private int id;

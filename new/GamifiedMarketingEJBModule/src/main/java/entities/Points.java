@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "points", schema = "gamified_db")
+@NamedQuery(name="Points.findAll", query="SELECT p FROM Points p")
 public class Points {
 
     private int id;

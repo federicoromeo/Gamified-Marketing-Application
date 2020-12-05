@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="ISO-8859-1">
+    <title> Deletion </title>
+    <a th:href="@{/Logout}" class="logout-button" > Logout </a>
+    <link rel="stylesheet" href="../css/style.css" th:href="@{/css/style.css}">
+    <script  src="../js/deletion.js" charset="utf-8" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<fieldset>
+    <legend><strong> Select questionnaire to delete  </strong></legend><br>
+
+    <form th:action="@{/DeleteQuestionnaire}">
+        <div th:each="p: ${pastProducts}" id="radio-container">
+            <input th:value="${p.name + '  [' + p.date + ']'}" type="radio" name="questionnaire" checked="checked"><br><br>
+            <hidden name="productId" value=p.id></hidden>
+            <button id="delete-questionnaire"> Delete questionnaire </button>
+        </div>
+    </form>
+
+
+</fieldset>
+
+</body>
+
+</html>

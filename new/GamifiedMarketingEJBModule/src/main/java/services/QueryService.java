@@ -9,6 +9,6 @@ import javax.persistence.PersistenceContextType;
 @Stateful
 public class QueryService
 {
-    @PersistenceContext(unitName = "PersUn3", type = PersistenceContextType.EXTENDED)
+    @PersistenceContext(unitName = "PersUn", type = PersistenceContextType.EXTENDED)
     private EntityManager em;
 }

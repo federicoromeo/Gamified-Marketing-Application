@@ -5,6 +5,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "marketingquestion", schema = "gamified_db")
+@NamedQuery(name="MarketingQuestion.findAll", query="SELECT mq FROM MarketingQuestion mq")
 public class MarketingQuestion {
 
     private int id;

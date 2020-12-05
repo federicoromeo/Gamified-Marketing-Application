@@ -69,9 +69,11 @@ public class CheckRegistration extends HttpServlet
         }
 
         User user = null;
+        int idUser;
         try
         {
-            user = userService.register(username, password, email);
+            idUser= userService.createUser(username, password, email);
+            user=userService.findByUsername(username);
         }
         catch (NonUniqueResultException e)
         {

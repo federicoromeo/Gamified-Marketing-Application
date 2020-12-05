@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "log", schema = "gamified_db")
+@NamedQuery(name="Log.findAll", query="SELECT p FROM Product p")
 public class Log {
 
     private int id;

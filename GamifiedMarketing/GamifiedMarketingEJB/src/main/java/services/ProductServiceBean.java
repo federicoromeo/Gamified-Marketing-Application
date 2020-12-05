@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 
 import entities.*;
 
@@ -66,15 +67,28 @@ public class ProductServiceBean
                 .orElse(null);
     }
 
-    public static <T> T uncheckCall(Callable<T> callable) {
-        try { return callable.call(); }
-        catch (RuntimeException e) { throw e; }
-        catch (Exception e) { throw new RuntimeException(e); }
+
+
+
+    static <T, E extends Exception> Consumer<T>
+    consumerWrapper(Consumer<T> consumer, Class<E> clazz) {
+
+        return i -> {
+            try {
+                consumer.accept(i);
+            } catch (Exception ex) {
+                try {
+                    E exCast = clazz.cast(ex);
+                    System.err.println(
+                            "Exception occured : " + exCast.getMessage());
+                } catch (ClassCastException ccEx) {
+                    throw ex;
+                }
+            }
+        };
     }
 
 
-
-    //TODO
     /**
      * Get all products
      * @return the list of all past products, possibly empty
@@ -90,8 +104,7 @@ public class ProductServiceBean
                 .createNamedQuery("Product.findAll", Product.class)
                 .getResultList()
                 .stream()
-                .filter( x-> uncheckCall(
-                            dateFormat.parse(x.getDate()).before(today));
+                .filter( consumerWrapper(x-> dateFormat.parse(x.getDate()).before(today), ParseException.class));
 
 
 

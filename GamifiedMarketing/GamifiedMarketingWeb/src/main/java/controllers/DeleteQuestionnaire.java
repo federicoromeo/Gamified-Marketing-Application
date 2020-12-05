@@ -16,11 +16,12 @@ import javax.servlet.http.Part;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import services.ProductService;
+import services.ProductServiceBean;
 
 
 import java.io.IOException;
 import java.util.List;
+
 
 
 @WebServlet("/DeleteQuestionnaire")
@@ -31,7 +32,7 @@ public class DeleteQuestionnaire extends HttpServlet {
     private TemplateEngine templateEngine;
 
     @EJB(name = "services/ProductService")
-    private ProductService productService;
+    private ProductServiceBean productService;
 
     public DeleteQuestionnaire() {
         super();

@@ -1,13 +1,11 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Collection;
 
 @Entity
 @Table(name = "product", schema = "gamified_db")
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
-@NamedQuery(name="Blob.find", query="SELECT p.image FROM Product p")
 public class Product {
 
     private int id;

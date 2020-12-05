@@ -69,13 +69,6 @@ public class GoToCompileQuestionnaire extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Not got product");
         }
 
-        if(productOfTheDay != null){
-            for(MarketingQuestion mq : productOfTheDay.getMarketingquestionsById()){
-                System.out.println(mq.getText());
-            }
-        }
-
-
         String path = "/WEB-INF/questionnaire.html";
         ServletContext servletContext = this.getServletContext();
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());

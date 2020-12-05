@@ -38,7 +38,7 @@ button {
     width: 100%;
 }
 
-#login-button, #register-button, #show-login, #show-registration, #compile-questionnaire-button{
+#login-button, #register-button, #show-login, #show-registration, .compile-questionnaire-button{
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -72,9 +72,13 @@ button {
     padding: 8px;
 }
 
-.table tr:nth-child(even){background-color: #f2f2f2;}
+.table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
 
-.table tr:hover {background-color: #ddd;}
+.table tr:hover {
+    background-color: #ddd;
+}
 
 .table th {
     padding-top: 12px;
@@ -89,6 +93,17 @@ button {
   text-align: center;
 }
 */
+
+img{
+    width: 150px;
+    height: 150px;
+    border: None;
+}
+
 .errormessage{
     color: #ff0000;
+}
+
+.sessionuser{
+    font-style: oblique;
 }

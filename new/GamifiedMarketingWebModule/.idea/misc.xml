@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../GamifiedMarketingWebAdminModule" />
     <file type="web" url="file://$PROJECT_DIR$" />
     <file type="web" url="file://$USER_HOME$/Documents/polimi/db2/GamifiedMarketing/GamifiedMarketingWebAdminModule" />
   </component>
@@ -9,7 +10,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../GamifiedMarketingEJBModule/pom.xml" />
-        <option value="$USER_HOME$/Documents/polimi/db2/GamifiedMarketing/GamifiedMarketingWebAdminModule/pom.xml" />
+        <option value="$PROJECT_DIR$/../GamifiedMarketingWebAdminModule/pom.xml" />
       </list>
     </option>
   </component>

@@ -6,6 +6,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "user", schema = "gamified_db")
 @NamedQuery(name = "User.checkCredentials", query = "SELECT r FROM User r  WHERE r.username = ?1 and r.password = ?2")
+@NamedQuery(name = "User.checkRegistration", query = "SELECT r FROM User r  WHERE r.username = ?1")
 public class User {
 
     private int id;
@@ -30,7 +31,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "username", nullable = false, length = 255)
+    @Column(name = "username", nullable = false)
     public String getUsername() {
         return username;
     }
@@ -60,7 +61,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "email", nullable = false, length = 255)
+    @Column(name = "email", nullable = false)
     public String getEmail() {
         return email;
     }
@@ -70,7 +71,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "password", nullable = false, length = 255)
+    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }

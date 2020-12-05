@@ -5,6 +5,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -61,23 +62,13 @@ public class GoToHomeUser extends HttpServlet
         if (productOfTheDay == null)
             productOfTheDay = this.productService.findDefault();
 
+        String image = Base64.getEncoder().encodeToString(productOfTheDay.getImage());
 
-
-        /*String image = null;
-        try {
-            byte[] imageBytes= productOfTheDay.getImage();;
-            imageBytes = blob.getBytes(1, (int) blob.length());
-            image = Base64.getEncoder().encodeToString(imageBytes);
-            productOfTheDay.setImage(image);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }*/
-
-
-        String path = "/home_user.html";
+        String path = "/WEB-INF/home_user.html";
         ServletContext servletContext = this.getServletContext();
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
         ctx.setVariable("product", productOfTheDay);
+        ctx.setVariable("image", image);
         this.templateEngine.process(path, ctx, response.getWriter());
     }
 

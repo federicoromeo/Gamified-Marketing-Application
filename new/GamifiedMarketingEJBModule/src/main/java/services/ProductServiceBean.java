@@ -1,10 +1,7 @@
 package services;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.sql.Blob;
-import java.time.LocalDate;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Optional;
 import entities.*;
@@ -17,13 +14,6 @@ public class ProductServiceBean
 
     public ProductServiceBean(){
     }
-
-
-    /*public Blob getImage(int productId){
-        return em
-                .find(Product.class, productId);
-
-    }*/
 
 
     /**
@@ -52,17 +42,19 @@ public class ProductServiceBean
     }
 
     /**
-     * Get the default product
-     * @return the default product (the first one) if present, "null" otherwise
+     * Get the default product, which in the database is stored with id = 2
+     * @return the default product when no image is present for the day
      */
     public Product findDefault()
     {
         return em
-                .createNamedQuery("Product.findAll", Product.class)
+                .find(Product.class, 2);
+
+                /*.createNamedQuery("Product.findAll", Product.class)
                 .getResultList()
                 .stream()
                 .findFirst()
-                .orElse(null);
+                .orElse(null);*/
     }
 
 
@@ -94,12 +86,12 @@ public class ProductServiceBean
      * @param date the day in which the product is scheduled to be "product of the day"
      * @return the id of the product just created
      */
-    public int createProduct(String name, String image, String date)
+    public int createProduct(String name, byte[] image, String date)
     {
         Product product = new Product();
         product.setName(name);
         product.setDate(date);
-        //product.setImage(image);
+        product.setImage(image);
 
         em.persist(product);
         em.flush();

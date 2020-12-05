@@ -108,12 +108,18 @@ public class CheckLogin extends HttpServlet
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("queryService", qService);
 
-            if((int)user.getAdmin() != 0)
-                path = getServletContext().getContextPath() + "/GoToHomeAdmin";
-            else
+            if((int)user.getAdmin() != 0){
+                path = "/index.html";
+                ServletContext servletContext = getServletContext();
+                final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+                ctx.setVariable("errormessage", "You tried to log as an ADMIN account!");
+                templateEngine.process(path, ctx, response.getWriter());
+                //path = getServletContext().getContextPath() + "/GoToHomeAdmin";
+            }
+            else {
                 path = getServletContext().getContextPath() + "/GoToHomeUser";
-
-            response.sendRedirect(path);
+                response.sendRedirect(path);
+            }
         }
     }
 

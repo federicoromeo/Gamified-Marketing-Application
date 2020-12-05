@@ -19,8 +19,7 @@
 
     <form th:action="@{/DeleteQuestionnaire}">
         <div th:each="p: ${pastProducts}" id="radio-container">
-            <input th:value="${p.name + '  [' + p.date + ']'}" type="radio" name="questionnaire" checked="checked"><br><br>
-            <hidden name="productId" value=p.id></hidden>
+            <input th:value="${p.id}" type="radio" name="product" th:text="${ p.name }" checked="checked"><br><br>
             <button id="delete-questionnaire"> Delete questionnaire </button>
         </div>
     </form>

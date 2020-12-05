@@ -56,16 +56,23 @@ public class DeleteQuestionnaire extends HttpServlet {
         String path=null;
 
         ServletContext servletContext = getServletContext();
-        final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
-        if (request.getParameter("productId") != "" && !request.getParameter("productId").isEmpty()) {
-            productId= Integer.parseInt(request.getParameter("productId"));
+        if (request.getParameter("product") != "" && !request.getParameter("product").isEmpty()) {
+            productId= Integer.parseInt(request.getParameter("product"));
         }
 
         if (productId!=-1) {
 
             productService.deleteProduct(productId);
         }
+
+        List<Product> pastProducts= pastProducts=productService.findAll();
+
+        ctx.setVariable("pastProducts", pastProducts);
+
+        path = "/WEB-INF/deletion.html";
+        this.templateEngine.process(path, ctx, response.getWriter());
 
     }
 

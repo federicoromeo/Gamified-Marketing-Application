@@ -41,7 +41,7 @@ public class ProductServiceBean
      * @return the product of the day correspondent to today if present, possibly empty
      */
     public Product findProductOfTheDay(String today) {
-        // try {
+
         return em
                 .createNamedQuery("Product.findAll", Product.class)
                 .getResultList()
@@ -49,11 +49,18 @@ public class ProductServiceBean
                 .filter(x -> x.getDate().equals(today))
                 .findFirst()
                 .orElse(null);
-        // }
-        //catch(Exception e){
-        //  System.out.println(e.getMessage());
-        // }
     }
+
+
+    /**
+     * Get the default product
+     * @return the default product empty
+     */
+    public Product findDefaultNullImage() {
+        return em
+                .find(Product.class, 2);
+    }
+
     /**
      * Get the default product
      * @return the default product (the first one) if present, "null" otherwise

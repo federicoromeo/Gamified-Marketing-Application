@@ -49,7 +49,8 @@ public class GoToHomeUser extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Product productOfTheDay = null;
-        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yy"));
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
         try
         {
             productOfTheDay = this.productService.findProductOfTheDay(today);
@@ -60,7 +61,7 @@ public class GoToHomeUser extends HttpServlet
         }
 
         if (productOfTheDay == null)
-            productOfTheDay = this.productService.findDefault();
+            productOfTheDay = this.productService.findDefaultNullImage();
 
         String image = Base64.getEncoder().encodeToString(productOfTheDay.getImage());
 

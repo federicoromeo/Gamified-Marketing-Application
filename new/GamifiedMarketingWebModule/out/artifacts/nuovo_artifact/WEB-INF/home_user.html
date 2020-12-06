@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="ISO-8859-1">
+    <title>  Home Page  </title>
+    <!--script src="../js/************.js"></script-->
+    <link rel="stylesheet" type="text/css" media="all" href="../css/style.css" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <a th:href="@{/Logout}" class="logout-button">Logout</a>
+    <h1>Welcome to the User Home Page<span class="sessionuser" th:text="${' ' + session.user.username}"></span></h1><br>
+
+    <fieldset>
+        <h2>Product of the day</h2><br>
+        <div class="product-of-the-day-container">
+            <p   th:text="${product.name}" id="image-description" name="image-name"> No Product Of The Day </p><br>
+            <img th:src="@{'data:image/png;base64,'+${image}}"  /><br>
+        </div>
+    </fieldset>
+
+    <div class="reviews-container">
+        <h3>Users' reviews</h3>
+
+        <table class="table" id="reviews">
+            <tr>
+                <th>Username</th>
+                <div th:each="mq: ${product.marketingquestionsById}">
+                    <th th:text="${mq.getText()}">No questions</th>
+                </div>
+            </tr>
+            <tr th:each="mq: ${product.marketingquestionsById}">
+                <div th:each="ma: ${mq.marketinganswersById}">
+                    <td th:text="${ma.userByUserId.username}">fede</td>
+                    <td th:text="${ma.getText()}">awful</td>
+                </div>
+            </tr>
+        </table>
+
+    </div>
+    <br><br>
+
+    <form action="GoToCompileQuestionnaire" method="POST">
+        <input type="hidden" name="product" th:value="${product.getId()}">
+        <!-- if the product has id=2, it means that it's not present for the current day, so we disable the button-->
+        <div th:switch="${product.getId()}">
+            <input th:case="${2}" class="compile-questionnaire-button" type="submit" value="Can't compile the questionnaire!" disabled>
+            <input th:case="*"    class="compile-questionnaire-button" type="submit" value="Compile the questionnaire!">
+        </div>
+    </form>
+
+</body>
+
+
+</html>

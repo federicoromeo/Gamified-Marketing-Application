@@ -28,7 +28,6 @@ public class MarketingQuestionServiceBean
                 .find(MarketingQuestion.class, mqId);
     }
 
-
     /**
      * Get all marketingQuestions
      * @return the list of all marketingQuestions, possibly empty
@@ -39,10 +38,6 @@ public class MarketingQuestionServiceBean
                 .createNamedQuery("MarketingQuestion.findAll", MarketingQuestion.class)
                 .getResultList();
     }
-
-
-
-
 
 
     /**
@@ -61,9 +56,6 @@ public class MarketingQuestionServiceBean
     }
 
 
-
-
-
     /**
      * Create a new marketingQuestion
      * @param text the text of the question
@@ -72,9 +64,10 @@ public class MarketingQuestionServiceBean
      */
     public int createMarketingQuestion(String text, Product product)
     {
-        MarketingQuestion marketingQuestion=new MarketingQuestion();
+        MarketingQuestion marketingQuestion = new MarketingQuestion();
         marketingQuestion.setText(text);
         marketingQuestion.setProductId(product.getId());
+        marketingQuestion.setProductByProductId(product); //added fede
 
         em.persist(marketingQuestion);
         em.flush();
@@ -92,5 +85,6 @@ public class MarketingQuestionServiceBean
                 .of(em.find(MarketingAnswer.class, marketingQuestionId))
                 .ifPresent(p -> em.remove(p));
     }
+
 }
 

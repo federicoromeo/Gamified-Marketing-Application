@@ -33,8 +33,9 @@ window.onload = function() { // avoid variables ending up in the global scope
     var deleteQuestionButton = document.getElementById("delete-question-button");
     deleteQuestionButton.addEventListener("click", (e) => {
         var container = document.getElementById("questions-container");
-        var count = container.querySelectorAll("input").length;
+        var count = container.querySelectorAll('input[type="text"]').length;
         var toBeDeleted = document.getElementById(count);
+        console.log("tobedeleted: question" + count);
         var countAux = count+1;
         //var br = document.getElementById("br"+countAux);
         //console.log(br);
@@ -65,7 +66,7 @@ window.onload = function() { // avoid variables ending up in the global scope
            deleteQuestionButton.classList.add("visible");
         */
         var container = document.getElementById("questions-container");
-        var count = container.querySelectorAll("input").length;
+        var count = container.querySelectorAll('input[type="text"]').length;
         var countAux = count+1;
         console.log("added: question" + countAux);
 

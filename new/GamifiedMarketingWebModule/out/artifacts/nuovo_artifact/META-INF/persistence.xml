@@ -1,13 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <persistence version="2.2"
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 
-    <persistence-unit name="PersUn3"
-                      transaction-type="JTA">
+    <persistence-unit name="PersUn" transaction-type="JTA">
+
         <jta-data-source>GamifiedDB</jta-data-source>
+
+        <!--class>entities.OffensiveWord</class>
+        <class>entities.StatisticalAnswer</class>
+        <class>entities.Log</class>
+        <class>entities_auto.Sex</class>
+        <class>entities.MarketingQuestion</class>
+        <class>entities.MarketingAnswer</class>
+        <class>entities_auto.Expertise</class>
+        <class>entities.Points</class>
+        <class>entities.Product</class>
+        <class>entities.User</class-->
+
+        <class>entities.Log</class>
+        <class>entities.MarketingAnswer</class>
+        <class>entities.MarketingQuestion</class>
         <class>entities.OffensiveWord</class>
+        <class>entities.Points</class>
+        <class>entities.Product</class>
+        <class>entities.StatisticalAnswer</class>
+        <class>entities.User</class>
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
+            <property name="javax.persistence.jdbc.driver" value="jdbc:mysql://localhost:3306/gamified_db"/>
+            <!--property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
+            <property name="toplink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:mysql://localhost:3306/gamified_db"/>
+            <property name="openjpa.ConnectionDriverName" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
+            <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/-->
+        </properties>
 
     </persistence-unit>
 

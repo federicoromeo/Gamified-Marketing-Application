@@ -14,6 +14,13 @@ public class MarketingQuestion {
     private Collection<MarketingAnswer> marketinganswersById;
     private Product productByProductId;
 
+    public MarketingQuestion() {
+    }
+
+    public MarketingQuestion(String text) {
+        this.text = text;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {

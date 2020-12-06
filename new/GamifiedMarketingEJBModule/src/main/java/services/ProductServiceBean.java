@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.sql.Date;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -67,10 +68,36 @@ public class ProductServiceBean
                 .orElse(null);
     }
 
+<<<<<<< HEAD
+=======
+   /* static <T, E extends Exception> Consumer<T>
+    consumerWrapper(Consumer<T> consumer, Class<E> clazz) {
+
+        return i -> {
+            try {
+                consumer.accept(i);
+            } catch (Exception ex) {
+                try {
+                    E exCast = clazz.cast(ex);
+                    System.err.println(
+                            "Exception occured : " + exCast.getMessage());
+                } catch (ClassCastException ccEx) {
+                    throw ex;
+                }
+            }
+        };
+    } */
+
+
+>>>>>>> 34a5b301bbd528f22c16ac8fb18d4e2085ae4efd
     /**
      * Get all products
      * @return the list of all past products, possibly empty
      */
+<<<<<<< HEAD
+=======
+    /* todo
+>>>>>>> 34a5b301bbd528f22c16ac8fb18d4e2085ae4efd
     public List<Product> findPastProducts()
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
@@ -79,8 +106,17 @@ public class ProductServiceBean
         List<Product> result=null;
         List<Product> tmp=null;
 
+<<<<<<< HEAD
         tmp=em.createNamedQuery("Product.findAll", Product.class)
                         .getResultList();
+=======
+        return
+                em
+                    .createNamedQuery("Product.findAll", Product.class)
+                    .getResultList()
+                    .stream()
+                    .filter( consumerWrapper(x-> dateFormat.parse(((Product)x).getDate()).before(today), ParseException.class));
+>>>>>>> 34a5b301bbd528f22c16ac8fb18d4e2085ae4efd
 
 
         if(tmp!=null) {
@@ -123,18 +159,41 @@ public class ProductServiceBean
      * @param date the day in which the product is scheduled to be "product of the day"
      * @return the id of the product just created
      */
-    public int createProduct(String name, byte[] image, String date)
-    {
-        Product product = new Product();
-        product.setName(name);
-        product.setDate(date);
-        product.setImage(image);
+    public int createProduct(String name, byte[] image, String date) throws Exception {
 
-        em.persist(product);
-        em.flush();
+        Product duplicate = findAll()
+                                    .stream()
+                                    .filter(x -> x.getDate().equals(date))
+                                    .findFirst()
+                                    .orElse(null);
 
-        return product.getId();
+        if(duplicate == null){
+            Product product = null;
+            try
+            {
+                product = new Product();
+                product.setName(name);
+                product.setDate(date);
+                product.setImage(image);
+
+                em.persist(product);
+                em.flush();
+
+                return product.getId();
+            }
+            //catch(SQLIntegrityConstraintViolationException e){
+            catch(Exception e){
+                System.out.println(e.getMessage());
+                //em.getTransaction().rollback();
+                return -1;
+            }
+        }
+
+        else{
+            return -1;
+        }
     }
+
 
     /**
      * Remove a product

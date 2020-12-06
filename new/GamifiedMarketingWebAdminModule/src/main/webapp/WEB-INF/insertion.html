@@ -4,7 +4,6 @@
     <head>
         <meta charset="ISO-8859-1">
         <title> Creation </title>
-        <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
         <link rel="stylesheet" media="all" href="../css/style.css" th:href="@{/css/style.css}">
         <script src="../js/creation.js" th:src="@{/js/creation.js}" charset="utf-8" defer></script>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -12,7 +11,9 @@
 
     <body>
 
-        <form action="InsertProduct" method="POST">
+    <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
+
+        <form action="InsertProduct" method="POST" enctype='multipart/form-data'>
 
             <fieldset>
 
@@ -40,6 +41,7 @@
                 <button class="masked" type="button" id="delete-question-button">Delete a question</button>
                 <br><br><br>
 
+                <p th:text="${errormessage}" id="errormessage-login" class="errormessage"></p>
                 <input id="send-button" type="submit" value="Send">
 
             </fieldset>

@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.sql.Date;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -126,17 +127,38 @@ public class ProductServiceBean
      * @param date the day in which the product is scheduled to be "product of the day"
      * @return the id of the product just created
      */
-    public int createProduct(String name, byte[] image, String date)
-    {
-        Product product = new Product();
-        product.setName(name);
-        product.setDate(date);
-        product.setImage(image);
+    public int createProduct(String name, byte[] image, String date) throws Exception {
 
-        em.persist(product);
-        em.flush();
+        Product duplicate = findAll()
+                                    .stream()
+                                    .filter(x -> x.getDate().equals(date))
+                                    .findFirst()
+                                    .orElse(null);
 
-        return product.getId();
+        if(duplicate == null){
+            Product product = null;
+            try
+            {
+                product = new Product();
+                product.setName(name);
+                product.setDate(date);
+                product.setImage(image);
+
+                em.persist(product);
+                em.flush();
+
+                return product.getId();
+            }
+            //catch(SQLIntegrityConstraintViolationException e){
+            catch(Exception e){
+                System.out.println(e.getMessage());
+                return -1;
+            }
+        }
+
+        else{
+            return -1;
+        }
     }
 
 

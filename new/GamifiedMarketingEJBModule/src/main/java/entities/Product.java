@@ -48,7 +48,7 @@ public class Product {
     }
 
     @Basic
-    @Column(name = "date", nullable = false)
+    @Column(name = "date", unique = true, nullable = false)
     public String getDate() {
         return date;
     }

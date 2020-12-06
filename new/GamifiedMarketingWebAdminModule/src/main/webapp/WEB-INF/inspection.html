@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="ISO-8859-1">
-    <title> Inspection </title>
-    <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/inspection.js" charset="utf-8" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="ISO-8859-1">
+        <title> Inspection </title>
+        <link rel="stylesheet" media="all" href="../css/style.css" th:href="@{/css/style.css}">
+        <script src="../js/inspection.js" th:src="@{/js/inspection.js}" charset="utf-8" defer></script>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    </head>
 
-<body>
+    <body>
 
-<!--fieldset>
+        <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
 
-   <legend><strong> Here are the datas of the past questionnaires  </strong></legend><br>
+        <!--fieldset>
 
-   <div th:each="p: ${pastProducts}" id="radio-container">
-      <input value="${p.name}" type="radio" name="questionnaire" checked="checked"> Quest1 <br><br>
-      <input value="mockup2" type="radio" name="questionnaire">   Quest2 <br><br>
-      <input value="mockup1" type="radio" name="questionnaire">   Quest3 <br><br>
-   </div>
+           <legend><strong> Here are the datas of the past questionnaires  </strong></legend><br>
 
-</fieldset>
+           <div th:each="p: ${pastProducts}" id="radio-container">
+              <input value="${p.name}" type="radio" name="questionnaire" checked="checked"> Quest1 <br><br>
+              <input value="mockup2" type="radio" name="questionnaire">   Quest2 <br><br>
+              <input value="mockup1" type="radio" name="questionnaire">   Quest3 <br><br>
+           </div>
 
-<br><br><br-->
+        </fieldset>
 
-<h1> Here are the data of the past questionnaires </h1><br>
+        <br><br><br-->
 
-<div th:each="p: ${pastProducts}">
+        <h1> Here are the data of the past questionnaires </h1><br>
 
-    <fieldset>
-        <legend><strong th:text="${p.name}"></strong></legend>
-        <table class="table">
-            <tr>
-                <th> Users who submitted it </th>
-                <th> Users who cancelled it </th>
-                <div th:each="mq: ${p.marketingquestionsById}" id="answers">
-                    <th th:text="${mq.text}"> Answers </th>
-                </div>
-            </tr>
-            <tr>
-                <div th:each="l: ${p.logs}">
-                    <td th:text="${l.outcome} ? '${l.userId.username}'">marco</td>
-                    <td th:text="${!l.outcome} ? '${l.userId.username}'">paolo</td>
-                    <div th:each="mq: ${p.marketingQuestions}" id="answers">
-                        <div th:each="ma: ${mq.marketingAnswers}">
-                            <td th:text="${ma.text}">nice</td>
+        <div th:each="p: ${pastProducts}">
+
+            <fieldset>
+                <legend><strong th:text="${p.name}"></strong></legend>
+                <table class="table">
+                    <tr>
+                        <th> Users who submitted it </th>
+                        <th> Users who cancelled it </th>
+                        <div th:each="mq: ${p.marketingquestionsById}" id="answers">
+                            <th th:text="${mq.text}"> Answers </th>
                         </div>
-                    </div>
-                </div>
-            </tr>
-        </table>
-    </fieldset>
+                    </tr>
+                    <tr>
+                        <div th:each="l: ${p.logs}">
+                            <td th:text="${l.outcome} ? '${l.userId.username}'">marco</td>
+                            <td th:text="${!l.outcome} ? '${l.userId.username}'">paolo</td>
+                            <div th:each="mq: ${p.marketingQuestions}" id="answers">
+                                <div th:each="ma: ${mq.marketingAnswers}">
+                                    <td th:text="${ma.text}">nice</td>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                </table>
+            </fieldset>
 
-</div>
+        </div>
 
-</body>
+    </body>
 
 </html>

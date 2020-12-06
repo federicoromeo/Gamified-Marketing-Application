@@ -12,14 +12,21 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.MarketingQuestionServiceBean;
 import services.ProductServiceBean;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.io.IOUtils;
 
 @WebServlet("/InsertProduct")
 @MultipartConfig
@@ -52,10 +59,19 @@ public class InsertProduct extends HttpServlet {
     {
         // get all parameters from the form
         String date = request.getParameter("date");
+
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        //LocalDate date = LocalDate.parse(date, formatter);
+        //System.out.println("2 :" + date);
+
         String name = request.getParameter("name");
-        byte[] image = request.getParameter("image").getBytes();
+
+        Part filePart = request.getPart("image");
+        //String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+        InputStream fileContent = filePart.getInputStream();
+        byte[] image = IOUtils.toByteArray(fileContent);
+
         int numberOfQuestions = Integer.parseInt(request.getParameter("numberofquestions"));
-        System.out.println(numberOfQuestions);
 
         List<String> questions = new ArrayList<>();
         for(int i = 1; i <= numberOfQuestions; i++)
@@ -66,10 +82,26 @@ public class InsertProduct extends HttpServlet {
         try
         {
             newProductId = productService.createProduct(name, image, date);
+            if(newProductId == -1){
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not possible to create product");
+                String path = "/WEB-INF/insertion.html";
+                ServletContext servletContext = getServletContext();
+                final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+                ctx.setVariable("errormessage", "Invalid date for the product! Please change it.");
+                templateEngine.process(path, ctx, response.getWriter());
+            }
         }
         catch (Exception e)
         {
             e.printStackTrace(); //todo
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not possible to create product");
+            String path = "/WEB-INF/insertion.html";
+            ServletContext servletContext = getServletContext();
+            final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+            ctx.setVariable("errormessage", "Invalid date for the product! Please change it.");
+            templateEngine.process(path, ctx, response.getWriter());
+
+            return;
         }
 
         // get the product just inserted in the db
@@ -122,13 +154,9 @@ public class InsertProduct extends HttpServlet {
 
 
 
-        //List<Product> pastProducts = productService.findPastProducts(); todo
-        List<Product> pastProducts = productService.findAll();
-
         ServletContext servletContext = getServletContext();
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-        ctx.setVariable("pastProducts", pastProducts);
-        String path = "/WEB-INF/deletion.html";
+        String path = "/WEB-INF/home_admin.html";
         this.templateEngine.process(path, ctx, response.getWriter());
 
     }

@@ -152,6 +152,7 @@ public class ProductServiceBean
             //catch(SQLIntegrityConstraintViolationException e){
             catch(Exception e){
                 System.out.println(e.getMessage());
+                //em.getTransaction().rollback();
                 return -1;
             }
         }

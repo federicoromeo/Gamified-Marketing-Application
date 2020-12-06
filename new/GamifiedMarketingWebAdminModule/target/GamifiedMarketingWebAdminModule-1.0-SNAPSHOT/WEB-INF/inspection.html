@@ -30,31 +30,32 @@
         <h1> Here are the data of the past questionnaires </h1><br>
 
         <div th:each="p: ${pastProducts}">
+            <div th:if="${p.getId() != 2}">
 
-            <fieldset>
-                <legend><strong th:text="${p.name}"></strong></legend>
-                <table class="table">
-                    <tr>
-                        <th> Users who submitted it </th>
-                        <th> Users who cancelled it </th>
-                        <div th:each="mq: ${p.marketingquestionsById}" id="answers">
-                            <th th:text="${mq.text}"> Answers </th>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div th:each="l: ${p.logs}">
-                            <td th:text="${l.outcome} ? '${l.userId.username}'">marco</td>
-                            <td th:text="${!l.outcome} ? '${l.userId.username}'">paolo</td>
-                            <div th:each="mq: ${p.marketingQuestions}" id="answers">
-                                <div th:each="ma: ${mq.marketingAnswers}">
-                                    <td th:text="${ma.text}">nice</td>
+                <fieldset>
+                    <legend><strong th:text="${p.name}"></strong></legend>
+                    <table class="table">
+                        <tr>
+                            <th> Users who submitted it </th>
+                            <th> Users who cancelled it </th>
+                            <div th:each="mq: ${p.marketingquestionsById}">
+                                <th th:text="${mq.text}"> Answers </th>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div th:each="l: ${p.logsById}">
+                                <td th:if="${l.submitted} ? ${l.userByUserId.username}">marco</td>
+                                <div th:each="mq: ${p.marketingquestionsById}" id="answers">
+                                    <div th:each="ma: ${mq.marketinganswersById}">
+                                        <td th:text="${ma.text}">nice</td>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </tr>
-                </table>
-            </fieldset>
+                        </tr>
+                    </table>
+                </fieldset>
 
+            </div>
         </div>
 
     </body>

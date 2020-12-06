@@ -75,6 +75,7 @@ public class DispatcherAdmin extends HttpServlet {
                     break;
 
                 case "delete-button":
+                    //pastProducts = productService.findPastProducts(); todo
                     pastProducts = productService.findAll();
                     ctx.setVariable("pastProducts", pastProducts);
                     path = "/WEB-INF/deletion.html";

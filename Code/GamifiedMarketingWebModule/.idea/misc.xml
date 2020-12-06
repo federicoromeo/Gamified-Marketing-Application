@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+<<<<<<< HEAD
+    <file type="web" url="file://$PROJECT_DIR$" />
+=======
+    <file type="web" url="file://$PROJECT_DIR$/../GamifiedMarketingWebAdminModule" />
+    <file type="web" url="file://$PROJECT_DIR$" />
+    <file type="web" url="file://$USER_HOME$/Documents/polimi/db2/GamifiedMarketing/GamifiedMarketingWebAdminModule" />
+>>>>>>> 7f1c94f0cc0ae730c0cd4814970982a57db85f91
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+<<<<<<< HEAD
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="15" project-jdk-type="JavaSDK" />
+=======
+        <option value="$PROJECT_DIR$/../GamifiedMarketingEJBModule/pom.xml" />
+        <option value="$PROJECT_DIR$/../GamifiedMarketingWebAdminModule/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="15" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+>>>>>>> 7f1c94f0cc0ae730c0cd4814970982a57db85f91
+</project>

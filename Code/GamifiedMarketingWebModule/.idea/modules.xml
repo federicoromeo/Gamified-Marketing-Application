@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/GamifiedMarketingWebAdminModule.iml" filepath="$PROJECT_DIR$/GamifiedMarketingWebAdminModule.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/../GamifiedMarketingEJBModule/GamifiedMarketingEJBModule.iml" filepath="$PROJECT_DIR$/../GamifiedMarketingEJBModule/GamifiedMarketingEJBModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../GamifiedMarketingWebAdminModule/GamifiedMarketingWebAdminModule.iml" filepath="$PROJECT_DIR$/../GamifiedMarketingWebAdminModule/GamifiedMarketingWebAdminModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GamifiedMarketingWebModule.iml" filepath="$PROJECT_DIR$/GamifiedMarketingWebModule.iml" />
+>>>>>>> 7f1c94f0cc0ae730c0cd4814970982a57db85f91
+    </modules>
+  </component>
+</project>

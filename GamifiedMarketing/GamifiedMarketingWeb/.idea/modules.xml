@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/../GamifiedMarketingEJB/GamifiedMarketingEJB.iml" filepath="$PROJECT_DIR$/../GamifiedMarketingEJB/GamifiedMarketingEJB.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GamifiedMarketingWeb.iml" filepath="$PROJECT_DIR$/GamifiedMarketingWeb.iml" />
-    </modules>
-  </component>
-</project>

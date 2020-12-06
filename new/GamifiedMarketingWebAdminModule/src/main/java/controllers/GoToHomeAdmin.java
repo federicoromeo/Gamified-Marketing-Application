@@ -22,7 +22,8 @@ import java.time.LocalDate;
 import java.util.Base64;
 
 @WebServlet("/GoToHomeAdmin")
-public class GoToHomeAdmin extends HttpServlet
+public class
+GoToHomeAdmin extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 

@@ -75,8 +75,6 @@ public class ProductServiceBean
                 .orElse(null);
     }
 
-<<<<<<< HEAD
-=======
    /* static <T, E extends Exception> Consumer<T>
     consumerWrapper(Consumer<T> consumer, Class<E> clazz) {
 
@@ -96,15 +94,11 @@ public class ProductServiceBean
     } */
 
 
->>>>>>> 34a5b301bbd528f22c16ac8fb18d4e2085ae4efd
     /**
      * Get all products
      * @return the list of all past products, possibly empty
      */
-<<<<<<< HEAD
-=======
     /* todo
->>>>>>> 34a5b301bbd528f22c16ac8fb18d4e2085ae4efd
     public List<Product> findPastProducts()
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
@@ -113,17 +107,14 @@ public class ProductServiceBean
         List<Product> result=null;
         List<Product> tmp=null;
 
-<<<<<<< HEAD
         tmp=em.createNamedQuery("Product.findAll", Product.class)
                         .getResultList();
-=======
         return
                 em
                     .createNamedQuery("Product.findAll", Product.class)
                     .getResultList()
                     .stream()
                     .filter( consumerWrapper(x-> dateFormat.parse(((Product)x).getDate()).before(today), ParseException.class));
->>>>>>> 34a5b301bbd528f22c16ac8fb18d4e2085ae4efd
 
 
         if(tmp!=null) {

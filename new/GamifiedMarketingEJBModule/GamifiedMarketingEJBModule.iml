@@ -6,7 +6,11 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="EclipseLink" />
         <datasource-mapping>
+<<<<<<< HEAD
+          <factory-entry name="PersUn" />
+=======
           <factory-entry name="PersUn" value="b68f32e9-8c88-4135-ad8d-aeaae841e775" />
+>>>>>>> 34a5b301bbd528f22c16ac8fb18d4e2085ae4efd
           <factory-entry name="PersUn3" value="b68f32e9-8c88-4135-ad8d-aeaae841e775" />
         </datasource-mapping>
         <naming-strategy-map />

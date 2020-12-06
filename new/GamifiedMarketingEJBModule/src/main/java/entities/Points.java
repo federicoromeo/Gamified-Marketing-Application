@@ -10,7 +10,7 @@ public class Points {
     private int id;
     private int userId;
     private int productId;
-    private String total;
+    private int total;
     private User userByUserId;
     private Product productByProductId;
 
@@ -46,11 +46,11 @@ public class Points {
 
     @Basic
     @Column(name = "total", nullable = false, length = 255)
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 
@@ -64,7 +64,7 @@ public class Points {
         if (id != points.id) return false;
         if (userId != points.userId) return false;
         if (productId != points.productId) return false;
-        if (total != null ? !total.equals(points.total) : points.total != null) return false;
+        if (total != points.total) return false;
 
         return true;
     }
@@ -74,7 +74,7 @@ public class Points {
         int result = id;
         result = 31 * result + userId;
         result = 31 * result + productId;
-        result = 31 * result + (total != null ? total.hashCode() : 0);
+        result = 31 * result + total;
         return result;
     }
 
@@ -98,3 +98,59 @@ public class Points {
         this.productByProductId = productByProductId;
     }
 }
+
+
+
+
+
+
+/*
+********Trigger per calcolare i punti della sezione 1:
+        NB: nel nostro db il testo delle marketingAnswer deve essere not null,
+        * quindi per ciascun inserimento il punteggio è incrementato di uno
+
+        CREATE TRIGGER UpdatePointsSection1
+        AFTER INSERT ON MarketingAnswer
+        FOR EACH ROW
+        BEGIN
+            IF EXISTS (SELECT *
+                        FROM Points P
+                        WHERE P.userId==NEW.userId
+                         AND P.productId==NEW.productId)
+            THEN
+                UPDATE Points
+                    SET total=total+1;
+                WHERE P.userId==NEW.userId
+                AND P.productId==NEW.productId
+            ELSE
+                INSERT ON Points(userId, productid, total)
+                VALUES(NEW.userId, NEW.productId, 1)
+        END;
+
+********Trigger per calcolare i punti della sezione 2:
+        NB:il trigger calcola correttamente i punti solo se non vi solo valori di default in statistical answer
+
+        CREATE TRIGGER UpdatePointsSection2
+        AFTER INSERT ON StatisticalAnswer
+        FOR EACH ROW
+        BEGIN
+            DECLARE pointToAdd integer;
+                WHEN((NEW.age IS NULL, 2, 0)+ IF(NEW.expertise IS NULL, 2, 0) + IF(NEW.sex IS NULL, 2, 0) INTO pointsToAdd )>0
+                    IF EXISTS ( SELECT *
+                                 FROM Points P
+                                 WHERE P.userId==NEW.userId
+                                  AND P.productId==NEW.productId)
+                    THEN
+                        UPDATE Points
+                            SET total=total+pointsToAdd;
+                        WHERE P.userId==NEW.userId
+                        AND P.productId==NEW.productId
+                    ELSE
+                        INSERT ON Points(userId, productid, total)
+                        VALUES(NEW.userId, NEW.productId, pointsToAdd)
+                 //quest'ultimo caso dovrebbe capitare raramente in quanto l'inserimento di una statisticalAnswer
+                    avviene in teoria solamante l'inserimento di una marketingQuestion che scatena il precedente trigger.
+                    Il caso è comunque considerato per mettersi al riparo nel caso in cui il dbms processi i trigger o
+                    l'inserimento delle tuple con ordine differente da quanto aspettato
+
+ */

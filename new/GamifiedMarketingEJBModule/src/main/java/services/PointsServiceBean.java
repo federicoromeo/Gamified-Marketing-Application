@@ -85,7 +85,7 @@ public class PointsServiceBean
      * @param total the total number of points
      * @return the id of the points just created
      */
-    public int createPoints(User user, Product product, String total)
+    public int createPoints(User user, Product product, int total)
     {
         Points points=new Points();
         points.setUserId(user.getId());

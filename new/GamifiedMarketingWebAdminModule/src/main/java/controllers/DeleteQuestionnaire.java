@@ -67,7 +67,7 @@ public class DeleteQuestionnaire extends HttpServlet {
             productService.deleteProduct(productId);
         }
 
-        List<Product> pastProducts= pastProducts=productService.findAll();
+        List<Product> pastProducts=productService.findPastProducts();
 
         ctx.setVariable("pastProducts", pastProducts);
 

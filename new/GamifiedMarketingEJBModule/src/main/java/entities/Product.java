@@ -57,7 +57,12 @@ public class Product {
         this.date = date;
     }
 
-    @OneToMany(mappedBy = "productByProductId")
+    //when a product is removed all tuples referring to it are deleted
+    //also orphan are deleted
+    //cascade policy: lazy because in average there are more access made by simple user than of made by admin (which requires all the info),
+    //cascade policy: eager only for marketing question because users need always question to answer to them
+
+    @OneToMany(mappedBy = "productByProductId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<Log> getLogsById() {
         return logsById;
     }
@@ -66,7 +71,7 @@ public class Product {
         this.logsById = logsById;
     }
 
-    @OneToMany(mappedBy = "productByProductId")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "productByProductId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<MarketingQuestion> getMarketingquestionsById() {
         return marketingquestionsById;
     }
@@ -75,7 +80,17 @@ public class Product {
         this.marketingquestionsById = marketingquestionsById;
     }
 
-    @OneToMany(mappedBy = "productByProductId")
+   /* Fetch type EAGER allows resorting the relationship list content also in the
+	 * client Web servlet after the creation of a new mission. If you leave the
+	 * default LAZY policy, the relationship is sorted only at the first access but
+	 * then adding a new mission does not trigger the reloading of data from the
+	 * database and thus the sort method in the client does not actually re-sort the
+	 * list of missions.
+	 * In average when a product is loaded the application need also the points made by each user (in the leaderboard)
+    */
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "productByProductId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
+    @OrderBy("total DESC")
     public Collection<Points> getPointsById() {
         return pointsById;
     }
@@ -84,7 +99,7 @@ public class Product {
         this.pointsById = pointsById;
     }
 
-    @OneToMany(mappedBy = "productByProductId")
+    @OneToMany(mappedBy = "productByProductId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<StatisticalAnswer> getStatisticalanswersById() {
         return statisticalanswersById;
     }

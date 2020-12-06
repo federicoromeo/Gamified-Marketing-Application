@@ -71,7 +71,7 @@ public class DispatcherAdmin extends HttpServlet {
                     break;
                 case "inspect-button":
 
-                    pastProducts=productService.findAll();
+                    pastProducts=productService.findPastProducts();
 
                     ctx.setVariable("pastProducts", pastProducts);
 
@@ -79,7 +79,7 @@ public class DispatcherAdmin extends HttpServlet {
                     break;
                 case "delete-button":
 
-                    pastProducts=productService.findAll();
+                    pastProducts=productService.findPastProducts();
 
                     ctx.setVariable("pastProducts", pastProducts);
 

@@ -109,7 +109,11 @@ public class User {
         return result;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
+    //when a user is removed all tuples referring to him/her are deleted
+    //also orphan are deleted
+    //cascade policy: lazy because in average there are more access made by simple user than of those made by admin (which requires all the info)
+
+    @OneToMany(mappedBy = "userByUserId" ,cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<Log> getLogsById() {
         return logsById;
     }
@@ -118,7 +122,7 @@ public class User {
         this.logsById = logsById;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
+    @OneToMany(mappedBy = "userByUserId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<MarketingAnswer> getMarketinganswersById() {
         return marketinganswersById;
     }
@@ -127,7 +131,8 @@ public class User {
         this.marketinganswersById = marketinganswersById;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
+    @OneToMany(mappedBy = "userByUserId", cascade = { CascadeType.REMOVE,
+            CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<Points> getPointsById() {
         return pointsById;
     }
@@ -136,7 +141,8 @@ public class User {
         this.pointsById = pointsById;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
+    @OneToMany(mappedBy = "userByUserId", cascade = {CascadeType.REMOVE,
+            CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<StatisticalAnswer> getStatisticalanswersById() {
         return statisticalanswersById;
     }

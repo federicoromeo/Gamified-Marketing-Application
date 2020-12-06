@@ -66,7 +66,12 @@ public class MarketingQuestion {
         return result;
     }
 
-    @OneToMany(mappedBy = "marketingquestionByMarketingquestionId")
+    //when a question is removed all tuples referring to it are deleted
+    //also orphan are deleted
+    //cascade policy: lazy because in average there are more access made by simple user than of made by admin (which requires all the info),
+
+
+    @OneToMany(mappedBy = "marketingquestionByMarketingquestionId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<MarketingAnswer> getMarketinganswersById() {
         return marketinganswersById;
     }

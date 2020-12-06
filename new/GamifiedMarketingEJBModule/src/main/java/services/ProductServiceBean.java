@@ -67,48 +67,43 @@ public class ProductServiceBean
                 .orElse(null);
     }
 
-
-
-
-   /* static <T, E extends Exception> Consumer<T>
-    consumerWrapper(Consumer<T> consumer, Class<E> clazz) {
-
-        return i -> {
-            try {
-                consumer.accept(i);
-            } catch (Exception ex) {
-                try {
-                    E exCast = clazz.cast(ex);
-                    System.err.println(
-                            "Exception occured : " + exCast.getMessage());
-                } catch (ClassCastException ccEx) {
-                    throw ex;
-                }
-            }
-        };
-    } */
-
-
     /**
      * Get all products
      * @return the list of all past products, possibly empty
      */
-    /*public List<Product> findPastProducts()
+    public List<Product> findPastProducts()
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
         Date today = (Date) Calendar.getInstance().getTime();
 
+        List<Product> result=null;
+        List<Product> tmp=null;
 
-        return
-                em
-                        .createNamedQuery("Product.findAll", Product.class)
-                        .getResultList()
-                        .stream()
-                        .filter( consumerWrapper(x-> dateFormat.parse(((Product)x).getDate()).before(today), ParseException.class));
+        tmp=em.createNamedQuery("Product.findAll", Product.class)
+                        .getResultList();
 
 
+        if(tmp!=null) {
+            for (Product p : tmp) {
 
-    }*/
+                try {
+
+                    if(dateFormat.parse(((Product) p).getDate()).before(today)){
+                        if(result==null){
+                            result=new ArrayList<Product>();
+                        }
+                        result.add(p);
+                    }
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return result;
+
+    }
 
     /**
      * Get all products

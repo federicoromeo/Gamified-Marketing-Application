@@ -66,12 +66,6 @@ public class DispatcherAdmin extends HttpServlet {
                 case "insert-button":
                     path = "/WEB-INF/insertion.html";
                     break;
-<<<<<<< HEAD
-                case "inspect-button":
-
-                    pastProducts=productService.findPastProducts();
-=======
->>>>>>> 34a5b301bbd528f22c16ac8fb18d4e2085ae4efd
 
                 case "inspect-button":
                     //pastProducts = productService.findPastProducts(); todo
@@ -79,12 +73,6 @@ public class DispatcherAdmin extends HttpServlet {
                     ctx.setVariable("pastProducts", pastProducts);
                     path = "/WEB-INF/inspection.html";
                     break;
-<<<<<<< HEAD
-                case "delete-button":
-
-                    pastProducts=productService.findPastProducts();
-=======
->>>>>>> 34a5b301bbd528f22c16ac8fb18d4e2085ae4efd
 
                 case "delete-button":
                     //pastProducts = productService.findPastProducts(); todo
@@ -108,7 +96,7 @@ public class DispatcherAdmin extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        doPost(request, response);
     }
 
 

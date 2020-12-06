@@ -38,7 +38,7 @@ button {
     width: 100%;
 }
 
-#login-button{
+#login-button, #register-button, #show-login, #show-registration, .compile-questionnaire-button{
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -48,13 +48,8 @@ button {
     width: 40%;
 }
 
-#add-question-button, #delete-question-button, #delete-questionnaire{
+#add-question-button, #delete-question-button{
     width: 15%;
-}
-
-#back-button{
-    width: 15%;
-    background-color: #082681;
 }
 
 .logout-button{
@@ -77,9 +72,13 @@ button {
     padding: 8px;
 }
 
-.table tr:nth-child(even){background-color: #f2f2f2;}
+.table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
 
-.table tr:hover {background-color: #ddd;}
+.table tr:hover {
+    background-color: #ddd;
+}
 
 .table th {
     padding-top: 12px;
@@ -95,6 +94,16 @@ button {
 }
 */
 
+img{
+    width: 150px;
+    height: 150px;
+    border: None;
+}
+
 .errormessage{
     color: #ff0000;
+}
+
+.sessionuser{
+    font-style: oblique;
 }

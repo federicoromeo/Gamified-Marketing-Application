@@ -24,10 +24,12 @@
                         <input th:value="${p.id}" type="radio" name="product" th:text="${p.name}" checked="checked" ><br><br>
                     </div>
                 </div>
-                <input type="submit" id="delete-questionnaire" value="Delete questionnaire">
+                <button id="delete-questionnaire"> Delete questionnaire </button>
             </form>
 
         </fieldset>
+
+        <br><br><button onclick='window.history.back()' id="back-button" > Back </button>
 
     </body>
 

@@ -48,8 +48,13 @@ button {
     width: 40%;
 }
 
-#add-question-button, #delete-question-button{
+#add-question-button, #delete-question-button, #delete-questionnaire{
     width: 15%;
+}
+
+#back-button{
+    width: 15%;
+    background-color: #082681;
 }
 
 .logout-button{

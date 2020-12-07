@@ -158,17 +158,15 @@ public class ProductServiceBean
      * @return the id of the product just created
      */
     public int createProduct(String name, byte[] image, String date) throws Exception {
-
         Product duplicate = findAll()
-                                    .stream()
-                                    .filter(x -> x.getDate().equals(date))
-                                    .findFirst()
-                                    .orElse(null);
+                .stream()
+                .filter(x -> x.getDate().equals(date))
+                .findFirst()
+                .orElse(null);
 
-        if(duplicate == null){
+        if(duplicate == null) {
             Product product = null;
-            try
-            {
+            try {
                 product = new Product();
                 product.setName(name);
                 product.setDate(date);
@@ -178,18 +176,18 @@ public class ProductServiceBean
                 em.flush();
 
                 return product.getId();
-            }
-            //catch(SQLIntegrityConstraintViolationException e){
-            catch(Exception e){
-                System.out.println(e.getMessage());
-                //em.getTransaction().rollback();
-                return -1;
+            } catch (Exception e) {
+                System.out.println("\n\n\n\n\n\n");
+                System.out.println("cause.");
+                System.out.println(e.getCause());
             }
         }
+        /*}
 
         else{
             return -1;
-        }
+        }*/
+        return -1;
     }
 
 

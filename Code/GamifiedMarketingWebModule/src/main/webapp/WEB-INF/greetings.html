@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+
+        <meta charset="ISO-8859-1">
+        <title>  Gamified Marketing Application </title>
+        <link rel="stylesheet" media="all" href="../css/style.css" th:href="@{/css/style.css}">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <h1> Gamified Marketing Application </h1><br>
+
+        <h3>Completed!</h3> <span th:text="${'Thanks for your answer, ' + session.user.username + '!'}"/>
+        <br><br><br>
+
+
+        <!--TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOO-->
+        <button onclick="window.location.href='WEB-INF/home_user.html'" id="back-button" > Home </button>
+
+    </body>
+
+</html>

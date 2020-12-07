@@ -8,6 +8,10 @@
     display: none;
 }
 
+.hidden-questions{
+    display: none;
+}
+
 .visible{
     display: block;
 }
@@ -37,6 +41,16 @@ button {
     cursor: pointer;
     width: 100%;
 }
+input[type=submit]{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+}
+/*id="submit-button"  id="cancel-button"*/
 
 #login-button, #register-button, #show-login, #show-registration, .compile-questionnaire-button{
     background-color: #4CAF50;

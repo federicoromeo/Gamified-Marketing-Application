@@ -64,13 +64,8 @@ public class DeleteQuestionnaire extends HttpServlet {
             // TODO : MANCA DA CANCELLARE TUTTTE LE DOMANDE E I RELATIVI PUNTI
         }
 
-<<<<<<< HEAD:new/GamifiedMarketingWebAdminModule/src/main/java/controllers/DeleteQuestionnaire.java
-        List<Product> pastProducts=productService.findPastProducts();
-=======
-        //List<Product> pastProducts = productService.findPastProducts(); todo
-        List<Product> pastProducts = productService.findAll();
->>>>>>> 7f1c94f0cc0ae730c0cd4814970982a57db85f91:Code/GamifiedMarketingWebAdminModule/src/main/java/controllers/DeleteQuestionnaire.java
 
+        List<Product> pastProducts=productService.findPastProducts();
         ctx.setVariable("pastProducts", pastProducts);
         path = "/WEB-INF/deletion.html";
         this.templateEngine.process(path, ctx, response.getWriter());

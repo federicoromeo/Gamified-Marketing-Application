@@ -9,6 +9,7 @@
       </options>
     </properties>
     <root id="root">
+      <element id="module-output" name="GamifiedMarketingWebModule" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="GamifiedMarketingWebModule" />
@@ -27,7 +28,6 @@
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.11" />
         </element>
       </element>
-      <element id="module-output" name="GamifiedMarketingWebModule" />
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/GamifiedMarketingWebModule-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>

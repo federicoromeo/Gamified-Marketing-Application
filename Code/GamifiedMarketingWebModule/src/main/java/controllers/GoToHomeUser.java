@@ -19,7 +19,9 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 @WebServlet("/GoToHomeUser")
 public class GoToHomeUser extends HttpServlet
@@ -65,11 +67,14 @@ public class GoToHomeUser extends HttpServlet
 
         String image = Base64.getEncoder().encodeToString(productOfTheDay.getImage());
 
+        //List<Integer> iteration = new ArrayList<>();
+
         String path = "/WEB-INF/home_user.html";
         ServletContext servletContext = this.getServletContext();
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
         ctx.setVariable("product", productOfTheDay);
         ctx.setVariable("image", image);
+        //ctx.setVariable("iteration", iteration);
         this.templateEngine.process(path, ctx, response.getWriter());
     }
 

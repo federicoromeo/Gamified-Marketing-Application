@@ -100,7 +100,6 @@ public class InsertProduct extends HttpServlet {
             final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
             ctx.setVariable("errormessage", "Invalid date for the product! Please change it.");
             templateEngine.process(path, ctx, response.getWriter());
-
             return;
         }
 

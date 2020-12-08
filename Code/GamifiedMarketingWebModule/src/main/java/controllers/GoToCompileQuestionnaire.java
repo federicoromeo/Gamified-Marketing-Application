@@ -77,8 +77,8 @@ public class GoToCompileQuestionnaire extends HttpServlet {
         this.templateEngine.process(path, ctx, response.getWriter());
     }
 
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doGet(request, response);
+        this.doPost(request, response);
     }
+
 }

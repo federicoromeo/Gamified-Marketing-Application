@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <head>
+<head>
 
-        <meta charset="ISO-8859-1">
-        <title> Deletion </title>
-        <!--script type="text/javascript" th:src="@{/deletion.js}" src="../js/deletion.js" charset="utf-8" defer></script-->
-        <link rel="stylesheet" media="all" href="../css/style.css" th:href="@{/css/style.css}">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <meta charset="ISO-8859-1">
+    <title> Deletion </title>
+    <!--script type="text/javascript" th:src="@{/deletion.js}" src="../js/deletion.js" charset="utf-8" defer></script-->
+    <link rel="stylesheet" media="all" href="../css/style.css" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <a th:href="@{/Logout}" class="logout-button" > Logout </a>
+<a th:href="@{/Logout}" class="logout-button" > Logout </a>
 
-        <fieldset>
-            <legend><strong> Select questionnaire to delete  </strong></legend><br>
+<fieldset>
+    <legend><strong> Select questionnaire to delete  </strong></legend><br>
 
-            <form action="DeleteQuestionnaire" method="POST">
-                <div th:each="p: ${pastProducts}" id="radio-container">
-                    <div th:if="${p.id != 2}">
-                        <input th:value="${p.id}" type="radio" name="product" th:text="${p.name}" checked="checked" ><br><br>
-                    </div>
-                </div>
-                <button id="delete-questionnaire"> Delete questionnaire </button>
-            </form>
+    <form action="DeleteQuestionnaire" method="POST">
+        <div th:each="p: ${pastProducts}" id="radio-container">
+            <div th:if="${p.id != 2}">
+                <input th:value="${p.id}" type="radio" name="product" th:text="${p.name}" checked="checked" ><br><br>
+            </div>
+        </div>
+        <button id="delete-questionnaire"> Delete questionnaire </button>
+    </form>
 
-        </fieldset>
+</fieldset>
 
-        <br><br><button onclick='window.history.back()' id="back-button" > Back </button>
+<br><br><button onclick='window.history.back()' id="back-button" > Back </button>
 
-    </body>
+</body>
 
 </html>

@@ -1,10 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="GamifiedMarketingWebAdminModule:war">
-<<<<<<< HEAD
-    <output-path>$PROJECT_DIR$/target</output-path>
-=======
     <output-path>$PROJECT_DIR$/../GamifiedMarketingWebAdminModule/target</output-path>
->>>>>>> 7f1c94f0cc0ae730c0cd4814970982a57db85f91
     <properties id="maven-jee-properties">
       <options>
         <module>GamifiedMarketingWebAdminModule</module>

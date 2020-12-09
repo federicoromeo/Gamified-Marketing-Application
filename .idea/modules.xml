@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GamifiedMarketingWebAdminModule.iml" filepath="$PROJECT_DIR$/GamifiedMarketingWebAdminModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Gamified-Marketing-Application.iml" filepath="$PROJECT_DIR$/.idea/Gamified-Marketing-Application.iml" />
     </modules>
   </component>
 </project>

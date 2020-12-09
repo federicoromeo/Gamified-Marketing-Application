@@ -64,8 +64,9 @@ public class DeleteQuestionnaire extends HttpServlet {
             // TODO : MANCA DA CANCELLARE TUTTTE LE DOMANDE E I RELATIVI PUNTI
         }
 
+        //List<Product> pastProducts = productService.findPastProducts(); todo
+        List<Product> pastProducts = productService.findAll();
 
-        List<Product> pastProducts=productService.findPastProducts();
         ctx.setVariable("pastProducts", pastProducts);
         path = "/WEB-INF/deletion.html";
         this.templateEngine.process(path, ctx, response.getWriter());

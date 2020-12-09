@@ -2,11 +2,7 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-<<<<<<< HEAD
-/../../../../../../../../:\Users\pc\IdeaProjects\Gamified-Marketing-Application\new\GamifiedMarketingWebAdminModule\.idea/dataSources/
-=======
 /../../../../../../../../../:\Users\Francesco\Documents\polimi\db2\GamifiedMarketing\GamifiedMarketingWebModule\.idea/dataSources/
->>>>>>> 7f1c94f0cc0ae730c0cd4814970982a57db85f91
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/

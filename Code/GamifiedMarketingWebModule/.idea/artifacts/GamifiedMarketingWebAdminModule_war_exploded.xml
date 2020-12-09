@@ -1,10 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="GamifiedMarketingWebAdminModule:war exploded">
-<<<<<<< HEAD
-    <output-path>$PROJECT_DIR$/target/GamifiedMarketingWebAdminModule-1.0-SNAPSHOT</output-path>
-=======
     <output-path>$PROJECT_DIR$/../GamifiedMarketingWebAdminModule/target/GamifiedMarketingWebAdminModule-1.0-SNAPSHOT</output-path>
->>>>>>> 7f1c94f0cc0ae730c0cd4814970982a57db85f91
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -19,13 +15,9 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-servlet-api:10.0.0-M9" />
-<<<<<<< HEAD
-          <element id="library" level="project" name="Maven: it.polimi.db2:GamifiedMarketingEJBModule:1.0-SNAPSHOT" />
-=======
           <element id="archive" name="GamifiedMarketingEJBModule-1.0-SNAPSHOT.jar">
             <element id="module-output" name="GamifiedMarketingEJBModule" />
           </element>
->>>>>>> 7f1c94f0cc0ae730c0cd4814970982a57db85f91
           <element id="library" level="project" name="Maven: org.thymeleaf:thymeleaf:3.0.11.RELEASE" />
           <element id="library" level="project" name="Maven: ognl:ognl:3.1.12" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.20.0-GA" />
@@ -37,11 +29,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-<<<<<<< HEAD
-        <element id="file-copy" path="$PROJECT_DIR$/target/GamifiedMarketingWebAdminModule-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
-=======
         <element id="file-copy" path="$PROJECT_DIR$/../GamifiedMarketingWebAdminModule/target/GamifiedMarketingWebAdminModule-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
->>>>>>> 7f1c94f0cc0ae730c0cd4814970982a57db85f91
       </element>
       <element id="javaee-facet-resources" facet="GamifiedMarketingWebAdminModule/web/Web" />
     </root>

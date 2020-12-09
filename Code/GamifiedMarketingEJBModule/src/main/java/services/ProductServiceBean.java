@@ -98,7 +98,7 @@ public class ProductServiceBean
      * Get all products
      * @return the list of all past products, possibly empty
      */
-
+    /* todo
     public List<Product> findPastProducts()
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
@@ -109,6 +109,12 @@ public class ProductServiceBean
 
         tmp=em.createNamedQuery("Product.findAll", Product.class)
                         .getResultList();
+        return
+                em
+                    .createNamedQuery("Product.findAll", Product.class)
+                    .getResultList()
+                    .stream()
+                    .filter( consumerWrapper(x-> dateFormat.parse(((Product)x).getDate()).before(today), ParseException.class));
 
 
         if(tmp!=null) {

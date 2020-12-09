@@ -16,6 +16,10 @@
     display: block;
 }
 
+input[name=username],input[name=email],input[name=password]{
+    width: 50%;
+}
+
 /* Full-width inputs */
 input[type=text], input[type=password], input[type=email] {
     width: 100%;
@@ -82,7 +86,7 @@ input[type=submit]{
 }
 
 .table td, #table th {
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
     padding: 8px;
 }
 
@@ -112,6 +116,10 @@ img{
     width: 150px;
     height: 150px;
     border: None;
+}
+
+fieldset{
+    width: 50%;
 }
 
 .errormessage{

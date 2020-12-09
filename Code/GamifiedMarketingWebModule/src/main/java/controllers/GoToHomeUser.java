@@ -12,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Utils.Counter;
 import entities.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -74,6 +76,7 @@ public class GoToHomeUser extends HttpServlet
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
         ctx.setVariable("product", productOfTheDay);
         ctx.setVariable("image", image);
+        ctx.setVariable("counter", new Counter());
         //ctx.setVariable("iteration", iteration);
         this.templateEngine.process(path, ctx, response.getWriter());
     }

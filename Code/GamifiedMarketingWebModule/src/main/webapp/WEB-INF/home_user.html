@@ -52,12 +52,15 @@
 
             <input type="hidden" name="product" th:value="${product.getId()}">
             <!-- if the product has id=2, it means that it's not present for the current day, so we disable the button-->
-            <div th:if="${product.getId() != 2}">
+            <div th:if="${product.getId() != 2 && session.user.getBlocked()==0}">
                 <!--  th:case="2" input class="compile-questionnaire-button" type="submit" value="Can't compile the questionnaire!" disabled-->
                 <input class="compile-questionnaire-button" type="submit" value="Compile the questionnaire!">
             </div>
+            <div th:if="${session.user.getBlocked()==1}">
+                <span class="errormessage"> You are blocked! --->  You can't compile the questionnaire! </span>
+            </div>
             <div th:if="${product.getId() == 2}">
-                <span class="errormessage"> You can't compile the questionnaire! </span>
+                <span class="errormessage"> Now there are not new questionnaire to compile, check later! </span>
             </div>
         </form>
 

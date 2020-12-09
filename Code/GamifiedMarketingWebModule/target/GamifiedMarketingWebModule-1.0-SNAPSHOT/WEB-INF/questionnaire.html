@@ -70,13 +70,17 @@
             <br><br>
 
             <input id="submit-button"   type="submit" name="action" value="Submit">
-            <input id="cancel-button"   type="submit" name="action" value="Cancel">
+            <button onclick="window.location.href='/GamifiedMarketingWebModule_war_exploded/GoToHomeUser'" id="back-button" > Cancel </button>
             <button id="go-back-button" type="button"> Go back </button>
             <!--button id="submit-button"   type="button" name="action" value="submit"> Submit </button>
             <button id="cancel-button"   type="button" name="action" value="cancel"> Cancel </button>
             <button id="go-back-button"  type="button"> < Go back </button-->       <!--name="action" value="goback"-->
         </fieldset>
     </div>
+</form>
+<div th:if="${session.user.getBlocked()==1}">
+    <span class="errormessage"> You are blocked! --->  You can't compile the questionnaire! </span>
+</div>
     <!--
           EXAMPLE
 

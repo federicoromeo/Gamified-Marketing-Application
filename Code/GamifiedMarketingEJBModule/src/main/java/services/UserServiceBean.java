@@ -193,5 +193,14 @@ public class UserServiceBean {
     }
 
 
+    /**
+     * Update a user
+     * @param user the user to update
+     */
+    public void blockUser(User user) {
 
+        user.setBlocked((byte) 1);
+        em.merge(user);
+        em.flush();
+    }
 }

@@ -16,10 +16,6 @@
     display: block;
 }
 
-input[name=username],input[name=email],input[name=password]{
-    width: 50%;
-}
-
 /* Full-width inputs */
 input[type=text], input[type=password], input[type=email] {
     width: 100%;
@@ -75,6 +71,10 @@ input[type=submit]{
     color: blue;
 }
 
+#leaderbord-button{
+    color: blue;
+}
+
 /*#questionnaire-table{
    width=100%;
 }*/
@@ -111,6 +111,11 @@ input[type=submit]{
   text-align: center;
 }
 */
+
+#back-button{
+    width: 15%;
+    background-color: #082681;
+}
 
 img{
     width: 150px;

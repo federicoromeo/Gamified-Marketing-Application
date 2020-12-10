@@ -69,6 +69,15 @@
             </div>
         </form>
 
+        <br>
+
+        <div th:if="${product.getId() != 2}">
+            <form action="GoToLeaderboard" method="POST">
+                <input type="hidden" name="productId" th:value="${product.getId()}">
+                <input class="leaderbord-button" type="submit" value="Go to Leaderboard">
+            </form>
+        </div>
+
     </body>
 
 

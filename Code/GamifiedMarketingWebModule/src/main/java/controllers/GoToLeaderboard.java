@@ -54,7 +54,7 @@ public class GoToLeaderboard extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int productId = Integer.parseInt(request.getParameter("product"));
+        int productId = Integer.parseInt(request.getParameter("productId"));
         List<Points> pointsPerUser = new ArrayList<>();
 
         if(productId > 0){

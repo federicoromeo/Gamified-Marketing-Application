@@ -112,6 +112,11 @@ input[type=submit]{
 }
 */
 
+#back-button{
+    width: 15%;
+    background-color: #082681;
+}
+
 img{
     width: 150px;
     height: 150px;

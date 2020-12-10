@@ -1,10 +1,7 @@
 package services;
 
-import entities.Points;
-import entities.Product;
 import entities.User;
 import exceptions.CredentialsException;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NonUniqueResultException;
@@ -13,6 +10,7 @@ import javax.persistence.PersistenceException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 @Stateless(name = "UserServiceEJB")
 public class UserServiceBean {
@@ -180,7 +178,6 @@ public class UserServiceBean {
     }
 
 
-
     /**
      * Remove a user
      * @param userId the Id of the user to remove
@@ -193,5 +190,21 @@ public class UserServiceBean {
     }
 
 
+    /**
+     * find User to that point
+     * @param pointId id
+     * @return user with that point id
+     */
+    public User findUserByPointId(int pointId) {
+
+        return em
+                .createNamedQuery("User.findAll", User.class)
+                .getResultList()
+                .stream()
+                .filter(x -> x.getPointsById().equals(pointId))
+                .findFirst()
+                .orElse(null);
+
+    }
 
 }

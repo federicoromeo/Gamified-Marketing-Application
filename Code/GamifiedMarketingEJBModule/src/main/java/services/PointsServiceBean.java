@@ -42,21 +42,18 @@ public class PointsServiceBean
 
 
 
-
-
-
     /**
      * Get points of a product
-     * @param product the product for which we want to find the points
+     * @param productId the id of the product for which we want to find the points
      * @return the list of the product's points, possibly empty
      */
-    public List<Points> findPointsByProduct(Product product)
+    public List<Points> findPointsByProduct(int productId)
     {
         return em
                 .createNamedQuery("Points.findAll", Points.class)
                 .getResultList()
                 .stream()
-                .filter(x -> x.getProductId()==product.getId())
+                .filter(x -> x.getProductId()==productId)
                 .collect(Collectors.toList());
     }
 
@@ -66,7 +63,7 @@ public class PointsServiceBean
      * @param user the user for which we want to find the points
      * @return the list of the user's points, possibly empty
      */
-    public List<Points> findPointsByUser(Product user)
+    public List<Points> findPointsByUser(User user)
     {
         return em
                 .createNamedQuery("Points.findAll", Points.class)
@@ -75,7 +72,6 @@ public class PointsServiceBean
                 .filter(x -> x.getUserId()==(user.getId()))
                 .collect(Collectors.toList());
     }
-
 
 
     /**

@@ -29,7 +29,7 @@
 
             <h3 th:if="${product.getId() != 2}" >Users' reviews</h3> <br>
 
-            <table th:if="${product.getId() != 2}"  class="table" id="reviews">
+            <table th:if="${product.getId() != 2}" class="table" id="reviews">
 
                 <div th:each="mq: ${product.marketingquestionsById}">
 
@@ -71,6 +71,15 @@
                 <span class="errormessage"> Now there are not new questionnaire to compile, check later! </span>
             </div>
         </form>
+
+        <br>
+
+        <div th:if="${product.getId() != 2}">
+            <form action="GoToLeaderboard" method="POST">
+                <input type="hidden" name="productId" th:value="${product.getId()}">
+                <input class="leaderbord-button" type="submit" value="Go to Leaderboard">
+            </form>
+        </div>
 
     </body>
 

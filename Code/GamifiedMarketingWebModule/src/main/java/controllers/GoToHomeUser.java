@@ -1,11 +1,8 @@
 package controllers;
 
 import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Utils.Counter;
+import utils.Counter;
 import entities.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -21,9 +18,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 
 @WebServlet("/GoToHomeUser")
 public class GoToHomeUser extends HttpServlet

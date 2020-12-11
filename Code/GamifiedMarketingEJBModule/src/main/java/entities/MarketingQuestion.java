@@ -77,7 +77,6 @@ public class MarketingQuestion {
     //also orphan are deleted
     //cascade policy: lazy because in average there are more access made by simple user than of made by admin (which requires all the info),
 
-
     @OneToMany(mappedBy = "marketingquestionByMarketingquestionId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<MarketingAnswer> getMarketinganswersById() {
         return marketinganswersById;

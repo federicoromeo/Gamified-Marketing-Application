@@ -1,7 +1,6 @@
 package controllers;
 
 import javax.ejb.EJB;
-
 import entities.MarketingQuestion;
 import entities.Product;
 import org.thymeleaf.context.WebContext;
@@ -20,10 +19,6 @@ import services.MarketingQuestionServiceBean;
 import services.ProductServiceBean;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
@@ -57,32 +52,71 @@ public class InsertProduct extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // get all parameters from the form
+        //get all parameters from the form
+
+        //date of the questionnaire
         String date = request.getParameter("date");
 
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        //LocalDate date = LocalDate.parse(date, formatter);
-        //System.out.println("2 :" + date);
-
+        //name of the product
         String name = request.getParameter("name");
 
+        //image of the product
         Part filePart = request.getPart("image");
-        //String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
         InputStream fileContent = filePart.getInputStream();
         byte[] image = IOUtils.toByteArray(fileContent);
 
+        //get the number of questions
         int numberOfQuestions = Integer.parseInt(request.getParameter("numberofquestions"));
-
         List<String> questions = new ArrayList<>();
         for(int i = 1; i <= numberOfQuestions; i++)
             questions.add(request.getParameter("question" + i));
 
-        //create new product from inserted datas
+        try
+        {
+            int newProductId = productService.createProduct(name, image, date);
+            Product newProduct = productService.find(newProductId);
+
+            int mqId = -1;
+            MarketingQuestion mqRef = null;
+            List<MarketingQuestion> allQuestions = new ArrayList<>();
+            for(String question : questions)
+            {
+                mqId = marketingQuestionServiceBean.createMarketingQuestion(question, newProduct);
+                mqRef = marketingQuestionServiceBean.find(mqId);
+                allQuestions.add(mqRef);
+
+            }
+
+            newProduct.setMarketingquestionsById(allQuestions);
+
+            ServletContext servletContext = getServletContext();
+            WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+            String path = "/WEB-INF/home_admin.html";
+            this.templateEngine.process(path, ctx, response.getWriter());
+        }
+        catch(Exception e) //any unknown error in the creation of the product
+        {
+            //we should avoid this terrible screendate
+            //response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not possible to create product");
+
+            //redirects to the insertion page
+            String path = "/WEB-INF/insertion.html";
+            ServletContext servletContext = getServletContext();
+            final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+            ctx.setVariable("errormessage", "There have been some problems, please try again");
+            templateEngine.process(path, ctx, response.getWriter());
+        }
+
+        /*
+
+        //create new product from inserted data
         int newProductId = -1;
         try
         {
             newProductId = productService.createProduct(name, image, date);
-            if(newProductId == -1){
+
+            if(newProductId == -1)
+            {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not possible to create product");
                 String path = "/WEB-INF/insertion.html";
                 ServletContext servletContext = getServletContext();
@@ -157,7 +191,7 @@ public class InsertProduct extends HttpServlet {
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
         String path = "/WEB-INF/home_admin.html";
         this.templateEngine.process(path, ctx, response.getWriter());
-
+        */
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

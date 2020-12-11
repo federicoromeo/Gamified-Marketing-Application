@@ -23,11 +23,8 @@ window.onload = function() { // avoid variables ending up in the global scope
 
         if(selectedDate < today){
             alert("Date should be today or later!")
-            return;
         }
-        else{
-            //////////
-        }
+
     });
 
     var deleteQuestionButton = document.getElementById("delete-question-button");

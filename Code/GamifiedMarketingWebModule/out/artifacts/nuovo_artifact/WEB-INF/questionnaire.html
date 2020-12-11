@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="ISO-8859-1">
+    <title>  Questionnaire  </title>
+    <script src="../js/questionnaire.js" th:src="@{/js/questionnaire.js}"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="../css/style.css" th:href="@{/css/style.css}" >
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<a th:href="@{/Logout}" class="logout-button"> Logout </a>
+
+<h1>  Questionnaire  </h1><br>
+
+<form action="AnswerQuestionnaire" method="POST" name="form" >
+
+    <div id="marketing-form">
+        <fieldset>
+            <legend><strong> Marketing questions </strong></legend> <br>
+            <div th:each="mq: ${product.marketingquestionsById}" id="responses-container">
+
+                <label style="display:none;" class="labels"> <!--inline style just because we needed a class here-->
+                    <!-- this tag is used to show to the js the question id as text content-->
+                    <input class="question-id" type="text" th:text="${mq.getId()}"><!--name="question"-->
+                </label>
+
+                <!-- this tag is used to show the question id (as variable context) to thymeleaf-->
+                <input type="hidden" class="id-question"> <!-- name="questionsId"-->
+
+                <ul>
+                    <li th:text="${mq.text}"> Question: </li> <br>
+                    <input type="text" class="response" name="response" placeholder="Your answer:" required> <br>  <!--value=""-->
+                </ul>
+
+            </div>
+            <input type="hidden" name="numberofresponses" id="number-of-responses">
+            <button id="next-button" name="next" type="button"> Next </button>
+        </fieldset>
+    </div>
+
+    <div id="statistical-form" class="masked">
+        <fieldset>
+            <legend><strong>Statistical questions</strong></legend><br>
+
+            Age:
+            <input name="age" type="number" min="0" max="100" value="0">
+            <br><br>
+
+            Sex:
+            <select name="sex">
+                <option name="sex" value="" selected disabled hidden>Not chosen</option>
+                <option name="sex" value="M"> M </option>
+                <option name="sex" value="F"> F </option>
+                <option name="sex" value="Other"> Other </option>
+            </select>
+            <br><br>
+
+            Expertise level:
+            <select name="expertise-level">
+                <option name="expertise-level" value="" selected disabled hidden>Not chosen</option>
+                <option name="expertise-level" value="Low"> Low </option>
+                <option name="expertise-level" value="Medium"> Medium </option>
+                <option name="expertise-level" value="High"> High </option>
+            </select>
+            <br><br>
+
+            <input id="submit-button"   type="submit" name="action" value="Submit">
+            <input id="cancel-button"   type="submit" name="action" value="Cancel">
+            <button id="go-back-button" type="button"> Go back </button>
+            <!--button id="submit-button"   type="button" name="action" value="submit"> Submit </button>
+            <button id="cancel-button"   type="button" name="action" value="cancel"> Cancel </button>
+            <button id="go-back-button"  type="button"> < Go back </button-->       <!--name="action" value="goback"-->
+        </fieldset>
+    </div>
+    <!--
+          EXAMPLE
+
+          HTML:
+             <form action="MainServlet" method="Post">
+                 Last Name: <input type="text" name="lastName" size="20">
+                 <br><br>
+                 <input type="submit" name="action" value="FirstServlet">
+                 <input type="submit" name="action" value="SecondServlet">
+             </form>
+
+          CORRESPONDANT MainServlet:
+
+          String action = request.getParameter("action");
+
+          if ("FirstServlet".equals(action)) {
+              // Invoke FirstServlet's job here.
+          } else if ("SecondServlet".equals(action)) {
+              // Invoke SecondServlet's job here.
+          }
+
+       -->
+</form>
+
+</body>
+
+
+</html>

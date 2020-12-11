@@ -135,7 +135,7 @@ public class Points {
         FOR EACH ROW
         BEGIN
             DECLARE pointToAdd integer;
-                WHEN((NEW.age IS NULL, 2, 0)+ IF(NEW.expertise IS NULL, 2, 0) + IF(NEW.sex IS NULL, 2, 0) INTO pointsToAdd )>0
+                WHEN((NEW.age==0, 2, 0)+ IF(NEW.expertise IS NULL, 2, 0) + IF(NEW.sex IS NULL, 2, 0) INTO pointsToAdd )>0
                     IF EXISTS ( SELECT *
                                  FROM Points P
                                  WHERE P.userId==NEW.userId

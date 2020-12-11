@@ -5,10 +5,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import services.MarketingAnswerServiceBean;
-import services.MarketingQuestionServiceBean;
-import services.ProductServiceBean;
-import services.StatisticalAnswerServiceBean;
+import services.*;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
@@ -40,6 +37,11 @@ public class AnswerQuestionnaire extends HttpServlet {
     @EJB(name = "services/ProductServiceBean")
     private ProductServiceBean productServiceBean;
 
+    @EJB(name = "services/OffensiveWordServiceBean")
+    private OffensiveWordServiceBean offensiveWordServiceBean;
+
+    @EJB(name = "services/UserServiceBean")
+    private UserServiceBean userServiceBean;
 
     public AnswerQuestionnaire() {
         super();
@@ -57,6 +59,11 @@ public class AnswerQuestionnaire extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
+        String path = null;
+        ServletContext servletContext = this.getServletContext();
+        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+
         // get statistical optional parameters from the form
         int age = 0;
         String sex = null;
@@ -69,117 +76,147 @@ public class AnswerQuestionnaire extends HttpServlet {
         int numberOfResponses = Integer.parseInt(request.getParameter("numberofresponses"));
         List<String> answers = new ArrayList<>();
         List<Integer> questionsId = new ArrayList<>();
-        for(int i = 1; i <= numberOfResponses; i++)
-        {
-            answers.add(request.getParameter("response" + i));
-            questionsId.add(Integer.parseInt(request.getParameter("question" + i)));
-        }
+        String tmpAnswer=null;
 
+        //retrieving all the offensive words from db
+        List<OffensiveWord> offensiveWords=offensiveWordServiceBean.findAll();
+
+        //check if the user is blocked
         User user = (User) request.getSession().getAttribute("user");
 
-        //MARKETING
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println(user.getBlocked());
 
-        MarketingQuestion mq = null;
-        int maId = 0;
-        for(int i = 0; i < numberOfResponses; i++)
-        {
-            try{
-                mq = marketingQuestionServiceBean.find(questionsId.get(i));
+        if(user.getBlocked()==0) {
+
+            System.out.println("Utente non bloccato!");
+
+            for (int i = 1; i <= numberOfResponses && user.getBlocked()==0; i++) {
+
+                //check if the answer include some offensive words
+                tmpAnswer = request.getParameter("response" + i); //retrieve the answer
+
+                if (checkPresence(tmpAnswer, offensiveWords)) { //the user is blocked and transaction rolled back
+                    userServiceBean.blockUser(user);
+                    System.out.println("ora ho bloccato l'utente");
+                }
+
+                answers.add(request.getParameter("response" + i));
+                questionsId.add(Integer.parseInt(request.getParameter("question" + i)));
             }
-            catch (Exception e)
-            {
-                //todo
+        }
+
+        //only if the user is not blocked
+        if(user.getBlocked()==0) {
+            //MARKETING
+
+            System.out.println("Utente non bloccato!");
+
+            MarketingQuestion mq = null;
+            int maId = 0;
+            for (int i = 0; i < numberOfResponses; i++) {
+                try {
+                    mq = marketingQuestionServiceBean.find(questionsId.get(i));
+                } catch (Exception e) {
+                    //todo
+                }
+                try {
+                    maId = marketingAnswerServiceBean.createMarketingAnswer(answers.get(i), user, mq);
+                } catch (Exception e) {
+                    //todo
+                }
             }
+
+            Product p = null;
             try {
-                maId = marketingAnswerServiceBean.createMarketingAnswer(answers.get(i),user,mq);
-            }
-            catch (Exception e)
-            {
+                int productId = mq.getProductId();
+                p = productServiceBean.find(productId);
+            } catch (Exception e) {
                 //todo
             }
-        }
-
-        Product p = null;
-        try
-        {
-            int productId = mq.getProductId();
-            p = productServiceBean.find(productId);
-        }
-        catch (Exception e)
-        {
-            //todo
-        }
 
 
-        //STATISTICAL
+            //STATISTICAL
 
-        if(sex != null)
-        {
-            if(sex.isEmpty() || sex.equals("Not Chosen"))
-            {
-                sex = null;
+            if (sex != null) {
+                if (sex.isEmpty() || sex.equals("Not Chosen")) {
+                    sex = null;
+                }
             }
-        }
-        if(expertiseLevel != null)
-        {
-            if(expertiseLevel.isEmpty() || expertiseLevel.equals("Not Chosen"))
-            {
-                expertiseLevel = null;
+            if (expertiseLevel != null) {
+                if (expertiseLevel.isEmpty() || expertiseLevel.equals("Not Chosen")) {
+                    expertiseLevel = null;
+                }
             }
-        }
 
-        StatisticalAnswer sa = null;
-        int saId = 0;
+            StatisticalAnswer sa = null;
+            int saId = 0;
 
-        try
-        {
-            saId = statisticalAnswerServiceBean.createStatisticalAnswer(user,p,age,sex,expertiseLevel);
-            sa = statisticalAnswerServiceBean.find(saId);
-        }
-        catch (Exception e)
-        {
-            //todo
-        }
+            try {
+                saId = statisticalAnswerServiceBean.createStatisticalAnswer(user, p, age, sex, expertiseLevel);
+                sa = statisticalAnswerServiceBean.find(saId);
+            } catch (Exception e) {
+                //todo
+            }
 
 
-        System.out.println("age: " + age);
-        System.out.println("expertise: "+ expertiseLevel);
-        System.out.println("sex: " + sex + "\n");
-        for(int i = 0; i < numberOfResponses; i++)
-        {
-            System.out.println(questionsId.get(i));
-            System.out.println(answers.get(i));
+            System.out.println("age: " + age);
+            System.out.println("expertise: " + expertiseLevel);
+            System.out.println("sex: " + sex + "\n");
+            for (int i = 0; i < numberOfResponses; i++) {
+                System.out.println(questionsId.get(i));
+                System.out.println(answers.get(i));
+                System.out.println();
+
+            }
+            System.out.println();
+            System.out.println();
+            System.out.println();
             System.out.println();
 
-        }
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
 
-        String path = null;
 
-        boolean committed = true; //fixme
+            boolean committed = true; //fixme
 
-        if(committed){
-            path = "/WEB-INF/greetings.html";
-            ServletContext servletContext = this.getServletContext();
-            WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-            this.templateEngine.process(path, ctx, response.getWriter());
+
+            if(committed){
+                path = "/WEB-INF/greetings.html";
+                this.templateEngine.process(path, ctx, response.getWriter());
+            }
+            else
+            {
+                request.getRequestDispatcher("/GoToHomeUser").forward(request, response);
+            }
+
+
+
         }
-        else
-        {
-            path = "/WEB-INF/home_user.html";
-            ServletContext servletContext = this.getServletContext();
-            WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-            ctx.setVariable("product", p);
-            this.templateEngine.process(path, ctx, response.getWriter());
+        else{ //the user is blocked
+
+            request.getRequestDispatcher("/GoToHomeUser").forward(request, response);
         }
+
+
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
+    }
+
+    /*
+     * return true if the string container contains at least one of the words in the list
+     * */
+    public static Boolean checkPresence(String container, List<OffensiveWord> words){
+
+        for(OffensiveWord word:words){
+
+            if(container.contains(word.getWord())) return true;
+        }
+
+        return false;
     }
 
 }

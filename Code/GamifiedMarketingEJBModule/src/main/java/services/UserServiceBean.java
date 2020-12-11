@@ -191,7 +191,17 @@ public class UserServiceBean {
 
 
     /**
-     * find User to that point
+     * Update a user
+     * @param user the user to update
+     */
+    public void blockUser(User user) {
+        user.setBlocked((byte) 1);
+        em.merge(user);
+        em.flush();
+    }
+
+
+     /* find User to that point
      * @param pointId id
      * @return user with that point id
      */
@@ -206,5 +216,6 @@ public class UserServiceBean {
                 .orElse(null);
 
     }
+
 
 }

@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.MarketingAnswer;
+import entities.MarketingQuestion;
+import entities.User;
 import utils.Counter;
 import entities.Product;
 import org.thymeleaf.TemplateEngine;
@@ -19,6 +22,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.*;
 import java.time.LocalDate;
 import java.util.Base64;
+import java.util.List;
 
 @WebServlet("/GoToHomeUser")
 public class GoToHomeUser extends HttpServlet
@@ -29,6 +33,9 @@ public class GoToHomeUser extends HttpServlet
 
     @EJB(name="ProductServiceEJB")
     private ProductServiceBean productService;
+
+    @EJB(name="MarketingAnswerServiceEJB")
+    private MarketingAnswerServiceBean marketingAnswerService;
 
     public GoToHomeUser()
     {
@@ -49,6 +56,10 @@ public class GoToHomeUser extends HttpServlet
     {
         Product productOfTheDay = null;
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        Boolean doQuestionnaire=true;
+
+        ServletContext servletContext = this.getServletContext();
+        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
         try
         {
@@ -66,9 +77,17 @@ public class GoToHomeUser extends HttpServlet
 
         //List<Integer> iteration = new ArrayList<>();
 
+        User user = (User) request.getSession().getAttribute("user");
+
+        if(questionnaireAlreadyMade(user, productOfTheDay) || user.getBlocked()==1){
+
+            doQuestionnaire=false;
+
+        }
+
+
         String path = "/WEB-INF/home_user.html";
-        ServletContext servletContext = this.getServletContext();
-        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+        ctx.setVariable("doQuestionnaire", doQuestionnaire);
         ctx.setVariable("product", productOfTheDay);
         ctx.setVariable("image", image);
         ctx.setVariable("counter", new Counter());
@@ -81,4 +100,18 @@ public class GoToHomeUser extends HttpServlet
         this.doGet(request, response);
     }
 
+
+    public Boolean questionnaireAlreadyMade(User user, Product product){
+
+        if(product==null | user==null) return false;
+
+        List<MarketingQuestion> questions=(List)product.getMarketingquestionsById();
+
+        for(MarketingQuestion mq: questions){
+
+            List<MarketingAnswer> answers=(List)marketingAnswerService.findMarketingAnswersByUserMarketingQuestion(user, mq);
+            if(answers!=null && !answers.isEmpty()) return true;
+        }
+        return false;
+    }
 }

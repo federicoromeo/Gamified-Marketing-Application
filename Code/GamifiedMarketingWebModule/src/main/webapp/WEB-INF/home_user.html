@@ -59,14 +59,28 @@
         <form action="GoToCompileQuestionnaire" method="POST">
 
             <input type="hidden" name="product" th:value="${product.getId()}">
-            <!-- if the product has id=2, it means that it's not present for the current day, so we disable the button-->
-            <div th:if="${product.getId() != 2}">
-                <!--  th:case="2" input class="compile-questionnaire-button" type="submit" value="Can't compile the questionnaire!" disabled-->
+
+            <!--there is a new questionnaire and the user can compile it -->
+            <div th:if="${product.getId() != 2 && doQuestionnaire==true}">
                 <input class="compile-questionnaire-button" type="submit" value="Compile the questionnaire!">
             </div>
-            <div th:if="${product.getId() == 2}">
-                <span class="errormessage"> You can't compile the questionnaire! </span>
+
+            <!--there isn't a new questionnaire but the user could compile it -->
+            <!-- if the product has id=2, it means that it's not present for the current day, so we disable the button-->
+            <div th:if="${product.getId() == 2 && doQuestionnaire==true}">
+                <span class="errormessage"> Now there are no new questionnaire to compile, check later! </span>
             </div>
+
+            <!--the user can't compile the questionnaire-->
+            <div th:if="${doQuestionnaire==false}">
+                <span th:if="${session.user.getBlocked()==1}">
+                    <span class="errormessage"> You are blocked! --->  You can't compile the questionnaire! </span>
+                </span>
+                <span th:if="${session.user.getBlocked()==0}">
+                    <span class="errormessage">You have already made the questionnaire!</span>
+                </span>
+            </div>
+
         </form>
 
         <br>

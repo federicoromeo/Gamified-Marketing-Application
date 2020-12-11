@@ -1,0 +1,136 @@
+*{
+    margin-left: 10px;
+    margin-right: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.masked{
+    display: none;
+}
+
+.hidden-questions{
+    display: none;
+}
+
+.visible{
+    display: block;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+image{
+    height: 300px;
+    width: 500px;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+input[type=submit]{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+}
+/*id="submit-button"  id="cancel-button"*/
+
+#login-button, #register-button, #show-login, #show-registration, .compile-questionnaire-button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+}
+
+#add-question-button, #delete-question-button{
+    width: 15%;
+}
+
+.logout-button{
+    float: right;
+    color: blue;
+}
+
+#leaderbord-button{
+    color: blue;
+}
+
+/*#questionnaire-table{
+   width=100%;
+}*/
+
+.table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 50%;
+}
+
+.table td, #table th {
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+
+.table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #ddd;
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+/*table, th, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+*/
+
+#back-button{
+    width: 15%;
+    background-color: #082681;
+}
+
+img{
+    width: 150px;
+    height: 150px;
+    border: None;
+}
+
+fieldset{
+    width: 50%;
+}
+
+.errormessage{
+    color: #ff0000;
+}
+
+.sessionuser{
+    font-style: oblique;
+}

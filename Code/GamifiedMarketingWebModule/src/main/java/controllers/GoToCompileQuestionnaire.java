@@ -36,8 +36,7 @@ public class GoToCompileQuestionnaire extends HttpServlet {
     @EJB(name="ProductServiceEJB")
     private ProductServiceBean productService;
 
-    @EJB(name="MarketingAnswerServiceEJB")
-    private MarketingAnswerServiceBean marketingAnswerService;
+
 
     public GoToCompileQuestionnaire() {
     }
@@ -56,6 +55,10 @@ public class GoToCompileQuestionnaire extends HttpServlet {
 
         String product = null;
         int productId = 0;
+
+
+        ServletContext servletContext = this.getServletContext();
+        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
         try {
             product = StringEscapeUtils.escapeJava(request.getParameter("product"));
@@ -79,11 +82,12 @@ public class GoToCompileQuestionnaire extends HttpServlet {
         }
 
 
-        //check if the user has already made the questionnaire of the day
+        //check if the user has already made the questionnaire of the day or he is blocked
 
         User user = (User) request.getSession().getAttribute("user");
+        Boolean doQuestionnaire=(Boolean)ctx.getVariable("doQuestionnaire");
 
-        if(questionnaireAlreadyMade(user, productOfTheDay)){
+        if((doQuestionnaire!=null && !doQuestionnaire) || user.getBlocked()==1){
 
             request.getRequestDispatcher("/GoToHomeUser").forward(request, response);
         }
@@ -91,8 +95,6 @@ public class GoToCompileQuestionnaire extends HttpServlet {
 
 
             String path = "/WEB-INF/questionnaire.html";
-            ServletContext servletContext = this.getServletContext();
-            WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
             ctx.setVariable("product", productOfTheDay);
             this.templateEngine.process(path, ctx, response.getWriter());
         }
@@ -102,16 +104,6 @@ public class GoToCompileQuestionnaire extends HttpServlet {
         this.doPost(request, response);
     }
 
-    public Boolean questionnaireAlreadyMade(User user, Product product){
 
-        if(product==null | user==null) return false;
-
-        List<MarketingQuestion> questions=(List)product.getMarketingquestionsById();
-
-        for(MarketingQuestion mq: questions){
-            if(marketingAnswerService.findMarketingAnswersByUserMarketingQuestion(user, mq)!=null) return true;
-        }
-        return false;
-    }
 
 }

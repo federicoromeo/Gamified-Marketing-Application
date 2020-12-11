@@ -111,8 +111,6 @@ public class AnswerQuestionnaire extends HttpServlet {
             }
         }
 
-        //TODO: dobbiamo loggare anche chi viene bloccato?
-        //TODO: se uno preme cancel non deve essere bloccato, così come è invece succede
         user = userServiceBean.find(user.getId());
         if(user.getBlocked()==1)
         {
@@ -132,6 +130,7 @@ public class AnswerQuestionnaire extends HttpServlet {
             {
                 mq = marketingQuestionServiceBean.find(questionsId.get(i));
                 maId = marketingAnswerServiceBean.createMarketingAnswer(answers.get(i),user,mq);
+                //qua dovrebbe scattare trigger
             }
         }
         catch(Exception e)
@@ -153,6 +152,7 @@ public class AnswerQuestionnaire extends HttpServlet {
         try
         {
             saId = statisticalAnswerServiceBean.createStatisticalAnswer(user,product,age,sex,expertiseLevel);
+            //qua dovrebbe scattare trigger
         }
         catch(Exception e)
         {
@@ -162,24 +162,11 @@ public class AnswerQuestionnaire extends HttpServlet {
         //commit or cancel the questionnaire
         try
         {
-            boolean committed = true;
-            if(committed)
-            {
-                logServiceBean.createLog(user,product,(byte)1,new Timestamp(System.currentTimeMillis()));
-                path = "/WEB-INF/greetings.html";
-                ServletContext servletContext = this.getServletContext();
-                WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-                this.templateEngine.process(path, ctx, response.getWriter());
-            }
-            else
-            {
-                logServiceBean.createLog(user,product,(byte)0,new Timestamp(System.currentTimeMillis()));
-                path = "/WEB-INF/home_user.html";
-                ServletContext servletContext = this.getServletContext();
-                WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-                ctx.setVariable("product", product);
-                this.templateEngine.process(path, ctx, response.getWriter());
-            }
+            logServiceBean.createLog(user,product,(byte)1,new Timestamp(System.currentTimeMillis()));
+            path = "/WEB-INF/greetings.html";
+            ServletContext servletContext = this.getServletContext();
+            WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+            this.templateEngine.process(path, ctx, response.getWriter());
         }
         catch(Exception e)
         {

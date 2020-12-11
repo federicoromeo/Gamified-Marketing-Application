@@ -13,36 +13,75 @@
 
 <body>
 
-<a th:href="@{/Logout}" class="logout-button"> Logout </a>
+    <form action="AnswerQuestionnaire" method="POST" name="form" >
 
-<h1>  Questionnaire  </h1><br>
+        <div id="marketing-form">
+            <fieldset>
+                <legend><strong> Marketing questions </strong></legend> <br>
+                <div th:each="mq: ${product.marketingquestionsById}" id="responses-container">
 
-<form action="AnswerQuestionnaire" method="POST" name="form" >
+                    <label style="display:none;" class="labels"> <!--inline style just because we needed a class here-->
+                        <!-- this tag is used to show to the js the question id as text content-->
+                        <input class="question-id" type="text" th:text="${mq.getId()}"><!--name="question"-->
+                    </label>
 
-    <div id="marketing-form">
-        <fieldset>
-            <legend><strong> Marketing questions </strong></legend> <br>
-            <div th:each="mq: ${product.marketingquestionsById}" id="responses-container">
+                    <!-- this tag is used to show the question id (as variable context) to thymeleaf-->
+                    <input type="hidden" class="id-question"> <!-- name="questionsId"-->
 
-                <label style="display:none;" class="labels"> <!--inline style just because we needed a class here-->
-                    <!-- this tag is used to show to the js the question id as text content-->
-                    <input class="question-id" type="text" th:text="${mq.getId()}"><!--name="question"-->
-                </label>
+                    <ul>
+                        <li th:text="${mq.text}"> Question: </li> <br>
+                        <input type="text" class="response" name="response" placeholder="Your answer:" required> <br>  <!--value=""-->
+                    </ul>
 
-                <!-- this tag is used to show the question id (as variable context) to thymeleaf-->
-                <input type="hidden" class="id-question"> <!-- name="questionsId"-->
+                </div>
+                <input type="hidden" name="numberofresponses" id="number-of-responses">
+                <button id="next-button" name="next" type="button"> Next </button>
+            </fieldset>
+        </div>
 
-                <ul>
-                    <li th:text="${mq.text}"> Question: </li> <br>
-                    <input type="text" class="response" name="response" placeholder="Your answer:" required> <br>  <!--value=""-->
-                </ul>
+        <div id="statistical-form" class="masked">
+            <fieldset>
+                <legend><strong>Statistical questions</strong></legend><br>
 
-            </div>
-            <input type="hidden" name="numberofresponses" id="number-of-responses">
-            <button id="next-button" name="next" type="button"> Next </button>
-        </fieldset>
+                Age:
+                <input name="age" type="number" min="0" max="100" value="0">
+                <br><br>
+
+                Sex:
+                <select name="sex">
+                    <option name="sex" value="" selected disabled hidden>Not chosen</option>
+                    <option name="sex" value="M"> M </option>
+                    <option name="sex" value="F"> F </option>
+                    <option name="sex" value="Other"> Other </option>
+                </select>
+                <br><br>
+
+                Expertise level:
+                <select name="expertise-level">
+                    <option name="expertise-level" value="" selected disabled hidden>Not chosen</option>
+                    <option name="expertise-level" value="Low"> Low </option>
+                    <option name="expertise-level" value="Medium"> Medium </option>
+                    <option name="expertise-level" value="High"> High </option>
+                </select>
+                <br><br>
+
+                <input id="submit-button"   type="submit" name="action" value="Submit">
+                <button id="go-back-button" type="button"> Go back </button>
+                <!--button id="submit-button"   type="button" name="action" value="submit"> Submit </button>
+                <button id="cancel-button"   type="button" name="action" value="cancel"> Cancel </button>
+                <button id="go-back-button"  type="button"> < Go back </button-->       <!--name="action" value="goback"-->
+            </fieldset>
+        </div>
+
+    </form>
+
+    <button onclick="window.location.href='/GamifiedMarketingWebModule_war_exploded/GoToHomeUser'" id="back-button" > Cancel </button>
+
+    <div th:if="${session.user.getBlocked()==1}">
+        <span class="errormessage" th:text="${'You are blocked! You can not compile the questionnaire!'}"> </span>
     </div>
 
+<<<<<<< HEAD
     <div id="statistical-form" class="masked">
         <fieldset>
             <legend><strong>Statistical questions</strong></legend><br>
@@ -118,6 +157,7 @@
           }
 
        -->
+
 
 </body>
 

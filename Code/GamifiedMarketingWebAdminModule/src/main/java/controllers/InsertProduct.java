@@ -89,9 +89,10 @@ public class InsertProduct extends HttpServlet {
 
             newProduct.setMarketingquestionsById(allQuestions);
 
+            String path = "/WEB-INF/home_admin.html";
             ServletContext servletContext = getServletContext();
             WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-            String path = "/WEB-INF/home_admin.html";
+            ctx.setVariable("message", "Successful insertion!");
             this.templateEngine.process(path, ctx, response.getWriter());
         }
         catch(Exception e) //any unknown error in the creation of the product

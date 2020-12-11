@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="ISO-8859-1">
+    <title>  Gamified Marketing Application </title>
+    <link rel="stylesheet" media="all" href="../css/style.css" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<h1> Gamified Marketing Application </h1><br>
+
+<h3 style="color:red;">Attention!</h3>
+<h4 style="color:red;">Your answer has been reported as inappropriate. You're now banned from the platform.</h4>
+
+<span th:text="${'We are sorry ' + session.user.username + '!'}">! </span>
+
+<br><br><br>
+
+<!--button onclick="window.location.href='WEB-INF/home_user.html'" id="back-button" > Home </button-->
+<a th:href="@{/GoToHomeUser}" class="back-button" href=""> Home </a>
+
+</body>
+
+</html>

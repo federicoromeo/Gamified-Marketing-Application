@@ -101,7 +101,7 @@ public class Product {
         this.pointsById = pointsById;
     }
 
-    @OneToMany(mappedBy = "productByProductId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "productByProductId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<StatisticalAnswer> getStatisticalanswersById() {
         return statisticalanswersById;
     }

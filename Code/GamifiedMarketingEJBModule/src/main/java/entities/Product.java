@@ -18,6 +18,8 @@ public class Product {
     private Collection<StatisticalAnswer> statisticalanswersById;
 
     @Id
+    @SequenceGenerator( name = "mySeq", sequenceName = "MY_SEQ", allocationSize = 1, initialValue = 1 )
+    @GeneratedValue(strategy=GenerationType.IDENTITY, generator="mySeq")
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

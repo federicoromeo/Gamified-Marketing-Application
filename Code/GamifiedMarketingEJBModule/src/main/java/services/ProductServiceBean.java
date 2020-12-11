@@ -158,6 +158,20 @@ public class ProductServiceBean
      * @return the id of the product just created
      */
     public int createProduct(String name, byte[] image, String date) throws Exception {
+
+        Product product = new Product();
+        product.setName(name);
+        product.setDate(date);
+        product.setImage(image);
+
+        System.out.println("Prodotto creato\n\n\n");
+
+        em.persist(product);
+        em.flush();
+
+        return product.getId();
+
+        /*
         Product duplicate = findAll()
                 .stream()
                 .filter(x -> x.getDate().equals(date))
@@ -187,7 +201,6 @@ public class ProductServiceBean
         else{
             return -1;
         }*/
-        return -1;
     }
 
 

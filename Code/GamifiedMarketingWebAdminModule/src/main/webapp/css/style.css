@@ -52,15 +52,16 @@ button {
     width: 15%;
 }
 
-#back-button{
-    width: 15%;
-    background-color: #082681;
+.back-button{
+    float: left;
+    color: blue;
 }
 
 .logout-button{
     float: right;
     color: blue;
 }
+
 
 /*#questionnaire-table{
    width=100%;

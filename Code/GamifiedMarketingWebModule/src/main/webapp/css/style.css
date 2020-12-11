@@ -82,7 +82,7 @@ input[type=submit]{
 }
 
 .table td, #table th {
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
     padding: 8px;
 }
 
@@ -112,6 +112,10 @@ img{
     width: 150px;
     height: 150px;
     border: None;
+}
+
+fieldset{
+    width: 50%;
 }
 
 .errormessage{

@@ -23,27 +23,35 @@
             </div>
         </fieldset>
 
+        <br><br>
+
         <div class="reviews-container">
-            <h3 th:if="${product.getId() != 2}" >Users' reviews</h3>
 
-            <table th:if="${product.getId() != 2}" class="table" id="reviews">
-                <tr>
-                    <th>Username</th>
-                    <div th:each="mq: ${product.marketingquestionsById}">
-                        <th th:text="${mq.getText()}">No questions</th>
-                    </div>
-                </tr>
-                <tr th:each="mq: ${product.marketingquestionsById}">
+            <h3 th:if="${product.getId() != 2}" >Users' reviews</h3> <br>
 
-                    <div th:each="ma: ${mq.marketinganswersById}">
-                        <td th:text="${ma.userByUserId.username}">fede</td>
-                        <td th:text="${ma.getText()}">awful</td>
-                    </div>
+            <table th:if="${product.getId() != 2}"  class="table" id="reviews">
 
-                </tr>
+                <div th:each="mq: ${product.marketingquestionsById}">
+
+                    <tr>
+                        <div th:with="myCounter = ${counter.getAndIncrement()}">
+                            <th th:if="${myCounter==0}" th:text="${'Username'}"></th>
+                            <th th:if="${myCounter!=0}"></th>
+                        </div>
+                        <th th:text="${mq.getText()}"></th>
+                    </tr>
+
+                    <tr th:each="ma: ${mq.marketinganswersById}">
+                        <td th:text="${ma.userByUserId.username}"></td>
+                        <td th:text="${ma.getText()}"></td>
+                    </tr>
+
+                </div>
+
             </table>
 
         </div>
+
 
         <br><br>
 

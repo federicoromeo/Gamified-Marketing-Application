@@ -100,7 +100,7 @@ public class AnswerQuestionnaire extends HttpServlet {
         product = productServiceBean.find(pId);
 
         //check if this is a duplicate submission
-        if(logServiceBean.isLogPresent(user.getId(), product.getId()))
+        if(logServiceBean.isLogPresent(user.getId(), product.getId(), true))
         {
             path = "/WEB-INF/duplicate.html";
             ServletContext servletContext = this.getServletContext();

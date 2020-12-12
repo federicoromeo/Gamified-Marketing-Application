@@ -112,16 +112,16 @@ public class LogServiceBean
                 .get(0);
     }
 
-    public boolean isLogPresent(int userId, int productId)
+    public boolean isLogPresent(int userId, int productId, boolean submitted)
     {
-        return (long) em
+        return em
                 .createNamedQuery("Log.findByUserProduct", Log.class)
                 .setParameter(1, userId)
                 .setParameter(2, productId)
                 .getResultList()
-                .size() > 0;
+                .stream()
+                .anyMatch(l -> l.getSubmitted() == (submitted ? 1 : 0));
     }
-
 
     /**
      * Create a new log

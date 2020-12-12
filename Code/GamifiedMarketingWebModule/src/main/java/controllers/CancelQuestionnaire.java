@@ -73,8 +73,7 @@ public class CancelQuestionnaire extends HttpServlet
         //log the cancel
         try
         {
-            if(!logServiceBean.isLogPresent(user.getId(), product.getId()))
-                logServiceBean.createLog(user,product,(byte)0,new Timestamp(System.currentTimeMillis()));
+            logServiceBean.createLog(user,product,(byte)0,new Timestamp(System.currentTimeMillis()));
             path = getServletContext().getContextPath() + "/GoToHomeUser";
             response.sendRedirect(path);
         }

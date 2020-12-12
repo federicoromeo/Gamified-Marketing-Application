@@ -104,11 +104,22 @@ public class LogServiceBean
      * Get all logs
      * @return the list of all logs, possibly empty
      */
-    public List<Log> findAll()
+    public Log findAll()
     {
         return em
                 .createNamedQuery("Log.findAll", Log.class)
-                .getResultList();
+                .getResultList()
+                .get(0);
+    }
+
+    public boolean isLogPresent(int userId, int productId)
+    {
+        return (long) em
+                .createNamedQuery("Log.findByUserProduct", Log.class)
+                .setParameter(1, userId)
+                .setParameter(2, productId)
+                .getResultList()
+                .size() > 0;
     }
 
 

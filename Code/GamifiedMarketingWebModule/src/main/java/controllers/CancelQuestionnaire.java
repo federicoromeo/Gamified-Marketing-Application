@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
 
-@WebServlet("/Cancel")
-public class Cancel extends HttpServlet
+@WebServlet("/CancelQuestionnaire")
+public class CancelQuestionnaire extends HttpServlet
 {
     @EJB(name = "services/LogServiceBean")
     private LogServiceBean logServiceBean;
@@ -33,7 +33,7 @@ public class Cancel extends HttpServlet
 
     private TemplateEngine templateEngine;
 
-    public Cancel()
+    public CancelQuestionnaire()
     {
         super();
     }
@@ -73,7 +73,8 @@ public class Cancel extends HttpServlet
         //log the cancel
         try
         {
-            logServiceBean.createLog(user,product,(byte)0,new Timestamp(System.currentTimeMillis()));
+            if(!logServiceBean.isLogPresent(user.getId(), product.getId()))
+                logServiceBean.createLog(user,product,(byte)0,new Timestamp(System.currentTimeMillis()));
             path = getServletContext().getContextPath() + "/GoToHomeUser";
             response.sendRedirect(path);
         }

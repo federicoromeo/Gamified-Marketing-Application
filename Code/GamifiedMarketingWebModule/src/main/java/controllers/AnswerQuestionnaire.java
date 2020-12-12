@@ -63,7 +63,7 @@ public class AnswerQuestionnaire extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        int age, numberOfResponses, saId, mqId, maId;
+        int age, numberOfResponses, saId, mqId, maId, pId;
         String sex, expertiseLevel, path, answer;
         List<String> answers = new ArrayList<>();
         List<Integer> questionsId = new ArrayList<>();
@@ -94,6 +94,20 @@ public class AnswerQuestionnaire extends HttpServlet {
 
         //get the active user
         user = (User) request.getSession().getAttribute("user");
+
+        //get the product
+        pId = Integer.parseInt(request.getParameter("product"));
+        product = productServiceBean.find(pId);
+
+        //check if this is a duplicate submission
+        if(logServiceBean.isLogPresent(user.getId(), product.getId()))
+        {
+            path = "/WEB-INF/duplicate.html";
+            ServletContext servletContext = this.getServletContext();
+            WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+            this.templateEngine.process(path, ctx, response.getWriter());
+            return;
+        }
 
         //retrieving all the offensive words from db
         offensiveWords=offensiveWordServiceBean.findAll();
@@ -136,16 +150,6 @@ public class AnswerQuestionnaire extends HttpServlet {
         catch(Exception e)
         {
             System.err.println("It was not possible to register the marketing answers");
-        }
-
-        try
-        {
-            mq  = marketingQuestionServiceBean.find(questionsId.get(0));
-            product = productServiceBean.find(mq.getProductId());
-        }
-        catch(Exception e)
-        {
-            System.err.println("It was not possible to fetch the product of the day" + e.getMessage());
         }
 
         //create the statistical answer

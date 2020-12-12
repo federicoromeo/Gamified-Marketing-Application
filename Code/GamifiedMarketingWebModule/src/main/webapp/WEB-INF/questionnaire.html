@@ -72,10 +72,10 @@
                 <button id="go-back-button"  type="button"> < Go back </button-->       <!--name="action" value="goback"-->
             </fieldset>
         </div>
-
+        <input type="hidden" name="product" th:value="${product.getId()}">
     </form>
 
-    <form action="Cancel" method="POST">
+    <form action="CancelQuestionnaire" method="POST">
         <input type="hidden" name="product" th:value="${product.getId()}">
         <input type="submit" value="Cancel">
     </form>

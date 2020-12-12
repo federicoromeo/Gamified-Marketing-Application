@@ -159,7 +159,7 @@ public class AnswerQuestionnaire extends HttpServlet {
             System.err.println("It was not possible to register the statistical answers");
         }
 
-        //commit or cancel the questionnaire
+        //commit the questionnaire
         try
         {
             logServiceBean.createLog(user,product,(byte)1,new Timestamp(System.currentTimeMillis()));

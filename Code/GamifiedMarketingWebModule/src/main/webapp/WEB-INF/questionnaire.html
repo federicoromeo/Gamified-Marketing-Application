@@ -75,7 +75,12 @@
 
     </form>
 
-    <button onclick="window.location.href='/GamifiedMarketingWebModule_war_exploded/GoToHomeUser'" id="back-button" > Cancel </button>
+    <form action="Cancel" method="POST">
+        <input type="hidden" name="product" th:value="${product.getId()}">
+        <input type="submit" value="Cancel">
+    </form>
+
+    <!--button onclick="window.location.href='/GamifiedMarketingWebModule_war_exploded/Cancel'" id="back-button" > Cancel </button-->
 
     <div th:if="${session.user.getBlocked()==1}">
         <span class="errormessage" th:text="${'You are blocked! You can not compile the questionnaire!'}"> </span>

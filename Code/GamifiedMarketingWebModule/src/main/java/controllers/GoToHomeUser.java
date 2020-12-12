@@ -56,7 +56,7 @@ public class GoToHomeUser extends HttpServlet
     {
         Product productOfTheDay = null;
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        Boolean doQuestionnaire=true;
+        boolean doQuestionnaire=true;
 
         ServletContext servletContext = this.getServletContext();
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
@@ -79,12 +79,8 @@ public class GoToHomeUser extends HttpServlet
 
         User user = (User) request.getSession().getAttribute("user");
 
-        if(questionnaireAlreadyMade(user, productOfTheDay) || user.getBlocked()==1){
-
+        if(questionnaireAlreadyMade(user, productOfTheDay) || user.getBlocked()==1)
             doQuestionnaire=false;
-
-        }
-
 
         String path = "/WEB-INF/home_user.html";
         ctx.setVariable("doQuestionnaire", doQuestionnaire);
@@ -103,14 +99,17 @@ public class GoToHomeUser extends HttpServlet
 
     public Boolean questionnaireAlreadyMade(User user, Product product){
 
-        if(product==null | user==null) return false;
+        if(product==null || user==null)
+            return false;
 
-        List<MarketingQuestion> questions=(List)product.getMarketingquestionsById();
+        List<MarketingQuestion> questions = (List)product.getMarketingquestionsById();
 
         for(MarketingQuestion mq: questions){
-
+            System.out.println(mq.getText());
             List<MarketingAnswer> answers=(List)marketingAnswerService.findMarketingAnswersByUserMarketingQuestion(user, mq);
-            if(answers!=null && !answers.isEmpty()) return true;
+            if(answers!=null && !answers.isEmpty()) {
+                return true;
+            }
         }
         return false;
     }

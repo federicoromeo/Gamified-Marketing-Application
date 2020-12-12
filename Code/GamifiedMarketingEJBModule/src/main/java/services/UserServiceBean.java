@@ -61,24 +61,31 @@ public class UserServiceBean {
      * @param email the email address
      * @return the id of the newly generated user
      */
-    public int createUser(String username, String password, String email)
+    public User createUser(String username, String password, String email)
     {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
         user.setAdmin((byte) 0);
+        user.setBlocked((byte) 0);
 
         em.persist(user);
-        em.flush();
-
-        return user.getId();
+        try
+        {
+            em.flush();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return user;
     }
 
 
     /**
      * Get a single user by Id
-     * @param userId
+     * @param userId id
      * @return the user with the specified id
      */
     public User find(int userId)
@@ -89,7 +96,7 @@ public class UserServiceBean {
 
     /**
      * Get a single user by Email
-     * @param userEmail
+     * @param userEmail email
      * @return the user with the specified email
      */
     public User findByEmail(String userEmail)

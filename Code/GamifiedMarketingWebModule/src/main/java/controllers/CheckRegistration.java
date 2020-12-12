@@ -47,6 +47,7 @@ public class CheckRegistration extends HttpServlet
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+
         String username = null;
         String password = null;
         String email = null;
@@ -57,7 +58,7 @@ public class CheckRegistration extends HttpServlet
             password = StringEscapeUtils.escapeJava(request.getParameter("password"));
             email = StringEscapeUtils.escapeJava(request.getParameter("email"));
 
-            if (username == null || password == null || username.isEmpty() || password.isEmpty() || email == null || email.isEmpty() )
+            if (username == null || password == null || email == null || username.isEmpty() || password.isEmpty() || email.isEmpty() )
                 throw new Exception("Missing or empty credential value");
 
         }
@@ -69,11 +70,10 @@ public class CheckRegistration extends HttpServlet
         }
 
         User user = null;
-        int idUser;
         try
         {
-            idUser= userService.createUser(username, password, email);
-            user=userService.findByUsername(username);
+            // Check if the username is valid
+            user = userService.findByUsername(username);
         }
         catch (NonUniqueResultException e)
         {
@@ -81,45 +81,68 @@ public class CheckRegistration extends HttpServlet
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Could not check credentials");
             return;
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         // If the user exists, add info to the session and go to home page,
         // otherwise show login page with error message
 
         String path;
-        if (user == null)
+        User newUser = null;
+        int idUser;
+
+        // Username already taken
+        if (user != null)
         {
             path = "/index.html";
             ServletContext servletContext = getServletContext();
             final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-            ctx.setVariable("errormessage", "Invalid username, register with a different one!");
+            ctx.setVariable("errormessage", "Username already taken, register with a different one!");
             templateEngine.process(path, ctx, response.getWriter());
         }
+        //the username is not taken   --> OK!
         else
         {
-            QueryService qService = null;
+            //QueryService qService = null;
             try
             {
-                // Get the Initial Context for the JNDI lookup for a local EJB
+                newUser = userService.createUser(username, password, email);
+
+                if(newUser.getId() == 0) {
+                    System.out.println("something went wrong");
+                    path = "/index.html";
+                    ServletContext servletContext = getServletContext();
+                    final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+                    ctx.setVariable("errormessage", "Something went wrong in the id assigning!");
+                    templateEngine.process(path, ctx, response.getWriter());
+                }
+                else
+                    {
+                    System.out.println("created user " + newUser.getUsername() + " with id: " + newUser.getId());
+                    request.getSession().setAttribute("user", newUser);
+                    //request.getSession().setAttribute("queryService", qService);
+                    path = getServletContext().getContextPath() + "/GoToHomeUser";
+                    response.sendRedirect(path);
+                }
+
+                /* Get the Initial Context for the JNDI lookup for a local EJB
                 InitialContext ic = new InitialContext();
                 // Retrieve the EJB using JNDI lookup
                 qService = (QueryService) ic.lookup("java:/openejb/local/QueryServiceLocalBean");
+                */
             }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
 
-            request.getSession().setAttribute("user", user);
-            request.getSession().setAttribute("queryService", qService);
-
-            path = getServletContext().getContextPath() + "/GoToHomeUser";
-            response.sendRedirect(path);
         }
     }
 
     public void destroy()
     {
-
     }
 
 }

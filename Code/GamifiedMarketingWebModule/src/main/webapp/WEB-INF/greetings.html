@@ -21,7 +21,9 @@
     <br><br><br>
 
     <!--button onclick="window.location.href='WEB-INF/home_user.html'" id="back-button" > Home </button-->
-    <a th:href="@{/GoToHomeUser}" class="back-button" href=""> Home </a>
+    <form action="GoToHomeUser">
+        <input type="submit" class="back-button" value="Home">
+    </form>
 
 </body>
 

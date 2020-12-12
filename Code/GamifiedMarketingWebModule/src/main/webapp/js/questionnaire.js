@@ -34,7 +34,7 @@ window.onload = function() { // avoid variables ending up in the global scope
     nextButton.addEventListener("click", (e) => {
 
         //form validity
-        for (i = 0; i < responses.length; i++) {
+        for (let i = 0; i < responses.length; i++) {
             if(responses[i].value.length===0){
                 alert("The fields must not be empty!");
                 return;

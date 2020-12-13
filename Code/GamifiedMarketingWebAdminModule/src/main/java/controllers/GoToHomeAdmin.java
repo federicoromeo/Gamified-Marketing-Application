@@ -48,17 +48,9 @@ public class GoToHomeAdmin extends HttpServlet
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Product productOfTheDay = null;
-        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        boolean createdProduct=false;
-
         ServletContext servletContext = this.getServletContext();
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-
-        createdProduct = productService.findProductOfTheDay(today) != null;
-
-        ctx.setVariable("createdProduct", createdProduct);
-
+        ctx.setVariable("createdProduct", productService.findProductOfTheDay(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))) != null);
         String path = "/WEB-INF/home_admin.html";
         this.templateEngine.process(path, ctx, response.getWriter());
     }

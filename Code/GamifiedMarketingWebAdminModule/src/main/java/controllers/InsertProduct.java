@@ -63,10 +63,20 @@ public class InsertProduct extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        String date, name;
+        Part filePart;
+        byte[] image;
+        InputStream fileContent;
+        int numberOfQuestions, newProductId, mqId;
+        List<String> questions;
+        Product newProduct;
+        MarketingQuestion mqRef;
+        List<MarketingQuestion> allQuestions = new ArrayList<>();;
+
         //get all parameters from the form
 
         //date of the questionnaire
-        String date = request.getParameter("date");
+        date = request.getParameter("date");
 
         //check if product is already present
         if(productService.findProductOfTheDay(date) != null)
@@ -76,12 +86,12 @@ public class InsertProduct extends HttpServlet {
         }
 
         //name of the product
-        String name = request.getParameter("name");
+        name = request.getParameter("name");
 
         //image of the product
-        Part filePart = request.getPart("image");
-        InputStream fileContent = filePart.getInputStream();
-        byte[] image = IOUtils.toByteArray(fileContent);
+        filePart = request.getPart("image");
+        fileContent = filePart.getInputStream();
+        image = IOUtils.toByteArray(fileContent);
 
         //check if too large for a BLOB
         if(image.length > 60000)
@@ -92,19 +102,16 @@ public class InsertProduct extends HttpServlet {
 
 
         //get the number of questions
-        int numberOfQuestions = Integer.parseInt(request.getParameter("numberofquestions"));
-        List<String> questions = new ArrayList<>();
+        numberOfQuestions = Integer.parseInt(request.getParameter("numberofquestions"));
+        questions = new ArrayList<>();
         for(int i = 1; i <= numberOfQuestions; i++)
             questions.add(request.getParameter("question" + i));
 
         try
         {
-            int newProductId = productService.createProduct(name, image, date);
-            Product newProduct = productService.find(newProductId);
+            newProductId = productService.createProduct(name, image, date);
+            newProduct = productService.find(newProductId);
 
-            int mqId = -1;
-            MarketingQuestion mqRef = null;
-            List<MarketingQuestion> allQuestions = new ArrayList<>();
             for(String question : questions)
             {
                 mqId = marketingQuestionServiceBean.createMarketingQuestion(question, newProduct);

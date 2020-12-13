@@ -109,45 +109,57 @@ public class Points {
         NB: nel nostro db il testo delle marketingAnswer deve essere not null,
         * quindi per ciascun inserimento il punteggio è incrementato di uno
 
-        CREATE TRIGGER UpdatePointsSection1
-        AFTER INSERT ON MarketingAnswer
-        FOR EACH ROW
+       CREATE DEFINER = CURRENT_USER TRIGGER `gamified_db`.`marketinganswer_AFTER_INSERT` AFTER INSERT ON `marketinganswer` FOR EACH ROW
         BEGIN
-            IF EXISTS (SELECT *
-                        FROM Points P
-                        WHERE P.userId==NEW.userId
-                         AND P.productId==NEW.productId)
-            THEN
-                UPDATE Points
-                    SET total=total+1;
-                WHERE P.userId==NEW.userId
-                AND P.productId==NEW.productId
-            ELSE
-                INSERT ON Points(userId, productid, total)
-                VALUES(NEW.userId, NEW.productId, 1)
-        END;
+
+            DECLARE x INTEGER;
+            SELECT productId INTO x
+            FROM marketingQuestion
+            WHERE NEW.marketingquestionId=id;
+
+                    IF EXISTS (SELECT *
+                                FROM points p
+                                WHERE p.userId=NEW.userId
+                                 AND p.productId=x)
+                    THEN
+                        UPDATE points
+                            SET total=total+1
+                        WHERE p.userId=NEW.userId
+                        AND p.productId=x;
+                    ELSE
+                        INSERT INTO points(userId, productid, total)
+                        VALUES(NEW.userId, x, 1);
+                    END IF;
+        END
 
 ********Trigger per calcolare i punti della sezione 2:
         NB:il trigger calcola correttamente i punti solo se non vi solo valori di default in statistical answer
 
-        CREATE TRIGGER UpdatePointsSection2
-        AFTER INSERT ON StatisticalAnswer
-        FOR EACH ROW
-        BEGIN
-            DECLARE pointToAdd integer;
-                WHEN((NEW.age==0, 2, 0)+ IF(NEW.expertise IS NULL, 2, 0) + IF(NEW.sex IS NULL, 2, 0) INTO pointsToAdd )>0
-                    IF EXISTS ( SELECT *
-                                 FROM Points P
-                                 WHERE P.userId==NEW.userId
-                                  AND P.productId==NEW.productId)
+       CREATE DEFINER=`root`@`localhost` TRIGGER `statisticalanswer_AFTER_INSERT` AFTER INSERT ON `statisticalanswer` FOR EACH ROW BEGIN
+   DECLARE pointsToAdd integer;
+
+
+   SELECT IF(NEW.age=0, 2, 0)+ IF(NEW.expertise IS NULL, 2, 0) + IF(NEW.sex IS NULL, 2, 0) INTO pointsToAdd
+   FROM points
+   WHERE NEW.userId=userId
+   AND NEW.productId=productId;
+
+
+                IF (pointsToAdd>0)
+                   AND EXISTS ( SELECT *
+                                 FROM points P
+                                 WHERE P.userId=NEW.userId
+                                  AND P.productId=NEW.productId)
                     THEN
                         UPDATE Points
-                            SET total=total+pointsToAdd;
-                        WHERE P.userId==NEW.userId
-                        AND P.productId==NEW.productId
+                            SET total=total+pointsToAdd
+                        WHERE userId=NEW.userId
+                        AND productId=NEW.productId;
                     ELSE
-                        INSERT ON Points(userId, productid, total)
-                        VALUES(NEW.userId, NEW.productId, pointsToAdd)
+                        INSERT INTO Points(userId, productid, total)
+                        VALUES(NEW.userId, NEW.productId, pointsToAdd);
+END IF;
+END
                  //quest'ultimo caso dovrebbe capitare raramente in quanto l'inserimento di una statisticalAnswer
                     avviene in teoria solamante l'inserimento di una marketingQuestion che scatena il precedente trigger.
                     Il caso è comunque considerato per mettersi al riparo nel caso in cui il dbms processi i trigger o

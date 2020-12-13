@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "product", schema = "gamified_db")
@@ -14,7 +15,7 @@ public class Product {
     private String date;
     private Collection<Log> logsById;
     private Collection<MarketingQuestion> marketingquestionsById;
-    private Collection<Points> pointsById;
+    private List<Points> pointsById;
     private Collection<StatisticalAnswer> statisticalanswersById;
 
     @Id
@@ -93,11 +94,11 @@ public class Product {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "productByProductId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     @OrderBy("total DESC")
-    public Collection<Points> getPointsById() {
+    public List<Points> getPointsById() {
         return pointsById;
     }
 
-    public void setPointsById(Collection<Points> pointsById) {
+    public void setPointsById(List<Points> pointsById) {
         this.pointsById = pointsById;
     }
 

@@ -101,7 +101,6 @@ public class InsertProduct extends HttpServlet {
                 mqId = marketingQuestionServiceBean.createMarketingQuestion(question, newProduct);
                 mqRef = marketingQuestionServiceBean.find(mqId);
                 allQuestions.add(mqRef);
-
             }
 
             newProduct.setMarketingquestionsById(allQuestions);

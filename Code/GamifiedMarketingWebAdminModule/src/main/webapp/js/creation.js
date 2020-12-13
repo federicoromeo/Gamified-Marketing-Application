@@ -1,6 +1,6 @@
 window.onload = function() { // avoid variables ending up in the global scope
 
-    var sendButton = document.getElementById("send-button");
+    /*var sendButton = document.getElementById("send-button");
     sendButton.addEventListener("click", (e) => {
 
         var numberofquestions = document.getElementById("number-of-questions");
@@ -25,7 +25,7 @@ window.onload = function() { // avoid variables ending up in the global scope
             alert("Date should be today or later!")
         }
 
-    });
+    });*/
 
     var deleteQuestionButton = document.getElementById("delete-question-button");
     deleteQuestionButton.addEventListener("click", (e) => {

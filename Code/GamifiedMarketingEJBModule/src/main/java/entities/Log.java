@@ -7,8 +7,8 @@ import java.sql.Timestamp;
 @Table(name = "log", schema = "gamified_db")
 
 @NamedQueries({
-        @NamedQuery(name = "Log.findByUserProduct", query = "SELECT l FROM Log l  WHERE l.userId = ?1 and l.productId = ?2"),
-        @NamedQuery(name= "Log.findAll", query="SELECT p FROM Product p")
+    @NamedQuery(name = "Log.findByUserProduct", query = "SELECT l FROM Log l  WHERE l.userId = ?1 and l.productId = ?2"),
+    @NamedQuery(name= "Log.findAll", query="SELECT p FROM Product p")
 })
 public class Log {
 

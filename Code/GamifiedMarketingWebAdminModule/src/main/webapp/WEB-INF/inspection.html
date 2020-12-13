@@ -13,47 +13,78 @@
 
 <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
 
-<!--fieldset>
-
-   <legend><strong> Here are the datas of the past questionnaires  </strong></legend><br>
-
-   <div th:each="p: ${pastProducts}" id="radio-container">
-      <input value="${p.name}" type="radio" name="questionnaire" checked="checked"> Quest1 <br><br>
-      <input value="mockup2" type="radio" name="questionnaire">   Quest2 <br><br>
-      <input value="mockup1" type="radio" name="questionnaire">   Quest3 <br><br>
-   </div>
-
-</fieldset>
-
-<br><br><br-->
-
 <h1> Here are the data of the past questionnaires </h1><br>
 
 <div th:each="p: ${pastProducts}">
     <div th:if="${p.getId() != 2}">
 
         <fieldset>
+
             <legend><strong th:text="${p.name}"></strong></legend>
-            <table class="table">
+
+            <table th:if="${p.getId() != 2}" class="table">
                 <tr>
                     <th> Users who submitted it </th>
-                    <th> Users who cancelled it </th>
-                    <div th:each="mq: ${p.marketingquestionsById}">
-                        <th th:text="${mq.text}"> Answers </th>
-                    </div>
                 </tr>
-                <tr>
-                    <div th:each="l: ${p.logsById}">
-                        <td th:if="${l.submitted} ? ${l.userByUserId.username}">marco</td>
-                        <div th:each="mq: ${p.marketingquestionsById}" id="answers">
-                            <div th:each="ma: ${mq.marketinganswersById}">
-                                <td th:text="${ma.text}">nice</td>
-                            </div>
-                        </div>
+
+                <tr th:each="l: ${p.logsById}">
+                    <div th:if="${l.submitted}">
+                        <td th:text="${l.userByUserId.username}"></td>
                     </div>
                 </tr>
             </table>
+            <br>
+
+            <table th:if="${p.getId() != 2}" class="table">
+                <tr>
+                    <th> Users who cancelled it </th>
+                </tr>
+
+                <tr th:each="l: ${p.logsById}">
+                    <div th:if="${!l.submitted}">
+                        <td th:text="${l.userByUserId.username}"></td>
+                    </div>
+                </tr>
+            </table>
+            <br>
+
+            <table th:if="${p.getId() != 2}" class="table">
+
+                <div th:each="mq: ${p.marketingquestionsById}">
+
+                    <tr>
+                        <div th:with="myCounter = ${counter.getAndIncrement()}">
+                            <th th:if="${myCounter==0}" th:text="${'Username'}"></th>
+                            <th th:if="${myCounter!=0}"></th>
+                        </div>
+                        <th th:text="${mq.getText()}"></th>
+                    </tr>
+
+                    <tr th:each="ma: ${mq.marketinganswersById}">
+                        <td th:text="${ma.userByUserId.username}"></td>
+                        <td th:text="${ma.getText()}"></td>
+                    </tr>
+
+                </div>
+
+            </table>
+            <br>
+
+            <!--tr>
+                <div th:each="l: ${p.logsById}">
+                    <td th:if="${l.submitted} ? ${l.userByUserId.username}">marco</td>
+
+                    <div th:each="mq: ${p.marketingquestionsById}" id="answers">
+                        <div th:each="ma: ${mq.marketinganswersById}">
+                            <td th:text="${ma.text}">nice</td>
+                        </div>
+                    </div>
+
+                </div>
+        </tr-->
+
         </fieldset>
+        <br>
 
     </div>
 </div>

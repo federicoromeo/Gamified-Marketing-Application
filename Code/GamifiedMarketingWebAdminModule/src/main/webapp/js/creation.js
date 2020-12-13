@@ -1,6 +1,6 @@
 window.onload = function() { // avoid variables ending up in the global scope
 
-    /*var sendButton = document.getElementById("send-button");
+    var sendButton = document.getElementById("send-button");
     sendButton.addEventListener("click", (e) => {
 
         var numberofquestions = document.getElementById("number-of-questions");
@@ -9,7 +9,7 @@ window.onload = function() { // avoid variables ending up in the global scope
         numberofquestions.value = numberOfChildren;
         console.log(numberofquestions.value + " question(s)");
 
-        var date = document.querySelector('input[type="date"]');
+       /* var date = document.querySelector('input[type="date"]');
         var arrayDate = date.value.split("-",3);
         var selectedDate = new Date(arrayDate[0], arrayDate[1]-1, arrayDate[2]);
         console.log("selected date: " + selectedDate);
@@ -23,9 +23,9 @@ window.onload = function() { // avoid variables ending up in the global scope
 
         if(selectedDate < today){
             alert("Date should be today or later!")
-        }
+        }*/
 
-    });*/
+    });
 
     var deleteQuestionButton = document.getElementById("delete-question-button");
     deleteQuestionButton.addEventListener("click", (e) => {

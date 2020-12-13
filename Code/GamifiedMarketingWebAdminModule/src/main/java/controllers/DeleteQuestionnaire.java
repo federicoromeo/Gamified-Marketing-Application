@@ -60,8 +60,12 @@ public class DeleteQuestionnaire extends HttpServlet {
 
         if (productId!=-1 && productId!=2)      // 2 is default
         {
-            productService.deleteProduct(productId);
-            // TODO : MANCA DA CANCELLARE TUTTTE LE DOMANDE E I RELATIVI PUNTI
+            try {
+                productService.deleteProduct(productId);
+                // TODO : MANCA DA CANCELLARE TUTTTE LE DOMANDE E I RELATIVI PUNTI
+            }catch(Exception e){
+                System.out.println("/n/n/n/n/n/n"+e.getClass());
+            }
         }
 
         //List<Product> pastProducts = productService.findPastProducts(); todo

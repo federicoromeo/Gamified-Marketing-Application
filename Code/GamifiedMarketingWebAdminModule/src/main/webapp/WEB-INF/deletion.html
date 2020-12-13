@@ -24,12 +24,17 @@
                 <input th:value="${p.id}" type="radio" name="product" th:text="${p.name}" checked="checked" ><br><br>
             </div>
         </div>
-        <button id="delete-questionnaire"> Delete questionnaire </button>
+        <div th:if="${!pastProducts.isEmpty()}">
+            <button id="delete-questionnaire"> Delete questionnaire </button>
+        <div>
     </form>
 
 </fieldset>
 
-<br><br><button onclick='window.history.back()' id="back-button" > Back </button>
+<br><br>
+<form action="GoToHomeAdmin" method="POST">
+    <button id="go-back-botton"> Back </button>
+</form>
 
 </body>
 

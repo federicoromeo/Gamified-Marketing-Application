@@ -54,6 +54,8 @@ public class GoToLeaderboard extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        System.out.println("\n\n\n\n\n\n\nEntro in post");
+
         int productId = Integer.parseInt(request.getParameter("productId"));
         List<Points> pointsPerUser = new ArrayList<>();
 
@@ -61,7 +63,9 @@ public class GoToLeaderboard extends HttpServlet {
 
             try
             {
+                productServiceBean.updateProduct(productId);
                 pointsPerUser = pointsServiceBean.findPointsByProduct(productId);
+                System.out.println("\n\n\n\n\n\n\n"+pointsPerUser);
             }
             catch(Exception e)
             {
@@ -69,7 +73,7 @@ public class GoToLeaderboard extends HttpServlet {
             }
 
             //TODO check non dovrebbe servire
-            pointsPerUser.sort(Collections.reverseOrder());
+            //pointsPerUser.sort(Collections.reverseOrder());
 
             Map<String,Integer> userAndPoints = new HashMap<>();
 

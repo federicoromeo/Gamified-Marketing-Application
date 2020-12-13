@@ -49,6 +49,8 @@ public class PointsServiceBean
      */
     public List<Points> findPointsByProduct(int productId)
     {
+
+
         return em
                 .createNamedQuery("Points.findAll", Points.class)
                 .getResultList()

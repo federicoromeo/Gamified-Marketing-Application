@@ -222,4 +222,13 @@ public class ProductServiceBean
                 .of(em.find(Product.class, productId))
                 .ifPresent(p -> em.remove(p));
     }
+
+    public void updateProduct(int productId) {
+
+        Product product=em.find(Product.class, productId);
+
+        em.refresh(product);
+
+
+    }
 }

@@ -1,13 +1,14 @@
 package entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "product", schema = "gamified_db")
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
-public class Product {
+public class Product implements Serializable {
 
     private int id;
     private String name;
@@ -65,7 +66,7 @@ public class Product {
     //cascade policy: lazy because in average there are more access made by simple user than of made by admin (which requires all the info),
     //cascade policy: eager only for marketing question because users need always question to answer to them
 
-    @OneToMany(mappedBy = "productByProductId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
+    @OneToMany(mappedBy = "productByProductId", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<Log> getLogsById() {
         return logsById;
     }
@@ -74,7 +75,7 @@ public class Product {
         this.logsById = logsById;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "productByProductId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "productByProductId", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<MarketingQuestion> getMarketingquestionsById() {
         return marketingquestionsById;
     }
@@ -102,7 +103,7 @@ public class Product {
         this.pointsById = pointsById;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "productByProductId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "productByProductId", cascade = { CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
     public Collection<StatisticalAnswer> getStatisticalanswersById() {
         return statisticalanswersById;
     }

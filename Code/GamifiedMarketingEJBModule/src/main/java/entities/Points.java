@@ -1,11 +1,12 @@
 package entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "points", schema = "gamified_db")
 @NamedQuery(name="Points.findAll", query="SELECT p FROM Points p")
-public class Points {
+public class Points implements Serializable {
 
     private int id;
     private int userId;

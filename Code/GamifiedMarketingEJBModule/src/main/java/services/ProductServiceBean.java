@@ -157,7 +157,7 @@ public class ProductServiceBean
      * @param date the day in which the product is scheduled to be "product of the day"
      * @return the id of the product just created
      */
-    public int createProduct(String name, byte[] image, String date) throws Exception
+    public int createProduct(String name, byte[] image, String date)
     {
         Product product = new Product();
         product.setName(name);
@@ -167,7 +167,15 @@ public class ProductServiceBean
         System.out.println("Prodotto creato\n\n\n");
 
         em.persist(product);
-        em.flush();
+
+        try
+        {
+            em.flush();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getClass());
+        }
 
         return product.getId();
 

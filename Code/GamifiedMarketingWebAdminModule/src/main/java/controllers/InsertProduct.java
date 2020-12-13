@@ -19,6 +19,8 @@ import services.MarketingQuestionServiceBean;
 import services.ProductServiceBean;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
@@ -65,6 +67,13 @@ public class InsertProduct extends HttpServlet {
 
         //date of the questionnaire
         String date = request.getParameter("date");
+
+        //check if product is already present
+        if(productService.findProductOfTheDay(date) != null)
+        {
+            errorAndRefresh("You've already created a product for that day, please delete the old first.", request, response);
+            return;
+        }
 
         //name of the product
         String name = request.getParameter("name");

@@ -16,13 +16,11 @@
     <form action="InsertProduct" method="POST" enctype='multipart/form-data'>
 
         <fieldset>
-            <label>Thymeleaf: </label> <span th:text="${#dates.format(#dates.createNow(),'YYYY/MM/dd')}"></span><br><br>
-            <label>Java: </label>      <span th:text="${now}"></span><br><br>
 
             <legend><strong>Product Insertion</strong></legend>
 
             <br><label>Select date: </label>
-            <input type="date" id="date" name="date" th:min="${#dates.format(#dates.createNow(),'YYYY/MM/dd')}" required>
+            <input type="date" id="date" name="date" min="2020-01-01" required>
             <br><br>
 
             <label> Insert the name of the product of the day:</label>

@@ -42,8 +42,8 @@ public class InsertProduct extends HttpServlet {
         super();
     }
 
-    public void init() throws ServletException {
-
+    public void init() throws ServletException
+    {
         ServletContext servletContext = getServletContext();
         ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
         templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -81,7 +81,7 @@ public class InsertProduct extends HttpServlet {
         //check if product is already present
         if(productService.findProductOfTheDay(date) != null)
         {
-            errorAndRefresh("You've already created a product for that day, please delete the old first.", request, response);
+            errorAndRefresh("You already created a product for that day, please delete the old one first.", request, response);
             return;
         }
 
@@ -94,12 +94,14 @@ public class InsertProduct extends HttpServlet {
         image = IOUtils.toByteArray(fileContent);
 
         //check if too large for a BLOB
+
+        /* todo : vaffanculo fra
+
         if(image.length > 60000)
         {
             errorAndRefresh("Please upload a smaller image", request, response);
             return;
-        }
-
+        }*/
 
         //get the number of questions
         numberOfQuestions = Integer.parseInt(request.getParameter("numberofquestions"));
@@ -114,6 +116,7 @@ public class InsertProduct extends HttpServlet {
 
             for(String question : questions)
             {
+                System.out.println(question);
                 mqId = marketingQuestionServiceBean.createMarketingQuestion(question, newProduct);
                 mqRef = marketingQuestionServiceBean.find(mqId);
                 allQuestions.add(mqRef);

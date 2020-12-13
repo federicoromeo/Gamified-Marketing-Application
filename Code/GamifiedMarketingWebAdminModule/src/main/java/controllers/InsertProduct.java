@@ -50,6 +50,15 @@ public class InsertProduct extends HttpServlet {
         templateResolver.setSuffix(".html");
     }
 
+    protected void errorAndRefresh(String error, HttpServletRequest request, HttpServletResponse response) throws IOException
+    {
+        String path = "/WEB-INF/insertion.html";
+        ServletContext servletContext = getServletContext();
+        final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+        ctx.setVariable("errormessage", error);
+        templateEngine.process(path, ctx, response.getWriter());
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         //get all parameters from the form
@@ -64,6 +73,14 @@ public class InsertProduct extends HttpServlet {
         Part filePart = request.getPart("image");
         InputStream fileContent = filePart.getInputStream();
         byte[] image = IOUtils.toByteArray(fileContent);
+
+        //check if too large for a BLOB
+        if(image.length > 60000)
+        {
+            errorAndRefresh("Please upload a smaller image", request, response);
+            return;
+        }
+
 
         //get the number of questions
         int numberOfQuestions = Integer.parseInt(request.getParameter("numberofquestions"));
@@ -84,7 +101,6 @@ public class InsertProduct extends HttpServlet {
                 mqId = marketingQuestionServiceBean.createMarketingQuestion(question, newProduct);
                 mqRef = marketingQuestionServiceBean.find(mqId);
                 allQuestions.add(mqRef);
-
             }
 
             newProduct.setMarketingquestionsById(allQuestions);
@@ -97,102 +113,8 @@ public class InsertProduct extends HttpServlet {
         }
         catch(Exception e) //any unknown error in the creation of the product
         {
-            //we should avoid this terrible screendate
-            //response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not possible to create product");
-
-            //redirects to the insertion page
-            String path = "/WEB-INF/insertion.html";
-            ServletContext servletContext = getServletContext();
-            final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-            ctx.setVariable("errormessage", "There have been some problems, please try again");
-            templateEngine.process(path, ctx, response.getWriter());
+            errorAndRefresh("We encountered some problems in the creation of the questionnaire, please try again", request, response);
         }
-
-        /*
-
-        //create new product from inserted data
-        int newProductId = -1;
-        try
-        {
-            newProductId = productService.createProduct(name, image, date);
-
-            if(newProductId == -1)
-            {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not possible to create product");
-                String path = "/WEB-INF/insertion.html";
-                ServletContext servletContext = getServletContext();
-                final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-                ctx.setVariable("errormessage", "Invalid date for the product! Please change it.");
-                templateEngine.process(path, ctx, response.getWriter());
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace(); //todo
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not possible to create product");
-            String path = "/WEB-INF/insertion.html";
-            ServletContext servletContext = getServletContext();
-            final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-            ctx.setVariable("errormessage", "Invalid date for the product! Please change it.");
-            templateEngine.process(path, ctx, response.getWriter());
-            return;
-        }
-
-        // get the product just inserted in the db
-        Product newProduct = null;
-        try
-        {
-            newProduct = productService.find(newProductId);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();  //todo
-        }
-
-        // insert all the questions separately
-        List<MarketingQuestion> allQuestions = new ArrayList<>();
-        if(newProduct != null)
-        {
-            for(String question : questions)
-            {
-                // create marketing question and get its autogen id
-                int mqId = -1;
-                try
-                {
-                    mqId = marketingQuestionServiceBean.createMarketingQuestion(question, newProduct);
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace(); //todo
-                }
-
-                //get from db the just created marketing question
-                MarketingQuestion mq = null;
-                try
-                {
-                    mq = marketingQuestionServiceBean.find(mqId);
-                    if(mq != null)
-                    {
-                        allQuestions.add(mq);
-                    }
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace(); //todo
-                }
-            }
-        }
-
-        //absolutely unuseful
-        newProduct.setMarketingquestionsById(allQuestions);
-
-
-
-        ServletContext servletContext = getServletContext();
-        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-        String path = "/WEB-INF/home_admin.html";
-        this.templateEngine.process(path, ctx, response.getWriter());
-        */
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

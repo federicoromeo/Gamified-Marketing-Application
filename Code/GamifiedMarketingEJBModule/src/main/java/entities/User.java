@@ -5,7 +5,6 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "user", schema = "gamified_db")
-
 @NamedQueries({
     @NamedQuery(name = "User.checkCredentials", query = "SELECT r FROM User r  WHERE r.username = ?1 and r.password = ?2"),
     @NamedQuery(name = "User.checkRegistration", query = "SELECT r FROM User r  WHERE r.username = ?1"),
@@ -25,6 +24,8 @@ public class User {
     private Collection<StatisticalAnswer> statisticalanswersById;
 
     @Id
+    @SequenceGenerator( name = "mySeq", sequenceName = "MY_SEQ", allocationSize = 1, initialValue = 1 )
+    @GeneratedValue(strategy=GenerationType.IDENTITY, generator="mySeq")
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

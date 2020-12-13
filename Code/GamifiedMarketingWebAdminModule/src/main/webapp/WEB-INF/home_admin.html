@@ -19,9 +19,15 @@
     <br><h2>What do you want to do?</h2><br><br>
 
     <div id="button-container">
-        <form action="DispatcherAdmin" method="POST">
-            <button id="insert-button" name="button" value="insert-button"> Create new product with associated marketing question(s)</button><br>
-        </form>
+
+        <div th:if="${createdProduct==false}">
+            <form action="DispatcherAdmin" method="POST">
+                <button id="insert-button" name="button" value="insert-button"> Create new product with associated marketing question(s)</button><br>
+            </form>
+        </div>
+        <div th:if="${createdProduct==true}">
+            <span class="errormessage"> You've already created a product for today! </span>
+        </div>
         <form action="DispatcherAdmin" method="POST">
             <button id="inspect-button" name="button" value="inspect-button"> Access the data of a past questionnaire</button><br>
         </form>

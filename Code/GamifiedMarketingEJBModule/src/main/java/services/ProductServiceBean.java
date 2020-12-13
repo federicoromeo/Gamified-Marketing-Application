@@ -157,8 +157,8 @@ public class ProductServiceBean
      * @param date the day in which the product is scheduled to be "product of the day"
      * @return the id of the product just created
      */
-    public int createProduct(String name, byte[] image, String date) throws Exception {
-
+    public int createProduct(String name, byte[] image, String date) throws Exception
+    {
         Product product = new Product();
         product.setName(name);
         product.setDate(date);

@@ -14,7 +14,10 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.ProductServiceBean;
+import utils.Counter;
+
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -64,6 +67,8 @@ public class DispatcherAdmin extends HttpServlet {
             switch(choice) {
 
                 case "insert-button":
+                    System.out.println( LocalDate.now());
+                    ctx.setVariable("now", LocalDate.now());
                     path = "/WEB-INF/insertion.html";
                     break;
 
@@ -71,6 +76,7 @@ public class DispatcherAdmin extends HttpServlet {
                     //pastProducts = productService.findPastProducts(); todo
                     pastProducts = productService.findAll();
                     ctx.setVariable("pastProducts", pastProducts);
+                    ctx.setVariable("counter", new Counter());
                     path = "/WEB-INF/inspection.html";
                     break;
 

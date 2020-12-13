@@ -11,48 +11,50 @@
 
 <body>
 
-<a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
+    <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
 
-<form action="InsertProduct" method="POST" enctype='multipart/form-data'>
+    <form action="InsertProduct" method="POST" enctype='multipart/form-data'>
 
-    <fieldset>
+        <fieldset>
+            <label>Thymeleaf: </label> <span th:text="${#dates.format(#dates.createNow(),'YYYY/MM/dd')}"></span><br><br>
+            <label>Java: </label>      <span th:text="${now}"></span><br><br>
 
-        <legend><strong>Product insertion</strong></legend>
+            <legend><strong>Product Insertion</strong></legend>
 
-        <br><label>Select date: </label>
-        <input type="date" id="date" name="date" required>
-        <br><br>
+            <br><label>Select date: </label>
+            <input type="date" id="date" name="date" th:min="${#dates.format(#dates.createNow(),'YYYY/MM/dd')}" required>
+            <br><br>
 
-        <label> Insert the name of the product of the day:</label>
-        <input type="text" name="name" required>
-        <br><br>
+            <label> Insert the name of the product of the day:</label>
+            <input type="text" name="name" required>
+            <br><br>
 
-        <label for="img">Select image:</label>
-        <input type="file" id="img" name="image" accept="image/*" required>
-        <br><br>
+            <label for="img">Select image:</label>
+            <input type="file" id="img" name="image" accept="image/*" required>
+            <br><br>
 
-        <div id="questions-container">
-            <label> Insert a marketing question:</label>
-            <input type="text"   name="question1" placeholder="Your question:" required> <!--OTHER QUESTIONS HAVE INCREMENTAL NAME: es: questionN-->
-            <input type="hidden" name="numberofquestions" id="number-of-questions"/>   <!--TO CYCLE IN THE SERVLET value TIMES-->
-        </div>
+            <div id="questions-container">
+                <label> Insert a marketing question:</label>
+                <input type="text"   name="question1" placeholder="Your question:" required> <!--OTHER QUESTIONS HAVE INCREMENTAL NAME: es: questionN-->
+                <input type="hidden" name="numberofquestions" id="number-of-questions"/>   <!--TO CYCLE IN THE SERVLET value TIMES-->
+            </div>
 
-        <button type="button" id="add-question-button">Add another question</button>
-        <button class="masked" type="button" id="delete-question-button">Delete a question</button>
-        <br><br><br>
+            <button type="button" id="add-question-button">Add another question</button>
+            <button class="masked" type="button" id="delete-question-button">Delete a question</button>
+            <br><br><br>
 
-        <p th:text="${errormessage}" id="errormessage-login" class="errormessage"></p>
-        <input id="send-button" type="submit" value="Send">
+            <p th:text="${errormessage}" id="errormessage-login" class="errormessage"></p>
+            <input id="send-button" type="submit" value="Send">
 
-    </fieldset>
+        </fieldset>
 
-    <br>
+        <br>
 
-    <a th:href="@{/GoToHomeAdmin}" class="back-button" href=""> Back </a>
+        <a th:href="@{/GoToHomeAdmin}" class="back-button" href=""> Back </a>
 
-    <br>    <br>
+        <br>    <br>
 
-</form>
+    </form>
 
 </body>
 

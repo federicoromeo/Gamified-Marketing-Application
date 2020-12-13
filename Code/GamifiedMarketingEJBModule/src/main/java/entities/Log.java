@@ -5,7 +5,11 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "log", schema = "gamified_db")
-@NamedQuery(name="Log.findAll", query="SELECT p FROM Product p")
+
+@NamedQueries({
+    @NamedQuery(name = "Log.findByUserProduct", query = "SELECT l FROM Log l  WHERE l.userId = ?1 and l.productId = ?2"),
+    @NamedQuery(name= "Log.findAll", query="SELECT p FROM Product p")
+})
 public class Log {
 
     private int id;

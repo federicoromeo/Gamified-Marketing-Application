@@ -148,6 +148,7 @@ public class ProductServiceBean
     {
         return em
                 .createNamedQuery("Product.findAll", Product.class)
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
                 .getResultList();
     }
 

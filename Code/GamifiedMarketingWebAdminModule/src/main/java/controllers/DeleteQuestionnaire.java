@@ -62,7 +62,7 @@ public class DeleteQuestionnaire extends HttpServlet {
         {
             try {
                 productService.deleteProduct(productId);
-                // TODO : MANCA DA CANCELLARE TUTTTE LE DOMANDE E I RELATIVI PUNTI
+
             }catch(Exception e){
                 System.out.println("/n/n/n/n/n/n"+e.getClass());
             }

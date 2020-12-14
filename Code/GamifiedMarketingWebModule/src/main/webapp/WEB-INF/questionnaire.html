@@ -72,21 +72,25 @@
                 <button id="go-back-button"  type="button"> < Go back </button-->       <!--name="action" value="goback"-->
             </fieldset>
         </div>
+
         <input type="hidden" name="product" th:value="${product.getId()}">
+
     </form>
+
 
     <form action="CancelQuestionnaire" method="POST">
+
         <input type="hidden" name="product" th:value="${product.getId()}">
         <input type="submit" value="Cancel">
+
     </form>
 
-    <!--button onclick="window.location.href='/GamifiedMarketingWebModule_war_exploded/Cancel'" id="back-button" > Cancel </button-->
 
     <div th:if="${session.user.getBlocked()==1}">
         <span class="errormessage" th:text="${'You are blocked! You can not compile the questionnaire!'}"> </span>
     </div>
 
-    <div id="statistical-form" class="masked">
+    <!--div id="statistical-form" class="masked">
         <fieldset>
             <legend><strong>Statistical questions</strong></legend><br>
 
@@ -114,49 +118,24 @@
 
             <input id="submit-button"   type="submit" name="action" value="Submit">
 
-            <!--button id="submit-button"   type="button" name="action" value="submit"> Submit </button>
-            <button id="cancel-button"   type="button" name="action" value="cancel"> Cancel </button>
-            <button id="go-back-button"  type="button"> < Go back </button-->       <!--name="action" value="goback"-->
+
         </fieldset>
     </div>
-</form>
+</form-->
 
-<div>
+    <!--div>
     <form action="AnswerQuestionnaire" method="POST" name="form" >
 
         <button id="go-back-button" type="button"> Go back </button>
     </form>
-</div>
+</div-->
 
 
-<div th:if="${session.user.getBlocked()==1}">
-    <span class="errormessage"> You are blocked! --->  You can't compile the questionnaire! </span>
-</div>
-    <!--
-          EXAMPLE
-
-          HTML:
-             <form action="MainServlet" method="Post">
-                 Last Name: <input type="text" name="lastName" size="20">
-                 <br><br>
-                 <input type="submit" name="action" value="FirstServlet">
-                 <input type="submit" name="action" value="SecondServlet">
-             </form>
-
-          CORRESPONDANT MainServlet:
-
-          String action = request.getParameter("action");
-
-          if ("FirstServlet".equals(action)) {
-              // Invoke FirstServlet's job here.
-          } else if ("SecondServlet".equals(action)) {
-              // Invoke SecondServlet's job here.
-          }
-
-       -->
+    <div th:if="${session.user.getBlocked()==1}">
+        <span class="errormessage"> You are blocked, you can't compile the questionnaire! </span>
+    </div>
 
 
 </body>
-
 
 </html>

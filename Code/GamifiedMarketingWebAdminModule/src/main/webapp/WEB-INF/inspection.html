@@ -11,85 +11,72 @@
 
 <body>
 
-<a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
+    <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
 
-<h1> Here are the data of the past questionnaires </h1><br>
+    <h1> Here are the data of the past questionnaires </h1><br>
 
-<div th:each="p: ${pastProducts}">
-    <div th:if="${p.getId() != 2}">
+    <div th:each="p: ${pastProducts}">
+        <div th:if="${p.getId() != 2}">
 
-        <fieldset>
+            <fieldset>
 
-            <legend><strong th:text="${p.name}"></strong></legend>
+                <legend><strong th:text="${p.name}"></strong></legend>
 
-            <table th:if="${p.getId() != 2}" class="table">
-                <tr>
-                    <th> Users who submitted it </th>
-                </tr>
-
-                <tr th:each="l: ${p.logsById}">
-                    <div th:if="${l.submitted}">
-                        <td th:text="${l.userByUserId.username}"></td>
-                    </div>
-                </tr>
-            </table>
-            <br>
-
-            <table th:if="${p.getId() != 2}" class="table">
-                <tr>
-                    <th> Users who cancelled it </th>
-                </tr>
-
-                <tr th:each="l: ${p.logsById}">
-                    <div th:if="${!l.submitted}">
-                        <td th:text="${l.userByUserId.username}"></td>
-                    </div>
-                </tr>
-            </table>
-            <br>
-
-            <table th:if="${p.getId() != 2}" class="table">
-
-                <div th:each="mq: ${p.marketingquestionsById}">
-
+                <table th:if="${p.getId() != 2}" class="table">
                     <tr>
-                        <div th:with="myCounter = ${counter.getAndIncrement()}">
-                            <th th:if="${myCounter==0}" th:text="${'Username'}"></th>
-                            <th th:if="${myCounter!=0}"></th>
-                        </div>
-                        <th th:text="${mq.getText()}"></th>
+                        <th> Users who submitted it </th>
                     </tr>
 
-                    <tr th:each="ma: ${mq.marketinganswersById}">
-                        <td th:text="${ma.userByUserId.username}"></td>
-                        <td th:text="${ma.getText()}"></td>
+                    <tr th:each="l: ${p.logsById}">
+                        <div th:if="${l.submitted}">
+                            <td th:text="${l.userByUserId.username}"></td>
+                        </div>
+                    </tr>
+                </table>
+                <br>
+
+                <table th:if="${p.getId() != 2}" class="table">
+                    <tr>
+                        <th> Users who cancelled it </th>
                     </tr>
 
-                </div>
-
-            </table>
-            <br>
-
-            <!--tr>
-                <div th:each="l: ${p.logsById}">
-                    <td th:if="${l.submitted} ? ${l.userByUserId.username}">marco</td>
-
-                    <div th:each="mq: ${p.marketingquestionsById}" id="answers">
-                        <div th:each="ma: ${mq.marketinganswersById}">
-                            <td th:text="${ma.text}">nice</td>
+                    <tr th:each="l: ${p.logsById}">
+                        <div th:if="${!l.submitted}">
+                            <td th:text="${l.userByUserId.username}"></td>
                         </div>
+                    </tr>
+                </table>
+                <br>
+
+                <table th:if="${p.getId() != 2}" class="table">
+
+                    <div th:each="mq: ${p.marketingquestionsById}">
+
+                        <tr>
+                            <!--div th:with="myCounter = ${counter.getAndIncrement()}">
+                                <th th:if="${myCounter==0}" th:text="${'Username'}">Username</th>
+                            </div-->
+                            <th th:text="${'Username'}">Username</th>
+                            <th th:text="${mq.getText()}"></th>
+                        </tr>
+
+                        <tr th:each="ma: ${mq.marketinganswersById}">
+                            <td th:text="${ma.userByUserId.username}"></td>
+                            <td th:text="${ma.getText()}"></td>
+                        </tr>
+
                     </div>
 
-                </div>
-        </tr-->
+                </table>
+                <br>
 
-        </fieldset>
-        <br>
+            </fieldset>
+            <br>
 
+        </div>
     </div>
-</div>
 
-<br><br><button onclick='window.history.back()' id="back-button"> Back </button>
+    <br><br><button onclick='window.history.back()' id="back-button"> Back </button>
 
 </body>
 

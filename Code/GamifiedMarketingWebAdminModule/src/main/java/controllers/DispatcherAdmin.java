@@ -15,8 +15,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.ProductServiceBean;
 import utils.Counter;
-
 import java.io.IOException;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,7 +33,6 @@ public class DispatcherAdmin extends HttpServlet {
 
     public DispatcherAdmin() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     public void init() throws ServletException
@@ -73,16 +72,24 @@ public class DispatcherAdmin extends HttpServlet {
                     break;
 
                 case "inspect-button":
-                    //pastProducts = productService.findPastProducts(); todo
-                    pastProducts = productService.findAll();
+                    try {
+                        pastProducts = productService.findPastProducts();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    //pastProducts = productService.findAll();
                     ctx.setVariable("pastProducts", pastProducts);
                     ctx.setVariable("counter", new Counter());
                     path = "/WEB-INF/inspection.html";
                     break;
 
                 case "delete-button":
-                    //pastProducts = productService.findPastProducts(); todo
-                    pastProducts = productService.findAll();
+                    try {
+                        pastProducts = productService.findPastProducts();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    //pastProducts = productService.findAll();
                     ctx.setVariable("pastProducts", pastProducts);
                     path = "/WEB-INF/deletion.html";
                     break;
@@ -101,7 +108,8 @@ public class DispatcherAdmin extends HttpServlet {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         doPost(request, response);
     }
 

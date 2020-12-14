@@ -15,6 +15,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.ProductServiceBean;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -68,8 +69,13 @@ public class DeleteQuestionnaire extends HttpServlet {
             }
         }
 
-        //List<Product> pastProducts = productService.findPastProducts(); todo
-        List<Product> pastProducts = productService.findAll();
+        List<Product> pastProducts = null;
+        try {
+            pastProducts = productService.findPastProducts();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //List<Product> pastProducts = productService.findAll();
 
         ctx.setVariable("pastProducts", pastProducts);
         path = "/WEB-INF/deletion.html";

@@ -3,15 +3,14 @@ package services;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
@@ -76,68 +75,43 @@ public class ProductServiceBean
                 .orElse(null);
     }
 
-   /* static <T, E extends Exception> Consumer<T>
-    consumerWrapper(Consumer<T> consumer, Class<E> clazz) {
-
-        return i -> {
-            try {
-                consumer.accept(i);
-            } catch (Exception ex) {
-                try {
-                    E exCast = clazz.cast(ex);
-                    System.err.println(
-                            "Exception occured : " + exCast.getMessage());
-                } catch (ClassCastException ccEx) {
-                    throw ex;
-                }
-            }
-        };
-    } */
-
 
     /**
-     * Get all products
+     * Get all PAST  products
      * @return the list of all past products, possibly empty
      */
-    /* todo
-    public List<Product> findPastProducts()
-    {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
-        Date today = (Date) Calendar.getInstance().getTime();
+    public List<Product> findPastProducts() throws ParseException {
 
-        List<Product> result=null;
-        List<Product> tmp=null;
+        List<Product> pastProducts = new ArrayList<>();
+        List<Product> allProducts;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        tmp=em.createNamedQuery("Product.findAll", Product.class)
+        String todayString = LocalDate.now().format(formatter);
+        LocalDate today = LocalDate.parse(todayString, formatter);
+        System.out.println("today: " + today + "\n");
+
+        allProducts = em
+                        .createNamedQuery("Product.findAll", Product.class)
                         .getResultList();
-        return
-                em
-                    .createNamedQuery("Product.findAll", Product.class)
-                    .getResultList()
-                    .stream()
-                    .filter( consumerWrapper(x-> dateFormat.parse(((Product)x).getDate()).before(today), ParseException.class));
 
+        for(Product p : allProducts){
 
-        if(tmp!=null) {
-            for (Product p : tmp) {
+            LocalDate date = LocalDate.parse(p.getDate(), formatter);
+            System.out.println(date);
 
-                try {
-
-                    if(dateFormat.parse(((Product) p).getDate()).before(today)){
-                        if(result==null){
-                            result=new ArrayList<Product>();
-                        }
-                        result.add(p);
-                    }
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+            if(date.isBefore(today)) {
+                pastProducts.add(p);
+                System.out.println("aggiunto prod con data: " + date);
             }
+            else
+                System.out.println("scartato prod con data: " + date);
         }
 
-        return result;
+        System.out.println("PAST PRODUCTS:");
+        for(Product p : pastProducts)
+            System.out.println("prod: " + p.getName() + ", date: "+ p.getDate());
 
+        return pastProducts;
     }
 
     /**

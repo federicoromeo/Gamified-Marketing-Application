@@ -137,13 +137,13 @@ public class Points implements Serializable {
         NB:il trigger calcola correttamente i punti solo se non vi solo valori di default in statistical answer
 
        CREATE DEFINER=`root`@`localhost` TRIGGER `statisticalanswer_AFTER_INSERT` AFTER INSERT ON `statisticalanswer` FOR EACH ROW BEGIN
-   DECLARE pointsToAdd integer;
+           DECLARE pointsToAdd integer;
 
 
-   SELECT IF(NEW.age=0, 2, 0)+ IF(NEW.expertise IS NULL, 2, 0) + IF(NEW.sex IS NULL, 2, 0) INTO pointsToAdd
-   FROM points
-   WHERE NEW.userId=userId
-   AND NEW.productId=productId;
+           SELECT IF(NEW.age=0, 2, 0)+ IF(NEW.expertise IS NULL, 2, 0) + IF(NEW.sex IS NULL, 2, 0) INTO pointsToAdd
+           FROM points
+           WHERE NEW.userId=userId
+           AND NEW.productId=productId;
 
 
                 IF (pointsToAdd>0)
@@ -159,8 +159,8 @@ public class Points implements Serializable {
                     ELSE
                         INSERT INTO Points(userId, productid, total)
                         VALUES(NEW.userId, NEW.productId, pointsToAdd);
-END IF;
-END
+                 END IF;
+        END
                  //quest'ultimo caso dovrebbe capitare raramente in quanto l'inserimento di una statisticalAnswer
                     avviene in teoria solamante l'inserimento di una marketingQuestion che scatena il precedente trigger.
                     Il caso è comunque considerato per mettersi al riparo nel caso in cui il dbms processi i trigger o

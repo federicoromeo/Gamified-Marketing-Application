@@ -4,12 +4,10 @@ window.onload = function() { // avoid variables ending up in the global scope
     var dd = today.getDate();
     var mm = today.getMonth()+1; //January is 0!
     var yyyy = today.getFullYear();
-    if(dd<10){
+    if(dd<10)
         dd='0'+dd
-    }
-    if(mm<10){
+    if(mm<10)
         mm='0'+mm
-    }
     today = yyyy+'-'+mm+'-'+dd;
     document.getElementById("date").setAttribute("min", today);
 
@@ -24,22 +22,6 @@ window.onload = function() { // avoid variables ending up in the global scope
         console.log(numberofquestions.value + " question(s)");
         console.log(numberOfChildren + " question(s)");
 
-       /* var date = document.querySelector('input[type="date"]');
-        var arrayDate = date.value.split("-",3);
-        var selectedDate = new Date(arrayDate[0], arrayDate[1]-1, arrayDate[2]);
-        console.log("selected date: " + selectedDate);
-
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        today = new Date(yyyy, mm-1, dd);
-        console.log("today : " + today);
-
-        if(selectedDate < today){
-            alert("Date should be today or later!")
-        }*/
-
     });
 
     var deleteQuestionButton = document.getElementById("delete-question-button");
@@ -49,8 +31,6 @@ window.onload = function() { // avoid variables ending up in the global scope
         var toBeDeleted = document.getElementById(count);
         console.log("tobedeleted: question" + count);
         var countAux = count+1;
-        //var br = document.getElementById("br"+countAux);
-        //console.log(br);
         if(count===1){
             deleteQuestionButton.classList.add("masked");
             alert("You must insert at least one marketing question!");
@@ -58,9 +38,7 @@ window.onload = function() { // avoid variables ending up in the global scope
         else{
             toBeDeleted.remove();
             console.log("deleted: question" + count);
-            //br.remove();
         }
-
     });
 
     var addQuestionButton = document.getElementById("add-question-button");
@@ -68,15 +46,6 @@ window.onload = function() { // avoid variables ending up in the global scope
 
         var deleteQuestionButton = document.getElementById("delete-question-button");
         deleteQuestionButton.classList.add("visible");
-        /*var present = 0;
-        for(var el of deleteQuestionButton.classList.entries()) {
-           if (el === "visible"){
-              present = 1;
-           }
-        }
-        if(!present)
-           deleteQuestionButton.classList.add("visible");
-        */
         var container = document.getElementById("questions-container");
         var count = container.querySelectorAll('input[type="text"]').length;
         var countAux = count+1;

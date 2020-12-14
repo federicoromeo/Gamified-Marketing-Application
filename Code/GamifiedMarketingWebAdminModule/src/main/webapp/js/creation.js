@@ -1,13 +1,28 @@
 window.onload = function() { // avoid variables ending up in the global scope
 
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+    today = yyyy+'-'+mm+'-'+dd;
+    document.getElementById("date").setAttribute("min", today);
+
+
     var sendButton = document.getElementById("send-button");
     sendButton.addEventListener("click", (e) => {
 
         var numberofquestions = document.getElementById("number-of-questions");
         var questionsContainer = document.getElementById("questions-container");
-        var numberOfChildren = questionsContainer.children.length - 2  //only questions
+        var numberOfChildren = questionsContainer.querySelectorAll('input[type="text"]').length//questionsContainer.children.length - 2  //only questions
         numberofquestions.value = numberOfChildren;
         console.log(numberofquestions.value + " question(s)");
+        console.log(numberOfChildren + " question(s)");
 
        /* var date = document.querySelector('input[type="date"]');
         var arrayDate = date.value.split("-",3);

@@ -37,6 +37,9 @@ public class GoToHomeUser extends HttpServlet
     @EJB(name="MarketingAnswerServiceEJB")
     private MarketingAnswerServiceBean marketingAnswerService;
 
+    @EJB(name="MarketingQuestionServiceEJB")
+    private MarketingQuestionServiceBean marketingQuestionService;
+
     public GoToHomeUser()
     {
         super();
@@ -102,11 +105,13 @@ public class GoToHomeUser extends HttpServlet
         if(product==null || user==null)
             return false;
 
-        List<MarketingQuestion> questions = (List)product.getMarketingquestionsById();
+        List<MarketingQuestion> questions = (List)marketingQuestionService.findMarketingQuestionsByProduct(product);
+        //List<MarketingQuestion> questions = (List)product.getMarketingquestionsById();
 
         for(MarketingQuestion mq: questions){
             System.out.println(mq.getText());
             List<MarketingAnswer> answers=(List)marketingAnswerService.findMarketingAnswersByUserMarketingQuestion(user, mq);
+
             if(answers!=null && !answers.isEmpty()) {
                 return true;
             }

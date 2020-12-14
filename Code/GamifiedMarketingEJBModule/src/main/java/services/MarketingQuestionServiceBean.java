@@ -36,6 +36,7 @@ public class MarketingQuestionServiceBean
     {
         return em
                 .createNamedQuery("MarketingQuestion.findAll", MarketingQuestion.class)
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
                 .getResultList();
     }
 
@@ -49,6 +50,7 @@ public class MarketingQuestionServiceBean
     {
         return em
                 .createNamedQuery("MarketingQuestion.findAll", MarketingQuestion.class)
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
                 .getResultList()
                 .stream()
                 .filter(x -> x.getProductId()==product.getId())

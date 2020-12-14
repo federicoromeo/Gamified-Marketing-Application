@@ -72,8 +72,6 @@ public class GoToLeaderboard extends HttpServlet {
                 e.printStackTrace();
             }
 
-            //TODO check non dovrebbe servire
-            //pointsPerUser.sort(Collections.reverseOrder());
 
             Map<String,Integer> userAndPoints = new HashMap<>();
 

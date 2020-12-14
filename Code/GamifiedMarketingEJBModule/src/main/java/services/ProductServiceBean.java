@@ -44,6 +44,7 @@ public class ProductServiceBean
 
         return em
                 .createNamedQuery("Product.findAll", Product.class)
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
                 .getResultList()
                 .stream()
                 .filter(x -> x.getDate().equals(today))
@@ -225,9 +226,15 @@ public class ProductServiceBean
 
     public void updateProduct(int productId) {
 
-        Product product=em.find(Product.class, productId);
+        Product product=em.createNamedQuery("Product.findAll", Product.class)
+                                .setHint("javax.persistence.cache.storeMode", "REFRESH")
+                                .getResultList()
+                                .stream()
+                                .findFirst()
+                                .orElse(null);
 
-        em.refresh(product);
+
+        //em.refresh(product);
 
 
     }

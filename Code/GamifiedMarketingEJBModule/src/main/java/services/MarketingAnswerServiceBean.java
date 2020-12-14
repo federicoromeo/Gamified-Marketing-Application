@@ -37,6 +37,7 @@ public class MarketingAnswerServiceBean
     {
         return em
                 .createNamedQuery("MarketingAnswer.findAll", MarketingAnswer.class)
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
                 .getResultList();
     }
 
@@ -52,6 +53,7 @@ public class MarketingAnswerServiceBean
     {
         return em
                 .createNamedQuery("MarketingAnswer.findAll", MarketingAnswer.class)
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
                 .getResultList()
                 .stream()
                 .filter(x -> x.getUserId()==user.getId())
@@ -69,6 +71,7 @@ public class MarketingAnswerServiceBean
     {
         return em
                 .createNamedQuery("MarketingAnswer.findAll", MarketingAnswer.class)
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
                 .getResultList()
                 .stream()
                 .filter(x -> x.getMarketingquestionId()==marketingQuestion.getId())
@@ -86,6 +89,7 @@ public class MarketingAnswerServiceBean
     {
         return em
                 .createNamedQuery("MarketingAnswer.findAll", MarketingAnswer.class)
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
                 .getResultList()
                 .stream()
                 .filter(x -> x.getUserId()==user.getId())

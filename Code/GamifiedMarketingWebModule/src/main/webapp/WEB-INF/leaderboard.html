@@ -13,8 +13,7 @@
     <body>
 
         <a th:href="@{/Logout}" class="logout-button" href=""> Logout </a>
-        <h1> Leaderboard </h1>
-        <br>
+        <h1> Leaderboard </h1> <br>
 
         <table class="table" id="leaderboard-table">
 
@@ -24,15 +23,9 @@
             </tr>
 
             <tr th:each="entry: ${map}">
-                <th th:text="${entry.key}"> - </th>
-                <th th:text="${entry.value}"> - </th>
+                <td th:text="${entry.key}"> - </td>
+                <td th:text="${entry.value}"> - </td>
             </tr>
-
-            <!--HERE IN JAVA WE WILL HAVE TO SORT THE LIST TROUGH COMPARATOR
-            tr th:each="u: ${#lists.sort(users, comparator)}">
-                <td th:text="${u.username}">pippo</td>
-                <td th:text="${#aggregates.sum(u.points)}">100</td>
-            </tr-->
 
         </table>
 

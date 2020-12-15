@@ -5,7 +5,6 @@
     <meta charset="ISO-8859-1">
     <title> Inspection </title>
     <link rel="stylesheet" media="all" href="../css/style.css" th:href="@{/css/style.css}">
-    <script src="../js/inspection.js" th:src="@{/js/inspection.js}" charset="utf-8" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 
@@ -76,7 +75,13 @@
         </div>
     </div>
 
-    <br><br><button onclick='window.history.back()' id="back-button"> Back </button>
+    <br><br>
+
+    <form action="GoToHomeAdmin" method="POST">
+        <button id="back-button"> Back </button>
+    </form>
+
+    <!--button onclick='window.history.back()' id="back-button"> Back </button-->
 
 </body>
 

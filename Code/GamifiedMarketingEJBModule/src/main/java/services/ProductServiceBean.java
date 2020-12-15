@@ -17,7 +17,6 @@ public class ProductServiceBean
 
     public ProductServiceBean()
     {
-
     }
 
     /**
@@ -55,20 +54,6 @@ public class ProductServiceBean
                 .find(Product.class, 2);
     }
 
-    //TODO why don't we use this?
-    /**
-     * Get the default product
-     * @return the default product (the first one) if present, "null" otherwise
-     */
-    public Product findDefault()
-    {
-        return em
-                .createNamedQuery("Product.findAll", Product.class)
-                .getResultList()
-                .stream()
-                .findFirst()
-                .orElse(null);
-    }
 
     /**
      * Get all PAST  products

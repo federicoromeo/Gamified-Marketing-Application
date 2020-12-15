@@ -25,11 +25,11 @@
 
         <br><br>
 
-        <div class="reviews-container">
+        <div th:if="${product.getId() != 2}" class="reviews-container">
 
-            <h3 th:if="${product.getId() != 2}" >Users' reviews</h3> <br>
+            <h3>Users' reviews</h3> <br>
 
-            <table th:if="${product.getId() != 2}" class="table" id="reviews">
+            <table class="table" id="reviews">
 
                 <div th:each="mq: ${product.marketingquestionsById}">
 

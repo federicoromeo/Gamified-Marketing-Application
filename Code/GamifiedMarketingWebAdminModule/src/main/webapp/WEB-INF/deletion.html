@@ -13,28 +13,28 @@
 
 <body>
 
-<a th:href="@{/Logout}" class="logout-button" > Logout </a>
+    <a th:href="@{/Logout}" class="logout-button" > Logout </a>
 
-<fieldset>
-    <legend><strong> Select questionnaire to delete  </strong></legend><br>
+    <fieldset>
+        <legend><strong> Select questionnaire to delete  </strong></legend><br>
 
-    <form action="DeleteQuestionnaire" method="POST">
-        <div th:each="p: ${pastProducts}" id="radio-container">
-            <div th:if="${p.id != 2}">
-                <input th:value="${p.id}" type="radio" name="product" th:text="${p.name}" checked="checked" ><br><br>
+        <form action="DeleteQuestionnaire" method="POST">
+            <div th:each="p: ${pastProducts}" id="radio-container">
+                <div th:if="${p.id != 2}">
+                    <input th:value="${p.id}" type="radio" name="product" th:text="${p.name}" checked="checked" ><br><br>
+                </div>
             </div>
-        </div>
-        <div th:if="${!pastProducts.isEmpty()}">
-            <button id="delete-questionnaire"> Delete questionnaire </button>
-        <div>
+            <div th:if="${!pastProducts.isEmpty()}">
+                <button id="delete-questionnaire"> Delete questionnaire </button>
+            </div>
+        </form>
+
+    </fieldset>
+
+    <br><br>
+    <form action="GoToHomeAdmin" method="POST">
+        <button id="back-button"> Back </button>
     </form>
-
-</fieldset>
-
-<br><br>
-<form action="GoToHomeAdmin" method="POST">
-    <button id="go-back-botton"> Back </button>
-</form>
 
 </body>
 

@@ -4,17 +4,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Date;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.function.Consumer;
-
 import entities.*;
+import utils.Data;
 
 @Stateless(name = "ProductServiceEJB")
 public class ProductServiceBean
@@ -22,7 +15,9 @@ public class ProductServiceBean
     @PersistenceContext(unitName = "PersUn")
     private EntityManager em;
 
-    public ProductServiceBean(){
+    public ProductServiceBean()
+    {
+
     }
 
     /**
@@ -36,21 +31,20 @@ public class ProductServiceBean
 
     /**
      * Get the product of the day
-     * @param today date formatted like yyyy/mm/dd
+     * @param day date formatted like yyyy/mm/dd
      * @return the product of the day correspondent to today if present, possibly empty
      */
-    public Product findProductOfTheDay(String today) {
-
+    public Product findProductOfTheDay(Date day)
+    {
         return em
                 .createNamedQuery("Product.findAll", Product.class)
                 .setHint("javax.persistence.cache.storeMode", "REFRESH")
                 .getResultList()
                 .stream()
-                .filter(x -> x.getDate().equals(today))
+                .filter(x -> Data.equalDates(x.getDate(), day))
                 .findFirst()
                 .orElse(null);
     }
-
 
     /**
      * Get the default product
@@ -61,6 +55,7 @@ public class ProductServiceBean
                 .find(Product.class, 2);
     }
 
+    //TODO why don't we use this?
     /**
      * Get the default product
      * @return the default product (the first one) if present, "null" otherwise
@@ -75,36 +70,29 @@ public class ProductServiceBean
                 .orElse(null);
     }
 
-
     /**
      * Get all PAST  products
      * @return the list of all past products, possibly empty
      */
-    public List<Product> findPastProducts() throws ParseException {
-
+    public List<Product> findPastProducts() throws ParseException
+    {
         List<Product> pastProducts = new ArrayList<>();
         List<Product> allProducts;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        String todayString = LocalDate.now().format(formatter);
-        LocalDate today = LocalDate.parse(todayString, formatter);
-        System.out.println("today: " + today + "\n");
+        Date today = new Date();
 
         allProducts = em
                         .createNamedQuery("Product.findAll", Product.class)
                         .getResultList();
 
-        for(Product p : allProducts){
-
-            LocalDate date = LocalDate.parse(p.getDate(), formatter);
-            System.out.println(date);
-
-            if(date.isBefore(today)) {
+        for(Product p : allProducts)
+        {
+            if(p.getDate().before(today))
+            {
                 pastProducts.add(p);
-                System.out.println("aggiunto prod con data: " + date);
+                System.out.println("aggiunto prod con data: " + p.getDate());
             }
             else
-                System.out.println("scartato prod con data: " + date);
+                System.out.println("scartato prod con data: " + p.getDate());
         }
 
         System.out.println("PAST PRODUCTS:");
@@ -133,60 +121,18 @@ public class ProductServiceBean
      * @param date the day in which the product is scheduled to be "product of the day"
      * @return the id of the product just created
      */
-    public int createProduct(String name, byte[] image, String date)
+    public int createProduct(String name, byte[] image, Date date) throws  Exception
     {
         Product product = new Product();
         product.setName(name);
         product.setDate(date);
         product.setImage(image);
 
-        System.out.println("Prodotto creato\n\n\n");
-
         em.persist(product);
-
-        try
-        {
-            em.flush();
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getClass());
-        }
+        em.flush();
 
         return product.getId();
-
-        /*
-        Product duplicate = findAll()
-                .stream()
-                .filter(x -> x.getDate().equals(date))
-                .findFirst()
-                .orElse(null);
-
-        if(duplicate == null) {
-            Product product = null;
-            try {
-                product = new Product();
-                product.setName(name);
-                product.setDate(date);
-                product.setImage(image);
-
-                em.persist(product);
-                em.flush();
-
-                return product.getId();
-            } catch (Exception e) {
-                System.out.println("\n\n\n\n\n\n");
-                System.out.println("cause.");
-                System.out.println(e.getCause());
-            }
-        }
-        /*}
-
-        else{
-            return -1;
-        }*/
     }
-
 
     /**
      * Remove a product
@@ -199,8 +145,8 @@ public class ProductServiceBean
                 .ifPresent(p -> em.remove(p));
     }
 
-    public void updateProduct(int productId) {
-
+    public void updateProduct(int productId)
+    {
         Product product=em.createNamedQuery("Product.findAll", Product.class)
                                 .setHint("javax.persistence.cache.storeMode", "REFRESH")
                                 .getResultList()
@@ -210,7 +156,15 @@ public class ProductServiceBean
 
 
         //em.refresh(product);
+    }
 
-
+    /**
+     * Check if a product for a given date is already present
+     * @param date the date
+     * @return true if the database already contains a product for that day
+     */
+    public boolean productAlreadyCreatedForTheDate(Date date)
+    {
+        return findProductOfTheDay(date) != null;
     }
 }

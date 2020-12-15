@@ -11,19 +11,16 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.MarketingQuestionServiceBean;
 import services.ProductServiceBean;
 import java.io.IOException;
-import java.io.InputStream;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.io.IOUtils;
+import utils.Data;
 
 @WebServlet("/InsertProduct")
 @MultipartConfig
@@ -63,23 +60,22 @@ public class InsertProduct extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String date, name;
-        Part filePart;
+        String name;
         byte[] image;
-        InputStream fileContent;
         int numberOfQuestions, newProductId, mqId;
-        List<String> questions;
+        List<String> questions = new ArrayList<>();;
         Product newProduct;
         MarketingQuestion mqRef;
-        List<MarketingQuestion> allQuestions = new ArrayList<>();;
+        List<MarketingQuestion> allQuestions = new ArrayList<>();
+        Date date;
 
         //get all parameters from the form
 
         //date of the questionnaire
-        date = request.getParameter("date");
+        date = Data.stringToDate(request.getParameter("date"));
 
         //check if product is already present
-        if(productService.findProductOfTheDay(date) != null)
+        if(productService.productAlreadyCreatedForTheDate(date))
         {
             errorAndRefresh("You already created a product for that day, please delete the old one first.", request, response);
             return;
@@ -89,23 +85,10 @@ public class InsertProduct extends HttpServlet {
         name = request.getParameter("name");
 
         //image of the product
-        filePart = request.getPart("image");
-        fileContent = filePart.getInputStream();
-        image = IOUtils.toByteArray(fileContent);
-
-        //check if too large for a BLOB
-
-        /* todo : vaffanculo fra
-
-        if(image.length > 60000)
-        {
-            errorAndRefresh("Please upload a smaller image", request, response);
-            return;
-        }*/
+        image = Data.filepartToByte(request.getPart("image"));
 
         //get the number of questions
         numberOfQuestions = Integer.parseInt(request.getParameter("numberofquestions"));
-        questions = new ArrayList<>();
         for(int i = 1; i <= numberOfQuestions; i++)
             questions.add(request.getParameter("question" + i));
 

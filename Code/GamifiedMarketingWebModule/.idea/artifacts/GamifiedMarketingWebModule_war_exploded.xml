@@ -9,6 +9,7 @@
       </options>
     </properties>
     <root id="root">
+      <element id="module-output" name="GamifiedMarketingWebModule" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="GamifiedMarketingWebModule" />
@@ -18,6 +19,7 @@
           <element id="archive" name="GamifiedMarketingEJBModule-1.0-SNAPSHOT.jar">
             <element id="module-output" name="GamifiedMarketingEJBModule" />
           </element>
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.5" />
           <element id="library" level="project" name="Maven: org.thymeleaf:thymeleaf:3.0.11.RELEASE" />
           <element id="library" level="project" name="Maven: ognl:ognl:3.1.12" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.20.0-GA" />
@@ -27,7 +29,6 @@
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.11" />
         </element>
       </element>
-      <element id="module-output" name="GamifiedMarketingWebModule" />
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/GamifiedMarketingWebModule-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>

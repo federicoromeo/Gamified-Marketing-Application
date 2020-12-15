@@ -23,6 +23,7 @@ import services.*;
 import java.time.LocalDate;
 import java.util.Base64;
 import java.util.List;
+import java.util.Date;
 
 @WebServlet("/GoToHomeUser")
 public class GoToHomeUser extends HttpServlet
@@ -66,7 +67,7 @@ public class GoToHomeUser extends HttpServlet
 
         try
         {
-            productOfTheDay = this.productService.findProductOfTheDay(today);
+            productOfTheDay = this.productService.findProductOfTheDay(new Date());
         }
         catch(Exception e)
         {

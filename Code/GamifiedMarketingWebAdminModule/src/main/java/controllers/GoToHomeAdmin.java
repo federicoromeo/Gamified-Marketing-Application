@@ -20,6 +20,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.*;
 import java.time.LocalDate;
 import java.util.Base64;
+import java.util.Date;
 
 @WebServlet("/GoToHomeAdmin")
 public class GoToHomeAdmin extends HttpServlet
@@ -50,7 +51,8 @@ public class GoToHomeAdmin extends HttpServlet
     {
         ServletContext servletContext = this.getServletContext();
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-        ctx.setVariable("createdProduct", productService.findProductOfTheDay(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))) != null);
+        //ctx.setVariable("createdProduct", productService.findProductOfTheDay(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))) != null);
+        ctx.setVariable("createdProduct", productService.findProductOfTheDay(new Date()) != null);
         String path = "/WEB-INF/home_admin.html";
         this.templateEngine.process(path, ctx, response.getWriter());
     }

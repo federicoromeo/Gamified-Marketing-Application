@@ -140,7 +140,7 @@ public class Points implements Serializable {
            DECLARE pointsToAdd integer;
 
 
-           SELECT IF(NEW.age=0, 2, 0)+ IF(NEW.expertise IS NULL, 2, 0) + IF(NEW.sex IS NULL, 2, 0) INTO pointsToAdd
+           SELECT IF(NEW.age=0, 0, 2)+ IF(NEW.expertise IS NULL, 0, 2) + IF(NEW.sex IS NULL, 0, 2) INTO pointsToAdd
            FROM points
            WHERE NEW.userId=userId
            AND NEW.productId=productId;

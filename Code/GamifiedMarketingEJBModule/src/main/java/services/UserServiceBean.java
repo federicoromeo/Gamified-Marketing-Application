@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,12 +62,14 @@ public class UserServiceBean {
      * @param email the email address
      * @return the id of the newly generated user
      */
-    public User createUser(String username, String password, String email)
+    public User createUser(String username, String password, String email, String sex, Date date)
     {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
+        user.setSex(sex);
+        user.setBirthDate(date);
         user.setAdmin((byte) 0);
         user.setBlocked((byte) 0);
 

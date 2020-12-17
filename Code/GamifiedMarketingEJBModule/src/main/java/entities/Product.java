@@ -7,12 +7,8 @@ import java.util.List;
 import java.util.Date;
 
 @Entity
-@Table(
-        name = "product",
-        schema = "gamified_db")
-@NamedQuery(
-        name="Product.findAll",
-        query="SELECT p FROM Product p")
+@Table(name = "product", schema = "gamified_db")
+@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product implements Serializable {
 
     private int id;

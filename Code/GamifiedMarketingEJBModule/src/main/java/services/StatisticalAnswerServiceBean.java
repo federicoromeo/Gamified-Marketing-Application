@@ -45,52 +45,8 @@ public class StatisticalAnswerServiceBean
 
 
 
-    /**
-     * Get statisticalAnswer for a specific age
-     * @param age the age for which we want to retrieve the statisticalAnswers
-     * @return the list of statisticalAnswers of a particular age, possibly empty
-     */
-    public List<StatisticalAnswer> findStatisticalAnswerByAge(Integer age)
-    {
-        return em
-                .createNamedQuery("StatisticalAnswer.findAll", StatisticalAnswer.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getAge().equals(age))
-                .collect(Collectors.toList());
-    }
 
-    /**
-     * Get statisticalAnswer for a range of age
-     * @param initialAge the initial age for which we want to retrieve the statisticalAnswers
-     * @param finalAge the final age for which we want to retrieve the statisticalAnswers
-     * @return the list of statisticalAnswers of a particular range of age, possibly empty
-     */
-    public List<StatisticalAnswer> findStatisticalAnswerByRangeAge(Integer initialAge, Integer finalAge)
-    {
-        return em
-                .createNamedQuery("StatisticalAnswer.findAll", StatisticalAnswer.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getAge().intValue()>=initialAge.intValue())
-                .filter(x -> x.getAge().intValue()<=finalAge.intValue())
-                .collect(Collectors.toList());
-    }
 
-    /**
-     * Get statisticalAnswer for sex
-     * @param sex the sex for which we want to retrieve the statisticalAnswers
-     * @return the list of statisticalAnswers of a sex, possibly empty
-     */
-    public List<StatisticalAnswer> findStatisticalAnswerBySex(String sex)
-    {
-        return em
-                .createNamedQuery("StatisticalAnswer.findAll", StatisticalAnswer.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getSex().equals(sex))
-                .collect(Collectors.toList());
-    }
 
 
     /**
@@ -117,7 +73,7 @@ public class StatisticalAnswerServiceBean
      * @param expertise the sex related to the statisticalAnswer
      * @return the id of the statisticalAnswer just created
      */
-    public int createStatisticalAnswer(User user, Product product, Integer age, String sex, String expertise)
+    public int createStatisticalAnswer(User user, Product product, byte age, byte sex, String expertise)
     {
         StatisticalAnswer statisticalAnswer=new StatisticalAnswer();
         statisticalAnswer.setUserId(user.getId());

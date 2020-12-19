@@ -8,8 +8,8 @@ import javax.persistence.*;
 public class StatisticalAnswer {
 
     private int id;
-    private Integer age;
-    private String sex;
+    private byte age;
+    private byte sex;
     private String expertise;
     private int userId;
     private int productId;
@@ -28,21 +28,21 @@ public class StatisticalAnswer {
 
     @Basic
     @Column(name = "age", nullable = true)
-    public Integer getAge() {
+    public byte getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(byte age) {
         this.age = age;
     }
 
     @Basic
     @Column(name = "sex", nullable = true)
-    public String getSex() {
+    public byte getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(byte sex) {
         this.sex = sex;
     }
 

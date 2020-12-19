@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.Date;
+
 import entities.User;
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
@@ -16,6 +18,8 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.*;
+import utils.Data;
+
 import javax.persistence.NonUniqueResultException;
 import javax.naming.*;
 
@@ -48,18 +52,27 @@ public class CheckRegistration extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
 
-        String username = null;
-        String password = null;
-        String email = null;
+        String username, password, email, sex = null;
+        Date date = null;
 
         try
         {
             username = StringEscapeUtils.escapeJava(request.getParameter("username"));
             password = StringEscapeUtils.escapeJava(request.getParameter("password"));
             email = StringEscapeUtils.escapeJava(request.getParameter("email"));
+            date = Data.stringToDate(request.getParameter("date"));
+            sex = request.getParameter("sex");
 
-            if (username == null || password == null || email == null || username.isEmpty() || password.isEmpty() || email.isEmpty() )
+            if (username == null || password == null || email == null || username.isEmpty() || password.isEmpty() || email.isEmpty() ||
+                sex == null || sex.isEmpty() || date == null)
                 throw new Exception("Missing or empty credential value");
+
+            Date today = new Date();
+            if(date.after(today))
+                throw new Exception("Impossible birthdate!");
+
+            if(!sex.equals("MALE") && !sex.equals("FEMALE") && !sex.equals("OTHER"))
+                throw new Exception("Impossible Gender!");
 
         }
         catch (Exception e)
@@ -108,7 +121,7 @@ public class CheckRegistration extends HttpServlet
             //QueryService qService = null;
             try
             {
-                newUser = userService.createUser(username, password, email);
+                newUser = userService.createUser(username, password, email, sex, date);
 
                 if(newUser.getId() == 0) {
                     System.out.println("something went wrong");

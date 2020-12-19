@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name = "user", schema = "gamified_db")
@@ -13,11 +14,13 @@ import java.util.Collection;
 public class User {
 
     private int id;
-    private String username;
     private byte admin;
     private byte blocked;
+    private String username;
     private String email;
     private String password;
+    private Date birthDate;
+    private String sex;
     private Collection<Log> logsById;
     private Collection<MarketingAnswer> marketinganswersById;
     private Collection<Points> pointsById;
@@ -43,6 +46,29 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Basic
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birthDate", unique = true, nullable = false)
+    public Date getBirthDate()
+    {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate)
+    {
+        this.birthDate = birthDate;
+    }
+
+    @Basic
+    @Column(name = "sex", nullable = true)
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     @Basic

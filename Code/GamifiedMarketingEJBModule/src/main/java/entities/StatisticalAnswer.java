@@ -96,8 +96,8 @@ public class StatisticalAnswer {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (age != null ? age.hashCode() : 0);
-        result = 31 * result + (sex != null ? sex.hashCode() : 0);
+        //result = 31 * result + (age != null ? age.hashCode() : 0);
+        //result = 31 * result + (sex != null ? sex.hashCode() : 0);
         result = 31 * result + (expertise != null ? expertise.hashCode() : 0);
         result = 31 * result + userId;
         result = 31 * result + productId;

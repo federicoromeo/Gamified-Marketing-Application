@@ -155,7 +155,8 @@ public class AnswerQuestionnaire extends HttpServlet {
         //create the statistical answer
         try
         {
-            saId = statisticalAnswerServiceBean.createStatisticalAnswer(user,product,age,sex,expertiseLevel);
+            //TODO da cambiare
+            //saId = statisticalAnswerServiceBean.createStatisticalAnswer(user,product,age,sex,expertiseLevel);
             //qua dovrebbe scattare trigger
         }
         catch(Exception e)

@@ -110,28 +110,27 @@ public class Points implements Serializable {
         NB: nel nostro db il testo delle marketingAnswer deve essere not null,
         * quindi per ciascun inserimento il punteggio è incrementato di uno
 
-       CREATE DEFINER = CURRENT_USER TRIGGER `gamified_db`.`marketinganswer_AFTER_INSERT` AFTER INSERT ON `marketinganswer` FOR EACH ROW
-        BEGIN
+       CREATE DEFINER=`root`@`localhost` TRIGGER `marketinganswer_AFTER_INSERT` AFTER INSERT ON `marketinganswer` FOR EACH ROW BEGIN
 
-            DECLARE x INTEGER;
-            SELECT productId INTO x
-            FROM marketingQuestion
-            WHERE NEW.marketingquestionId=id;
+	DECLARE x INTEGER;
+    SELECT productId INTO x
+    FROM marketingQuestion
+    WHERE NEW.marketingquestionId=id;
 
-                    IF EXISTS (SELECT *
-                                FROM points p
-                                WHERE p.userId=NEW.userId
-                                 AND p.productId=x)
-                    THEN
-                        UPDATE points
-                            SET total=total+1
-                        WHERE userId=NEW.userId
-                        AND productId=x;
-                    ELSE
-                        INSERT INTO points(userId, productid, total)
-                        VALUES(NEW.userId, x, 1);
-                    END IF;
-        END
+            IF EXISTS (SELECT *
+                        FROM points p
+                        WHERE p.userId=NEW.userId
+                         AND p.productId=x)
+            THEN
+                UPDATE points
+                    SET total=total+1
+                WHERE userId=NEW.userId
+                AND productId=x;
+            ELSE
+                INSERT INTO points(userId, productid, total)
+                VALUES(NEW.userId, x, 1);
+			END IF;
+END
 
 ********Trigger per calcolare i punti della sezione 2:
         NB:il trigger calcola correttamente i punti solo se non vi solo valori di default in statistical answer

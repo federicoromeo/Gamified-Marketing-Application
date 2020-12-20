@@ -64,7 +64,11 @@ public class GoToLeaderboard extends HttpServlet {
             try
             {
                 productServiceBean.updateProduct(productId);
-                pointsPerUser = pointsServiceBean.findPointsByProduct(productId);
+                pointsPerUser = productServiceBean.findLeaderboardByProductId(productId);
+
+                for(Points p : pointsPerUser)
+                    System.out.println(p.getUserByUserId().getUsername()+" "+ p.getTotal());
+
                 System.out.println("\n\n\n\n\n\n\n"+pointsPerUser);
             }
             catch(Exception e)
@@ -73,15 +77,14 @@ public class GoToLeaderboard extends HttpServlet {
             }
 
 
+            /*
             Map<String,Integer> userAndPoints = new HashMap<>();
 
             for(Points p : pointsPerUser)
             {
                 try
                 {
-                    User u = userServiceBean.find(p.getUserId());
-                    if(u != null)
-                        userAndPoints.put(p.getUserByUserId().getUsername(), p.getTotal());
+                    userAndPoints.put(p.getUserByUserId().getUsername(), p.getTotal());
                 }
                 catch(Exception e)
                 {
@@ -89,10 +92,12 @@ public class GoToLeaderboard extends HttpServlet {
                 }
             }
 
+             */
+
             String path = "/WEB-INF/leaderboard.html";
             ServletContext servletContext = this.getServletContext();
             WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-            ctx.setVariable("map", userAndPoints);
+            ctx.setVariable("pointsList", pointsPerUser);
             this.templateEngine.process(path, ctx, response.getWriter());
         }
         else

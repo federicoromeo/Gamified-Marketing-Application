@@ -31,7 +31,7 @@
 
             <table class="table" id="reviews">
 
-                <div th:each="mq: ${product.marketingquestionsById}">
+                <div th:each="mq: ${questions}">
 
                     <tr th:with="myCounter = ${counter.getAndIncrement()}">
                         <th th:if="${myCounter==0}" th:text="${'Username'}"></th>

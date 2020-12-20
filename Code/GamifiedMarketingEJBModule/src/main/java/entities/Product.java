@@ -8,7 +8,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "product", schema = "gamified_db")
-@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
+@NamedQueries({
+    @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p"),
+    @NamedQuery(name = "Product.getOrderedPoints", query = "Select po FROM Product pr, Points po WHERE pr.id = ?1 AND po.productId = pr.id ORDER BY po.total DESC") })
 public class Product implements Serializable {
 
     private int id;
@@ -118,7 +120,7 @@ public class Product implements Serializable {
             mappedBy = "productByProductId",
             cascade = {CascadeType.REMOVE, CascadeType.REFRESH },
             orphanRemoval = true)
-    @OrderBy("total DESC")
+    //@OrderBy("total DESC")
     public List<Points> getPointsById()
     {
         return pointsById;

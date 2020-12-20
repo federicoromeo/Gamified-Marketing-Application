@@ -71,7 +71,7 @@ public class ProductServiceBean
 
         for(Product p : allProducts)
         {
-            if(p.getDate().before(today))
+            if(p.getDate().before(today) && p.getId()!=2)  //remove default one
             {
                 pastProducts.add(p);
                 System.out.println("aggiunto prod con data: " + p.getDate());

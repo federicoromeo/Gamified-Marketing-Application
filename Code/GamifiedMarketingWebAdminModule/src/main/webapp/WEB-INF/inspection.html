@@ -14,7 +14,12 @@
 
     <h1> Here are the data of the past questionnaires </h1><br>
 
-    <div th:each="p: ${pastProducts}">
+    <div th:if="${pastProducts.size()==0}">
+        <h3 class="errormessage">No inspectables questionnaires!</h3>
+    </div>
+
+    <div th:if="${pastProducts.size()>0}">
+        <div th:each="p: ${pastProducts}">
         <div th:if="${p.getId() != 2}">
 
             <fieldset>
@@ -73,6 +78,7 @@
             <br>
 
         </div>
+    </div>
     </div>
 
     <br><br>

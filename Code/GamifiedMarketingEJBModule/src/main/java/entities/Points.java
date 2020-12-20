@@ -125,8 +125,8 @@ public class Points implements Serializable {
                     THEN
                         UPDATE points
                             SET total=total+1
-                        WHERE p.userId=NEW.userId
-                        AND p.productId=x;
+                        WHERE userId=NEW.userId
+                        AND productId=x;
                     ELSE
                         INSERT INTO points(userId, productid, total)
                         VALUES(NEW.userId, x, 1);

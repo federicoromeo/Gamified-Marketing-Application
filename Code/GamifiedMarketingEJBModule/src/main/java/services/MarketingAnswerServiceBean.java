@@ -110,6 +110,8 @@ public class MarketingAnswerServiceBean
      */
     public int createMarketingAnswer(String text, User user, MarketingQuestion marketingQuestion)
     {
+        System.out.println("Creo MA: "+text+user.toString()+marketingQuestion.toString());
+
         MarketingAnswer marketingAnswer=new MarketingAnswer();
         marketingAnswer.setText(text);
         marketingAnswer.setUserId(user.getId());

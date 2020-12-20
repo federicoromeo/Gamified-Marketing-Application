@@ -63,8 +63,8 @@ public class AnswerQuestionnaire extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        int age, numberOfResponses, saId, mqId, maId, pId;
-        String sex, expertiseLevel, path, answer;
+        int numberOfResponses, saId, mqId, maId, pId;
+        String expertiseLevel, path, answer;
         List<String> answers = new ArrayList<>();
         List<Integer> questionsId = new ArrayList<>();
         List<OffensiveWord> offensiveWords = null;
@@ -72,16 +72,15 @@ public class AnswerQuestionnaire extends HttpServlet {
         MarketingQuestion mq = null;
         StatisticalAnswer sa = null;
         Product product = null;
+        Object sex, age;
 
         //get statistical optional parameters from the form
 
         //age
-        age = Integer.parseInt(request.getParameter("age"));
+        age = request.getParameter("checkboxAge");
 
         //sex
-        sex = request.getParameter("sex");
-        if(sex != null && sex.equals("Not Chosen"))
-            sex = null;
+        sex = request.getParameter("checkboxSex");
 
         //expertise
         expertiseLevel = request.getParameter("expertise-level");
@@ -156,7 +155,7 @@ public class AnswerQuestionnaire extends HttpServlet {
         try
         {
             //TODO da cambiare
-            //saId = statisticalAnswerServiceBean.createStatisticalAnswer(user,product,age,sex,expertiseLevel);
+            saId = statisticalAnswerServiceBean.createStatisticalAnswer(user,product,(byte) (age!=null? 1 : 0),(byte) (sex!=null? 1 : 0),expertiseLevel);
             //qua dovrebbe scattare trigger
         }
         catch(Exception e)

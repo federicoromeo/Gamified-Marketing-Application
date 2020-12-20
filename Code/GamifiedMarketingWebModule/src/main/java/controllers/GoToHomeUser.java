@@ -86,9 +86,12 @@ public class GoToHomeUser extends HttpServlet
         if(questionnaireAlreadyMade(user, productOfTheDay) || user.getBlocked()==1)
             doQuestionnaire=false;
 
+        List<MarketingQuestion> questions = marketingQuestionService.findMarketingQuestionsByProduct(productOfTheDay);
+
         String path = "/WEB-INF/home_user.html";
         ctx.setVariable("doQuestionnaire", doQuestionnaire);
         ctx.setVariable("product", productOfTheDay);
+        ctx.setVariable("questions", questions);
         ctx.setVariable("image", image);
         ctx.setVariable("counter", new Counter());
         //ctx.setVariable("iteration", iteration);
@@ -108,7 +111,9 @@ public class GoToHomeUser extends HttpServlet
 
         List<MarketingQuestion> questions = marketingQuestionService.findMarketingQuestionsByProduct(product);
         //List<MarketingQuestion> questions = (List)product.getMarketingquestionsById();
+        /*
         System.out.println("\nSTART");
+
 
         for(MarketingQuestion mq: questions) {
             System.out.println(mq.getText());
@@ -117,6 +122,8 @@ public class GoToHomeUser extends HttpServlet
             }
         }
         System.out.println("END\n");
+
+         */
 
         for(MarketingQuestion mq: questions){
             List<MarketingAnswer> answers=marketingAnswerService.findMarketingAnswersByUserMarketingQuestion(user, mq);

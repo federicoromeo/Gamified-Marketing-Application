@@ -45,6 +45,15 @@ public class ProductServiceBean
                 .orElse(null);
     }
 
+    public List<Points> findLeaderboardByProductId(int productId)
+    {
+        return em
+                .createNamedQuery("Product.getOrderedPoints", Points.class)
+                .setParameter(1, productId)
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
+                .getResultList();
+    }
+
     /**
      * Get the default product
      * @return the default product empty
@@ -138,9 +147,6 @@ public class ProductServiceBean
                                 .stream()
                                 .findFirst()
                                 .orElse(null);
-
-
-        //em.refresh(product);
     }
 
     /**

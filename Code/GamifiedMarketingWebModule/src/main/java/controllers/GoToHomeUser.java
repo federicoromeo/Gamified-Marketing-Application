@@ -106,12 +106,20 @@ public class GoToHomeUser extends HttpServlet
         if(product==null || user==null)
             return false;
 
-        List<MarketingQuestion> questions = (List)marketingQuestionService.findMarketingQuestionsByProduct(product);
+        List<MarketingQuestion> questions = marketingQuestionService.findMarketingQuestionsByProduct(product);
         //List<MarketingQuestion> questions = (List)product.getMarketingquestionsById();
+        System.out.println("\nSTART");
+
+        for(MarketingQuestion mq: questions) {
+            System.out.println(mq.getText());
+            for (MarketingAnswer ma: mq.getMarketinganswersById()){
+                System.out.println(ma.getText());
+            }
+        }
+        System.out.println("END\n");
 
         for(MarketingQuestion mq: questions){
-            System.out.println(mq.getText());
-            List<MarketingAnswer> answers=(List)marketingAnswerService.findMarketingAnswersByUserMarketingQuestion(user, mq);
+            List<MarketingAnswer> answers=marketingAnswerService.findMarketingAnswersByUserMarketingQuestion(user, mq);
 
             if(answers!=null && !answers.isEmpty()) {
                 return true;

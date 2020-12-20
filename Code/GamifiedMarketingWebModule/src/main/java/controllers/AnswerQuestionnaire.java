@@ -90,6 +90,7 @@ public class AnswerQuestionnaire extends HttpServlet {
         //get marketing mandatory parameters from the form
 
         numberOfResponses = Integer.parseInt(request.getParameter("numberofresponses"));
+        System.out.println(numberOfResponses);
 
         //get the active user
         user = (User) request.getSession().getAttribute("user");

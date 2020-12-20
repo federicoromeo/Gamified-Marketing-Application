@@ -29,11 +29,13 @@
                 <table th:if="${p.getId() != 2}" class="table">
                     <tr>
                         <th> Users who submitted it </th>
+                        <th> When </th>
                     </tr>
 
                     <tr th:each="l: ${p.logsById}">
                         <div th:if="${l.submitted}">
                             <td th:text="${l.userByUserId.username}"></td>
+                            <td th:text="${l.time}"></td>
                         </div>
                     </tr>
                 </table>
@@ -42,11 +44,13 @@
                 <table th:if="${p.getId() != 2}" class="table">
                     <tr>
                         <th> Users who cancelled it </th>
+                        <th> When </th>
                     </tr>
 
                     <tr th:each="l: ${p.logsById}">
                         <div th:if="${!l.submitted}">
                             <td th:text="${l.userByUserId.username}"></td>
+                            <td th:text="${l.time}"></td>
                         </div>
                     </tr>
                 </table>

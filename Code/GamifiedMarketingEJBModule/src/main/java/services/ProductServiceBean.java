@@ -141,7 +141,7 @@ public class ProductServiceBean
 
     public void updateProduct(int productId)
     {
-        Product product=em.createNamedQuery("Product.findAll", Product.class)
+        Product product = em.createNamedQuery("Product.findAll", Product.class)
                                 .setHint("javax.persistence.cache.storeMode", "REFRESH")
                                 .getResultList()
                                 .stream()

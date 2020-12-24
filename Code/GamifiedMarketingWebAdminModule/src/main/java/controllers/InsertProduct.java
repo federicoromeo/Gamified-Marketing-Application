@@ -77,7 +77,7 @@ public class InsertProduct extends HttpServlet {
         //check if product is already present
         if(productService.productAlreadyCreatedForTheDate(date))
         {
-            errorAndRefresh("You already created a product for that day, please delete the old one first.", request, response);
+            errorAndRefresh("There is already a product for that day! Please change date or delete the old one first.", request, response);
             return;
         }
 
@@ -99,13 +99,14 @@ public class InsertProduct extends HttpServlet {
 
             for(String question : questions)
             {
-                System.out.println(question);
                 mqId = marketingQuestionServiceBean.createMarketingQuestion(question, newProduct);
                 mqRef = marketingQuestionServiceBean.find(mqId);
                 allQuestions.add(mqRef);
             }
 
             newProduct.setMarketingquestionsById(allQuestions);
+
+            System.out.println("created correctly");
 
             String path = "/WEB-INF/home_admin.html";
             ServletContext servletContext = getServletContext();

@@ -41,6 +41,9 @@
             <property name="openjpa.ConnectionDriverName" value="com.mysql.cj.jdbc.Driver"/>
             <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/gamified_db"/>
             <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/-->
+
+            <property name="eclipselink.allow-zero-id" value="true"/>
+
         </properties>
 
     </persistence-unit>

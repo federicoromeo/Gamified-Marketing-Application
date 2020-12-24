@@ -54,8 +54,6 @@ public class GoToLeaderboard extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("\n\n\n\n\n\n\nEntro in post");
-
         int productId = Integer.parseInt(request.getParameter("productId"));
         List<Points> pointsPerUser = new ArrayList<>();
 
@@ -69,7 +67,7 @@ public class GoToLeaderboard extends HttpServlet {
                 for(Points p : pointsPerUser)
                     System.out.println(p.getUserByUserId().getUsername()+" "+ p.getTotal());
 
-                System.out.println("\n\n\n\n\n\n\n"+pointsPerUser);
+                System.out.println("\n"+pointsPerUser);
             }
             catch(Exception e)
             {

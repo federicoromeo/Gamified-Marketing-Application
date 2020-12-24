@@ -21,21 +21,17 @@ window.onload = function() { // avoid variables ending up in the global scope
       today = new Date(yyyy, mm-1, dd);
       console.log("today : " + today);
 
-      if(selectedDate < today){
-         alert("Date should be today or later!")
-         return;
-      }
-      else{
-         //////////
-      }
+      if(selectedDate < today)
+         alert("Date should be today or later!");
    });
 
    var deleteQuestionButton = document.getElementById("delete-question-button");
    deleteQuestionButton.addEventListener("click", (e) => {
       var container = document.getElementById("questions-container");
       var count = container.querySelectorAll("input").length;
-      var toBeDeleted = document.getElementById(count);
       var countAux = count+1;
+      var toBeDeleted = document.getElementById("question"+countAux);
+      console.log("tobedeleted: " + toBeDeleted);
       //var br = document.getElementById("br"+countAux);
       //console.log(br);
       if(count===1){
@@ -55,15 +51,7 @@ window.onload = function() { // avoid variables ending up in the global scope
 
       var deleteQuestionButton = document.getElementById("delete-question-button");
       deleteQuestionButton.classList.add("visible");
-      /*var present = 0;
-      for(var el of deleteQuestionButton.classList.entries()) {
-         if (el === "visible"){
-            present = 1;
-         }
-      }
-      if(!present)
-         deleteQuestionButton.classList.add("visible");
-      */
+
       var container = document.getElementById("questions-container");
       var count = container.querySelectorAll("input").length;
       var countAux = count+1;

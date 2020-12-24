@@ -74,6 +74,7 @@ public class MarketingQuestionServiceBean
         em.persist(marketingQuestion);
         em.flush();
 
+        System.out.println("Created question " + marketingQuestion.getId());
         return marketingQuestion.getId();
     }
 

@@ -110,7 +110,7 @@ public class AnswerQuestionnaire extends HttpServlet {
         }
 
         //retrieving all the offensive words from db
-        offensiveWords=offensiveWordServiceBean.findAll();
+        offensiveWords = offensiveWordServiceBean.findAll();
 
         for(int i = 1; i <= numberOfResponses; i++)
         {
@@ -119,10 +119,8 @@ public class AnswerQuestionnaire extends HttpServlet {
             questionsId.add(Integer.parseInt(request.getParameter("question" + i)));
 
             //the user is blocked and transaction rolled back
-            if (checkPresence(answer, offensiveWords))
-            {
+            if (checkWordExistence(offensiveWords,answer))
                 userServiceBean.blockUser(user);
-            }
         }
 
         user = userServiceBean.find(user.getId());
@@ -183,16 +181,29 @@ public class AnswerQuestionnaire extends HttpServlet {
         this.doPost(request, response);
     }
 
-    /*
-     * return true if the string container contains at least one of the words in the list
-     * */
-    public static Boolean checkPresence(String container, List<OffensiveWord> words){
+    /**
+     *
+     * @param words bad words
+     * @param sentence to search into
+     * @return true if the word is contained, else false
+     */
+    public boolean checkWordExistence(List<OffensiveWord> words, String sentence) {
 
-        for(OffensiveWord word:words){
+        for (OffensiveWord word : words) {
 
-            if(container.contains(word.getWord())) return true;
+            String badWord = word.getWord();
+
+            if (sentence.contains(badWord)) {
+
+                int start = sentence.indexOf(badWord);
+                int end = start + badWord.length();
+
+                boolean valid_left = ((start == 0) || (sentence.charAt(start - 1) == ' '));
+                boolean valid_right = ((end == sentence.length()) || (sentence.charAt(end) == ' '));
+
+                if (valid_left && valid_right)  return true;
+            }
         }
-
         return false;
     }
 

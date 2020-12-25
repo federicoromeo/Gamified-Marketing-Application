@@ -193,15 +193,15 @@ public class AnswerQuestionnaire extends HttpServlet {
 
             String badWord = word.getWord();
 
-            if (sentence.contains(badWord)) {
+            if (sentence.toLowerCase().contains(badWord)) {
 
-                int start = sentence.indexOf(badWord);
+                int start = sentence.toLowerCase().indexOf(badWord);
                 int end = start + badWord.length();
 
-                boolean valid_left = ((start == 0) || (sentence.charAt(start - 1) == ' '));
-                boolean valid_right = ((end == sentence.length()) || (sentence.charAt(end) == ' '));
+                boolean validLeft = ((start == 0) || (sentence.toLowerCase().charAt(start - 1) == ' '));
+                boolean validRight = ((end == sentence.toLowerCase().length()) || (sentence.toLowerCase().charAt(end) == ' '));
 
-                if (valid_left && valid_right)  return true;
+                if (validLeft && validRight)  return true;
             }
         }
         return false;

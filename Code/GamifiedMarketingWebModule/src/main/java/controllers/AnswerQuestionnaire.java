@@ -60,9 +60,8 @@ public class AnswerQuestionnaire extends HttpServlet {
         templateResolver.setSuffix(".html");
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         int numberOfResponses, saId, mqId, maId, pId;
         String expertiseLevel, path, answer;
         List<String> answers = new ArrayList<>();
@@ -84,7 +83,7 @@ public class AnswerQuestionnaire extends HttpServlet {
 
         //expertise
         expertiseLevel = request.getParameter("expertise-level");
-        if(expertiseLevel != null && expertiseLevel.equals("Not Chosen"))
+        if(expertiseLevel != null && (expertiseLevel.equals("Not Chosen") || expertiseLevel.equals("")))
             expertiseLevel = null;
 
         //get marketing mandatory parameters from the form
@@ -154,7 +153,7 @@ public class AnswerQuestionnaire extends HttpServlet {
         try
         {
             //TODO da cambiare
-            saId = statisticalAnswerServiceBean.createStatisticalAnswer(user,product,(byte) (age!=null? 1 : 0),(byte) (sex!=null? 1 : 0),expertiseLevel);
+            saId = statisticalAnswerServiceBean.createStatisticalAnswer(user, product, (byte)(age!=null? 1 : 0), (byte)(sex!=null? 1 : 0), expertiseLevel);
             //qua dovrebbe scattare trigger
         }
         catch(Exception e)

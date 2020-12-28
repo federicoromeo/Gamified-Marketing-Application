@@ -4,7 +4,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,7 +16,8 @@ public class LogServiceBean
     @PersistenceContext(unitName = "PersUn")
     private EntityManager em;
 
-    public LogServiceBean(){
+    public LogServiceBean()
+    {
     }
 
     /**
@@ -31,13 +31,14 @@ public class LogServiceBean
                 .find(Log.class, logId);
     }
 
+
     /**
      * Get logs of a user
      * @param user the user for which we want to find the logs
      * @return the list of the user's logs, possibly empty
      */
-    public List<Log> findLogsByUser(User user) {
-
+    public List<Log> findLogsByUser(User user)
+    {
         return em
                 .createNamedQuery("Log.findAll", Log.class)
                 .getResultList()
@@ -112,6 +113,14 @@ public class LogServiceBean
                 .get(0);
     }
 
+
+    /**
+     * Check if a log with the specified status is already present
+     * @param userId the user referred in the log
+     * @param productId the product referred in the log
+     * @param submitted the status of the log to look for (true = submitted, false = canceled)
+     * @return true if a log with that status is present
+     */
     public boolean isLogPresent(int userId, int productId, boolean submitted)
     {
         return em
@@ -122,6 +131,7 @@ public class LogServiceBean
                 .stream()
                 .anyMatch(l -> l.getSubmitted() == (submitted ? 1 : 0));
     }
+
 
     /**
      * Create a new log
@@ -144,6 +154,7 @@ public class LogServiceBean
 
         return log.getId();
     }
+
 
     /**
      * Remove a log

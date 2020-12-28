@@ -3,7 +3,6 @@ package services;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ public class MarketingAnswerServiceBean
     }
 
     /**
-     * Get a single marketingAnswer by Id
+     * Get a single marketing answer by id
      */
     public MarketingAnswer find(int maId)
     {
@@ -30,8 +29,8 @@ public class MarketingAnswerServiceBean
 
 
     /**
-     * Get all marketingAnswers
-     * @return the list of all marketingAnswers, possibly empty
+     * Get all marketing answers
+     * @return the list of all marketing answers, possibly empty
      */
     public List<MarketingAnswer> findAll()
     {
@@ -42,12 +41,10 @@ public class MarketingAnswerServiceBean
     }
 
 
-
-
     /**
-     * Get marketingAnswers of a user
-     * @param user the user for which we want to find the marketingAnswers
-     * @return the list of the user's marketingAnswers, possibly empty
+     * Get marketing answers of a user
+     * @param user the user for which we want to find the answers
+     * @return the list of the user's marketing answers, possibly empty
      */
     public List<MarketingAnswer> findMarketingAnswerByUser(User user)
     {
@@ -61,11 +58,10 @@ public class MarketingAnswerServiceBean
     }
 
 
-
     /**
-     * Get marketingAnswers of a marketingQuestion
-     * @param marketingQuestion the marketingQuestion for which we want find the marketingAnswers
-     * @return the list of the marketingQuestion's marketingAnswers, possibly empty
+     * Get marketing answers of a question
+     * @param marketingQuestion the question for which we want find the marketing answers
+     * @return the list of marketing answers, possibly empty
      */
     public List<MarketingAnswer> findMarketingAnswersByMarketingQuestion(MarketingQuestion marketingQuestion)
     {
@@ -80,10 +76,10 @@ public class MarketingAnswerServiceBean
 
 
     /**
-     * Get marketingAnswers of a marketingQuestion and of a specific user
-     * @param user the user for which we want to find the marketingAnswers
-     * @param marketingQuestion the marketingQuestion for which we want find the marketingAnswers
-     * @return the list of the marketingQuestion and user' marketingAnswers, possibly empty
+     * Get marketing answers of a question for a specific user
+     * @param user the user for which we want to find the marketing answers
+     * @param marketingQuestion the question for which we want find the marketing answers
+     * @return the list of marketing answers, possibly empty
      */
     public List<MarketingAnswer> findMarketingAnswersByUserMarketingQuestion(User user, MarketingQuestion marketingQuestion)
     {
@@ -98,15 +94,12 @@ public class MarketingAnswerServiceBean
     }
 
 
-
-
-
     /**
-     * Create a new marketingAnswer
-     * @param text the text of the answer
-     * @param user the user who write the answer
+     * Create a new marketing answer
+     * @param text the text of the marketing answer
+     * @param user the user who submitted the marketing answer
      * @param marketingQuestion the question to which the user has answered
-     * @return the id of the marketingAnswer just created
+     * @return the id of the marketing answer just created
      */
     public int createMarketingAnswer(String text, User user, MarketingQuestion marketingQuestion)
     {
@@ -121,9 +114,10 @@ public class MarketingAnswerServiceBean
         return marketingAnswer.getId();
     }
 
+
     /**
-     * Remove a marketingAnswer
-     * @param marketingAnswerId the Id of the marketingAnswer to remove
+     * Remove an answer
+     * @param marketingAnswerId the id of the marketing answer to remove
      */
     public void deleteMarketingAnswer(int marketingAnswerId)
     {

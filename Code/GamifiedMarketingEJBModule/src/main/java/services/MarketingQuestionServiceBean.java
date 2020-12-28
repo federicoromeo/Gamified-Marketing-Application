@@ -3,7 +3,6 @@ package services;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,11 +15,12 @@ public class MarketingQuestionServiceBean
     @PersistenceContext(unitName = "PersUn")
     private EntityManager em;
 
-    public MarketingQuestionServiceBean(){
+    public MarketingQuestionServiceBean()
+    {
     }
 
     /**
-     * Get a single marketingQuestion by Id
+     * Get a single question by Id
      */
     public MarketingQuestion find(int mqId)
     {
@@ -28,9 +28,10 @@ public class MarketingQuestionServiceBean
                 .find(MarketingQuestion.class, mqId);
     }
 
+
     /**
-     * Get all marketingQuestions
-     * @return the list of all marketingQuestions, possibly empty
+     * Get all questions
+     * @return the list of all questions, possibly empty
      */
     public List<MarketingQuestion> findAll()
     {
@@ -42,9 +43,9 @@ public class MarketingQuestionServiceBean
 
 
     /**
-     * Get marketingQuestions of a product
-     * @param product the product for which we want to find the marketingQuestions
-     * @return the list of the product's marketingQuestions, possibly empty
+     * Get questions of a product
+     * @param product the product for which we want to find the questions
+     * @return the list of questions, possibly empty
      */
     public List<MarketingQuestion> findMarketingQuestionsByProduct(Product product)
     {
@@ -59,10 +60,10 @@ public class MarketingQuestionServiceBean
 
 
     /**
-     * Create a new marketingQuestion
+     * Create a new question
      * @param text the text of the question
      * @param product the product to which the question is related
-     * @return the id of the marketingAnswer just created
+     * @return the id of the question just created
      */
     public int createMarketingQuestion(String text, Product product)
     {
@@ -78,9 +79,10 @@ public class MarketingQuestionServiceBean
         return marketingQuestion.getId();
     }
 
+
     /**
-     * Remove a marketingQuestion
-     * @param marketingQuestionId the Id of the marketingQuestion to remove
+     * Remove a question
+     * @param marketingQuestionId the id of the marketingQuestion to remove
      */
     public void deleteMarketingQuestion(int marketingQuestionId)
     {

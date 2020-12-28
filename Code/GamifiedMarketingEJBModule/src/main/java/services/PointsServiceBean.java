@@ -3,7 +3,6 @@ package services;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ public class PointsServiceBean
     }
 
     /**
-     * Get a single point by Id
+     * Get a single point by id
      */
     public Points find(int pointsId)
     {
@@ -41,7 +40,6 @@ public class PointsServiceBean
     }
 
 
-
     /**
      * Get points of a product
      * @param productId the id of the product for which we want to find the points
@@ -49,8 +47,6 @@ public class PointsServiceBean
      */
     public List<Points> findPointsByProduct(int productId)
     {
-
-
         return em
                 .createNamedQuery("Points.findAll", Points.class)
                 .getResultList()
@@ -61,7 +57,7 @@ public class PointsServiceBean
 
 
     /**
-     * Get points of a user
+     * Get the points of a user
      * @param user the user for which we want to find the points
      * @return the list of the user's points, possibly empty
      */
@@ -94,17 +90,6 @@ public class PointsServiceBean
         em.flush();
 
         return points.getId();
-    }
-
-    /**
-     * Remove points
-     * @param pointsId the Id of the points to remove
-     */
-    public void deletePoints(int pointsId)
-    {
-        Optional
-                .of(em.find(Points.class, pointsId))
-                .ifPresent(p -> em.remove(p));
     }
 }
 

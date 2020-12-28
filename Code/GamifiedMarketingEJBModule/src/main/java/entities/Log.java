@@ -5,13 +5,12 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "log", schema = "gamified_db")
-
 @NamedQueries({
     @NamedQuery(name = "Log.findByUserProduct", query = "SELECT l FROM Log l  WHERE l.userId = ?1 and l.productId = ?2"),
     @NamedQuery(name= "Log.findAll", query="SELECT p FROM Product p")
 })
-public class Log {
-
+public class Log
+{
     private int id;
     private Timestamp time;
     private byte submitted;
@@ -22,13 +21,15 @@ public class Log {
 
     @Id
     @Column(name = "id", nullable = false)
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
+
 
     @Basic
     @Column(name = "time", nullable = false)
@@ -40,6 +41,7 @@ public class Log {
         this.time = time;
     }
 
+
     @Basic
     @Column(name = "submitted", nullable = false)
     public byte getSubmitted() {
@@ -49,6 +51,7 @@ public class Log {
     public void setSubmitted(byte submitted) {
         this.submitted = submitted;
     }
+
 
     @Basic
     @Column(name = "userId", nullable = false)
@@ -60,6 +63,7 @@ public class Log {
         this.userId = userId;
     }
 
+
     @Basic
     @Column(name = "productId", nullable = false)
     public int getProductId() {
@@ -70,8 +74,32 @@ public class Log {
         this.productId = productId;
     }
 
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "userId", referencedColumnName = "id")
+    public User getUserByUserId() {
+        return userByUserId;
+    }
+
+    public void setUserByUserId(User userByUserId) {
+        this.userByUserId = userByUserId;
+    }
+
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "productId", referencedColumnName = "id")
+    public Product getProductByProductId() {
+        return productByProductId;
+    }
+
+    public void setProductByProductId(Product productByProductId) {
+        this.productByProductId = productByProductId;
+    }
+
+
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -87,32 +115,13 @@ public class Log {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result = id;
         result = 31 * result + (time != null ? time.hashCode() : 0);
         result = 31 * result + (int) submitted;
         result = 31 * result + userId;
         result = 31 * result + productId;
         return result;
-    }
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "userId", referencedColumnName = "id")//, nullable = false)
-    public User getUserByUserId() {
-        return userByUserId;
-    }
-
-    public void setUserByUserId(User userByUserId) {
-        this.userByUserId = userByUserId;
-    }
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "productId", referencedColumnName = "id")//, nullable = false)
-    public Product getProductByProductId() {
-        return productByProductId;
-    }
-
-    public void setProductByProductId(Product productByProductId) {
-        this.productByProductId = productByProductId;
     }
 }

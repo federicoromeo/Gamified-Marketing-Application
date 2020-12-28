@@ -6,20 +6,13 @@ import java.util.Collection;
 @Entity
 @Table(name = "marketingquestion", schema = "gamified_db")
 @NamedQuery(name="MarketingQuestion.findAll", query="SELECT mq FROM MarketingQuestion mq")
-public class MarketingQuestion {
-
+public class MarketingQuestion
+{
     private int id;
     private String text;
     private int productId;
     private Collection<MarketingAnswer> marketinganswersById;
     private Product productByProductId;
-
-    public MarketingQuestion() {
-    }
-
-    public MarketingQuestion(String text) {
-        this.text = text;
-    }
 
     @Id
     @SequenceGenerator( name = "mySeq", sequenceName = "MY_SEQ", allocationSize = 1, initialValue = 1 )
@@ -33,6 +26,7 @@ public class MarketingQuestion {
         this.id = id;
     }
 
+
     @Basic
     @Column(name = "text", nullable = false, length = 255)
     public String getText() {
@@ -42,6 +36,7 @@ public class MarketingQuestion {
     public void setText(String text) {
         this.text = text;
     }
+
 
     @Basic
     @Column(name = "productId", nullable = false)
@@ -53,8 +48,35 @@ public class MarketingQuestion {
         this.productId = productId;
     }
 
+
+    @OneToMany(mappedBy = "marketingquestionByMarketingquestionId",
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.REMOVE, CascadeType.REFRESH },
+            orphanRemoval = true)
+    public Collection<MarketingAnswer> getMarketinganswersById() {
+        return marketinganswersById;
+    }
+
+    public void setMarketinganswersById(Collection<MarketingAnswer> marketinganswersById)
+    {
+        this.marketinganswersById = marketinganswersById;
+    }
+
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "productId", referencedColumnName = "id")
+    public Product getProductByProductId() {
+        return productByProductId;
+    }
+
+    public void setProductByProductId(Product productByProductId) {
+        this.productByProductId = productByProductId;
+    }
+
+
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -68,36 +90,11 @@ public class MarketingQuestion {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result = id;
         result = 31 * result + (text != null ? text.hashCode() : 0);
         result = 31 * result + productId;
         return result;
-    }
-
-    //when a question is removed all tuples referring to it are deleted
-    //also orphan are deleted
-    //cascade policy: lazy because in average there are more access made by simple user than of made by admin (which requires all the info),
-
-    @OneToMany(mappedBy = "marketingquestionByMarketingquestionId",
-            fetch = FetchType.EAGER,
-            cascade = {CascadeType.REMOVE, CascadeType.REFRESH },
-            orphanRemoval = true)
-    public Collection<MarketingAnswer> getMarketinganswersById() {
-        return marketinganswersById;
-    }
-
-    public void setMarketinganswersById(Collection<MarketingAnswer> marketinganswersById) {
-        this.marketinganswersById = marketinganswersById;
-    }
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "productId", referencedColumnName = "id")//, nullable = false)
-    public Product getProductByProductId() {
-        return productByProductId;
-    }
-
-    public void setProductByProductId(Product productByProductId) {
-        this.productByProductId = productByProductId;
     }
 }

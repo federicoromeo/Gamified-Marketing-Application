@@ -72,11 +72,7 @@ public class DispatcherAdmin extends HttpServlet {
                     break;
 
                 case "inspect-button":
-                    try {
-                        pastProducts = productService.findPastProducts();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    pastProducts = productService.findPastProducts();
                     //pastProducts = productService.findAll();
                     ctx.setVariable("pastProducts", pastProducts);
                     ctx.setVariable("counter", new Counter());
@@ -84,11 +80,7 @@ public class DispatcherAdmin extends HttpServlet {
                     break;
 
                 case "delete-button":
-                    try {
-                        pastProducts = productService.findPastProducts();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    pastProducts = productService.findPastProducts();
                     //pastProducts = productService.findAll();
                     ctx.setVariable("pastProducts", pastProducts);
                     path = "/WEB-INF/deletion.html";

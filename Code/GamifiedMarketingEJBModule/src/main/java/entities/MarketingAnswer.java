@@ -5,8 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "marketinganswer", schema = "gamified_db")
 @NamedQuery(name="MarketingAnswer.findAll", query="SELECT ma FROM MarketingAnswer ma")
-public class MarketingAnswer {
-
+public class MarketingAnswer
+{
     private int id;
     private String text;
     private int userId;
@@ -24,6 +24,7 @@ public class MarketingAnswer {
         this.id = id;
     }
 
+
     @Basic
     @Column(name = "text", nullable = false, length = 255)
     public String getText() {
@@ -33,6 +34,7 @@ public class MarketingAnswer {
     public void setText(String text) {
         this.text = text;
     }
+
 
     @Basic
     @Column(name = "userId", nullable = false)
@@ -44,6 +46,7 @@ public class MarketingAnswer {
         this.userId = userId;
     }
 
+
     @Basic
     @Column(name = "marketingquestionId", nullable = false)
     public int getMarketingquestionId() {
@@ -54,8 +57,34 @@ public class MarketingAnswer {
         this.marketingquestionId = marketingquestionId;
     }
 
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "userId", referencedColumnName = "id")
+    public User getUserByUserId() {
+        return userByUserId;
+    }
+
+    public void setUserByUserId(User userByUserId) {
+        this.userByUserId = userByUserId;
+    }
+
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "marketingquestionId", referencedColumnName = "id")
+    public MarketingQuestion getMarketingquestionByMarketingquestionId()
+    {
+        return marketingquestionByMarketingquestionId;
+    }
+
+    public void setMarketingquestionByMarketingquestionId(MarketingQuestion marketingquestionByMarketingquestionId)
+    {
+        this.marketingquestionByMarketingquestionId = marketingquestionByMarketingquestionId;
+    }
+
+
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -70,31 +99,12 @@ public class MarketingAnswer {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result = id;
         result = 31 * result + (text != null ? text.hashCode() : 0);
         result = 31 * result + userId;
         result = 31 * result + marketingquestionId;
         return result;
-    }
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "userId", referencedColumnName = "id")//, nullable = false)
-    public User getUserByUserId() {
-        return userByUserId;
-    }
-
-    public void setUserByUserId(User userByUserId) {
-        this.userByUserId = userByUserId;
-    }
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "marketingquestionId", referencedColumnName = "id")//, nullable = false)
-    public MarketingQuestion getMarketingquestionByMarketingquestionId() {
-        return marketingquestionByMarketingquestionId;
-    }
-
-    public void setMarketingquestionByMarketingquestionId(MarketingQuestion marketingquestionByMarketingquestionId) {
-        this.marketingquestionByMarketingquestionId = marketingquestionByMarketingquestionId;
     }
 }

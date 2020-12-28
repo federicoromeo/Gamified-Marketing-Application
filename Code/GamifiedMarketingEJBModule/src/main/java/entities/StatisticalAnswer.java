@@ -26,6 +26,7 @@ public class StatisticalAnswer {
         this.id = id;
     }
 
+
     @Basic
     @Column(name = "age", nullable = true)
     public byte getAge() {
@@ -35,6 +36,7 @@ public class StatisticalAnswer {
     public void setAge(byte age) {
         this.age = age;
     }
+
 
     @Basic
     @Column(name = "sex", nullable = true)
@@ -46,6 +48,7 @@ public class StatisticalAnswer {
         this.sex = sex;
     }
 
+
     @Basic
     @Column(name = "expertise", nullable = true)
     public String getExpertise() {
@@ -55,6 +58,7 @@ public class StatisticalAnswer {
     public void setExpertise(String expertise) {
         this.expertise = expertise;
     }
+
 
     @Basic
     @Column(name = "userId", nullable = false)
@@ -66,6 +70,7 @@ public class StatisticalAnswer {
         this.userId = userId;
     }
 
+
     @Basic
     @Column(name = "productId", nullable = false)
     public int getProductId() {
@@ -76,33 +81,6 @@ public class StatisticalAnswer {
         this.productId = productId;
     }
 
-    /*@Override
-    public boolean equals(String o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        StatisticalAnswer that = (StatisticalAnswer) o;
-
-        if (id != that.id) return false;
-        if (userId != that.userId) return false;
-        if (productId != that.productId) return false;
-        if (age != null ? !age.equals(that.age) : that.age != null) return false;
-        if (sex != null ? !sex.equals(that.sex) : that.sex != null) return false;
-        if (expertise != null ? !expertise.equals(that.expertise) : that.expertise != null) return false;
-
-        return true;
-    }*/
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        //result = 31 * result + (age != null ? age.hashCode() : 0);
-        //result = 31 * result + (sex != null ? sex.hashCode() : 0);
-        result = 31 * result + (expertise != null ? expertise.hashCode() : 0);
-        result = 31 * result + userId;
-        result = 31 * result + productId;
-        return result;
-    }
 
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "userId", referencedColumnName = "id")//, nullable = false)
@@ -113,6 +91,7 @@ public class StatisticalAnswer {
     public void setUserByUserId(User userByUserId) {
         this.userByUserId = userByUserId;
     }
+
 
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "productId", referencedColumnName = "id")//, nullable = false)

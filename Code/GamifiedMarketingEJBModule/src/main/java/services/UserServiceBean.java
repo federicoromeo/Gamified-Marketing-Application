@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 @Stateless(name = "UserServiceEJB")
 public class UserServiceBean {
 
@@ -22,6 +21,7 @@ public class UserServiceBean {
     public UserServiceBean()
     {
     }
+
 
     /**
      * Check the credential of the user and eventually fetch the user object
@@ -54,6 +54,7 @@ public class UserServiceBean {
             throw new CredentialsException("Could not verify credentials");
         }
     }
+
 
     /**
      * Create an user
@@ -97,6 +98,7 @@ public class UserServiceBean {
                 .find(User.class, userId);
     }
 
+
     /**
      * Get a single user by Email
      * @param userEmail email
@@ -113,6 +115,7 @@ public class UserServiceBean {
                 .orElse(null);
     }
 
+
     /**
      * Get a single user by username
      * @param userUsername
@@ -128,6 +131,7 @@ public class UserServiceBean {
                 .findFirst()
                 .orElse(null);
     }
+
 
     /**
      * Get all admins
@@ -160,7 +164,7 @@ public class UserServiceBean {
 
 
     /**
-     * Get all blocked/ non blocked users
+     * Get all blocked/non blocked users
      * @param blocked 1 for retrieving the blocked users, 0 otherwise
      * @return the list of all admins, possibly empry
      */
@@ -173,7 +177,6 @@ public class UserServiceBean {
                 .filter(x -> x.getBlocked()==blocked)
                 .collect(Collectors.toList());
     }
-
 
 
     /**
@@ -204,28 +207,10 @@ public class UserServiceBean {
      * Update a user
      * @param user the user to update
      */
-    public void blockUser(User user) {
+    public void blockUser(User user)
+    {
         user.setBlocked((byte) 1);
         em.merge(user);
         em.flush();
     }
-
-
-     /* find User to that point
-     * @param pointId id
-     * @return user with that point id
-     */
-    public User findUserByPointId(int pointId) {
-
-        return em
-                .createNamedQuery("User.findAll", User.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getPointsById().equals(pointId))
-                .findFirst()
-                .orElse(null);
-
-    }
-
-
 }

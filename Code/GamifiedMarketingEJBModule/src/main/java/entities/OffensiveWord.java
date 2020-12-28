@@ -20,6 +20,7 @@ public class OffensiveWord {
         this.id = id;
     }
 
+
     @Basic
     @Column(name = "word", nullable = false, length = 255)
     public String getWord() {
@@ -30,8 +31,10 @@ public class OffensiveWord {
         this.word = word;
     }
 
+
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -44,7 +47,8 @@ public class OffensiveWord {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result = id;
         result = 31 * result + (word != null ? word.hashCode() : 0);
         return result;

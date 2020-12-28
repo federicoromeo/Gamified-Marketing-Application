@@ -38,6 +38,7 @@ public class User {
         this.id = id;
     }
 
+
     @Basic
     @Column(name = "username", nullable = false)
     public String getUsername() {
@@ -47,6 +48,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
 
     @Basic
     @Temporal(TemporalType.DATE)
@@ -61,6 +63,7 @@ public class User {
         this.birthDate = birthDate;
     }
 
+
     @Basic
     @Column(name = "sex", nullable = true)
     public String getSex() {
@@ -70,6 +73,7 @@ public class User {
     public void setSex(String sex) {
         this.sex = sex;
     }
+
 
     @Basic
     @Column(name = "admin", nullable = false)
@@ -81,6 +85,7 @@ public class User {
         this.admin = admin;
     }
 
+
     @Basic
     @Column(name = "blocked", nullable = false)
     public byte getBlocked() {
@@ -90,6 +95,7 @@ public class User {
     public void setBlocked(byte blocked) {
         this.blocked = blocked;
     }
+
 
     @Basic
     @Column(name = "email", nullable = false)
@@ -101,6 +107,7 @@ public class User {
         this.email = email;
     }
 
+
     @Basic
     @Column(name = "password", nullable = false)
     public String getPassword() {
@@ -111,8 +118,65 @@ public class User {
         this.password = password;
     }
 
+
+    @OneToMany(
+            mappedBy = "userByUserId" ,
+            cascade = {CascadeType.REMOVE, CascadeType.REFRESH },
+            orphanRemoval = true)
+    public Collection<Log> getLogsById() {
+        return logsById;
+    }
+
+    public void setLogsById(Collection<Log> logsById) {
+        this.logsById = logsById;
+    }
+
+
+    @OneToMany(
+            mappedBy = "userByUserId",
+            cascade = {CascadeType.REMOVE, CascadeType.REFRESH },
+            orphanRemoval = true)
+    public Collection<MarketingAnswer> getMarketinganswersById() {
+        return marketinganswersById;
+    }
+
+    public void setMarketinganswersById(Collection<MarketingAnswer> marketinganswersById)
+    {
+        this.marketinganswersById = marketinganswersById;
+    }
+
+
+    @OneToMany(
+            mappedBy = "userByUserId",
+            cascade = { CascadeType.REMOVE, CascadeType.REFRESH },
+            orphanRemoval = true)
+    public Collection<Points> getPointsById() {
+        return pointsById;
+    }
+
+    public void setPointsById(Collection<Points> pointsById) {
+        this.pointsById = pointsById;
+    }
+
+
+    @OneToMany(
+            mappedBy = "userByUserId",
+            cascade = {CascadeType.REMOVE, CascadeType.REFRESH },
+            orphanRemoval = true)
+    public Collection<StatisticalAnswer> getStatisticalanswersById()
+    {
+        return statisticalanswersById;
+    }
+
+    public void setStatisticalanswersById(Collection<StatisticalAnswer> statisticalanswersById)
+    {
+        this.statisticalanswersById = statisticalanswersById;
+    }
+
+
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -129,7 +193,8 @@ public class User {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result = id;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (int) admin;
@@ -137,46 +202,5 @@ public class User {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
-    }
-
-    //when a user is removed all tuples referring to him/her are deleted
-    //also orphan are deleted
-    //cascade policy: lazy because in average there are more access made by simple user than of those made by admin (which requires all the info)
-
-    @OneToMany(mappedBy = "userByUserId" ,cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
-    public Collection<Log> getLogsById() {
-        return logsById;
-    }
-
-    public void setLogsById(Collection<Log> logsById) {
-        this.logsById = logsById;
-    }
-
-    @OneToMany(mappedBy = "userByUserId", cascade = {CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
-    public Collection<MarketingAnswer> getMarketinganswersById() {
-        return marketinganswersById;
-    }
-
-    public void setMarketinganswersById(Collection<MarketingAnswer> marketinganswersById) {
-        this.marketinganswersById = marketinganswersById;
-    }
-
-    @OneToMany(mappedBy = "userByUserId", cascade = { CascadeType.REMOVE, CascadeType.REFRESH }, orphanRemoval = true)
-    public Collection<Points> getPointsById() {
-        return pointsById;
-    }
-
-    public void setPointsById(Collection<Points> pointsById) {
-        this.pointsById = pointsById;
-    }
-
-    @OneToMany(mappedBy = "userByUserId", cascade = {CascadeType.REMOVE,
-            CascadeType.REFRESH }, orphanRemoval = true)
-    public Collection<StatisticalAnswer> getStatisticalanswersById() {
-        return statisticalanswersById;
-    }
-
-    public void setStatisticalanswersById(Collection<StatisticalAnswer> statisticalanswersById) {
-        this.statisticalanswersById = statisticalanswersById;
     }
 }

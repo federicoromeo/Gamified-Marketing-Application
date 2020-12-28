@@ -36,6 +36,7 @@ public class Product implements Serializable {
         this.id = id;
     }
 
+
     @Basic
     @Column(name = "name", nullable = false, length = 255)
     public String getName()
@@ -48,6 +49,7 @@ public class Product implements Serializable {
         this.name = name;
     }
 
+
     @Lob
     @Column(name = "image", nullable = false)
     public byte[] getImage()
@@ -59,6 +61,7 @@ public class Product implements Serializable {
     {
         this.image = image;
     }
+
 
     @Basic
     @Temporal(TemporalType.DATE)
@@ -73,10 +76,10 @@ public class Product implements Serializable {
         this.date = date;
     }
 
+
     /**
-     * When a product is removed all tuples referring to it are deleted and also orphan are deleted
-     * cascade policy: lazy because in average there are more access made by simple user than of made by admin (which requires all the info),
-     * cascade policy: eager only for marketing question because users need always question to answer to them
+     * cascade: when a product is removed all tuples referring to it are deleted and also orphan are deleted
+     * fetch policy: (default) lazy because in average there are more access made by simple user than of made by admin (which requires all the info)
      */
     @OneToMany(
             mappedBy = "productByProductId",
@@ -92,6 +95,10 @@ public class Product implements Serializable {
         this.logsById = logsById;
     }
 
+
+    /**
+     * fetch policy: eager because users need always question to answer to them
+     */
     @OneToMany(
             fetch = FetchType.EAGER,
             mappedBy = "productByProductId",
@@ -107,20 +114,16 @@ public class Product implements Serializable {
         this.marketingquestionsById = marketingquestionsById;
     }
 
-   /** Fetch type EAGER allows resorting the relationship list content also in the
-	 * client Web servlet after the creation of a new mission. If you leave the
-	 * default LAZY policy, the relationship is sorted only at the first access but
-	 * then adding a new mission does not trigger the reloading of data from the
-	 * database and thus the sort method in the client does not actually re-sort the
-	 * list of missions.
-	 * In average when a product is loaded the application need also the points made by each user (in the leaderboard)
+
+   /**
+    * fetch policy: eager because in average when a product is loaded the application
+    * needs also the points made by each user (in the leaderboard)
     */
     @OneToMany(
             fetch = FetchType.EAGER,
             mappedBy = "productByProductId",
             cascade = {CascadeType.REMOVE, CascadeType.REFRESH },
             orphanRemoval = true)
-    //@OrderBy("total DESC")
     public List<Points> getPointsById()
     {
         return pointsById;
@@ -130,6 +133,7 @@ public class Product implements Serializable {
     {
         this.pointsById = pointsById;
     }
+
 
     @OneToMany(
             fetch = FetchType.EAGER,

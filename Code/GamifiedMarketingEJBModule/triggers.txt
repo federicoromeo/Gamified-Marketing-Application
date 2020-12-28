@@ -1,0 +1,58 @@
+********Trigger per calcolare i punti della sezione 1:
+        NB: nel nostro db il testo delle marketingAnswer deve essere not null,
+        * quindi per ciascun inserimento il punteggio è incrementato di uno
+
+       CREATE DEFINER=`root`@`localhost` TRIGGER `marketinganswer_AFTER_INSERT` AFTER INSERT ON `marketinganswer` FOR EACH ROW BEGIN
+
+	DECLARE x INTEGER;
+    SELECT productId INTO x
+    FROM marketingQuestion
+    WHERE NEW.marketingquestionId=id;
+
+            IF EXISTS (SELECT *
+                        FROM points p
+                        WHERE p.userId=NEW.userId
+                         AND p.productId=x)
+            THEN
+                UPDATE points
+                    SET total=total+1
+                WHERE userId=NEW.userId
+                AND productId=x;
+            ELSE
+                INSERT INTO points(userId, productid, total)
+                VALUES(NEW.userId, x, 1);
+			END IF;
+END
+
+********Trigger per calcolare i punti della sezione 2:
+        NB:il trigger calcola correttamente i punti solo se non vi solo valori di default in statistical answer
+
+       CREATE DEFINER=`root`@`localhost` TRIGGER `statisticalanswer_AFTER_INSERT` AFTER INSERT ON `statisticalanswer` FOR EACH ROW BEGIN
+   DECLARE pointsToAdd integer;
+
+
+   SELECT IF(NEW.age=0, 0, 2)+ IF(NEW.expertise IS NULL, 0, 2) + IF(NEW.sex=0, 0, 2) INTO pointsToAdd
+   FROM points
+   WHERE NEW.userId=userId
+   AND NEW.productId=productId;
+
+
+                IF (pointsToAdd>0)
+                   AND EXISTS ( SELECT *
+                                 FROM points P
+                                 WHERE P.userId=NEW.userId
+                                  AND P.productId=NEW.productId)
+                    THEN
+                        UPDATE Points
+                            SET total=total+pointsToAdd
+                        WHERE userId=NEW.userId
+                        AND productId=NEW.productId;
+                    ELSE
+                        INSERT INTO Points(userId, productid, total)
+                        VALUES(NEW.userId, NEW.productId, pointsToAdd);
+END IF;
+END
+                 //quest'ultimo caso dovrebbe capitare raramente in quanto l'inserimento di una statisticalAnswer
+                    avviene in teoria solamante l'inserimento di una marketingQuestion che scatena il precedente trigger.
+                    Il caso è comunque considerato per mettersi al riparo nel caso in cui il dbms processi i trigger o
+                    l'inserimento delle tuple con ordine differente da quanto aspettato

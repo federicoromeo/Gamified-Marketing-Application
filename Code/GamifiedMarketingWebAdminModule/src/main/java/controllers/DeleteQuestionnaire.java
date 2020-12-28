@@ -29,9 +29,9 @@ public class DeleteQuestionnaire extends HttpServlet {
     @EJB(name = "services/ProductService")
     private ProductServiceBean productService;
 
-    public DeleteQuestionnaire() {
+    public DeleteQuestionnaire()
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     public void init() throws ServletException {
@@ -70,11 +70,7 @@ public class DeleteQuestionnaire extends HttpServlet {
         }
 
         List<Product> pastProducts = null;
-        try {
-            pastProducts = productService.findPastProducts();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        pastProducts = productService.findPastProducts();
         //List<Product> pastProducts = productService.findAll();
 
         ctx.setVariable("pastProducts", pastProducts);

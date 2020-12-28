@@ -9,6 +9,12 @@ import org.apache.commons.io.IOUtils;
 
 public class Data
 {
+    /**
+     * Compare two instances of date, potentially expressed in different formats
+     * @param date1 first Date to compare
+     * @param date2 second Date to compare
+     * @return true if the dates are the same
+     */
     public static boolean equalDates(Date date1, Date date2)
     {
         String pattern = "yyyy-MM-dd";
@@ -17,6 +23,11 @@ public class Data
         return formatter.format(date1).equals(formatter.format(date2));
     }
 
+    /**
+     * Converts a string to a Date object
+     * @param s a string representing a date
+     * @return a Date object
+     */
     public static Date stringToDate(String s)
     {
         String pattern = "yyyy-MM-dd";
@@ -32,6 +43,11 @@ public class Data
         }
     }
 
+    /**
+     * Hides complexity of reading a file coming from a servlet
+     * @param filePart a Part object
+     * @return an array of byte representing the file
+     */
     public static byte[] filepartToByte(Part filePart)
     {
         InputStream fileContent;

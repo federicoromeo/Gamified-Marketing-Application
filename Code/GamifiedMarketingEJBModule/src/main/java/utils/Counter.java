@@ -14,12 +14,6 @@ public class Counter
         count = init;
     }
 
-    public int getZero()
-    {
-        count = 0;
-        return count;
-    }
-
     public int get()
     {
         return count;

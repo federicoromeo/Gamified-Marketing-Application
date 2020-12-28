@@ -3,11 +3,8 @@ package services;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import entities.*;
 
@@ -21,7 +18,7 @@ public class StatisticalAnswerServiceBean
     }
 
     /**
-     * Get a single statisticalAnswer by Id
+     * Get a single statistical answer by Id
      */
     public StatisticalAnswer find(int statisticalAnswerId)
     {
@@ -31,8 +28,8 @@ public class StatisticalAnswerServiceBean
 
 
     /**
-     * Get all statisticalAnswers
-     * @return the list of all statisticalAnswers, possibly empty
+     * Get all statistical answers
+     * @return the list of all statistical answers, possibly empty
      */
     public List<StatisticalAnswer> findAll()
     {
@@ -42,36 +39,14 @@ public class StatisticalAnswerServiceBean
     }
 
 
-
-
-
-
-
-
-
     /**
-     * Get statisticalAnswer for expertise
-     * @param expertise the expertise for which we want to retrieve the statisticalAnswers
-     * @return the list of statisticalAnswers of a expertise, possibly empty
-     */
-    public List<StatisticalAnswer> findStatisticalAnswerByExpertise(String expertise)
-    {
-        return em
-                .createNamedQuery("StatisticalAnswer.findAll", StatisticalAnswer.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getExpertise().equals(expertise))
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Create a new StatisticalAnswer
-     * @param user the user related to the statisticalAnswer
-     * @param product the product related to the statisticalAnswer
-     * @param age the age related to the statisticalAnswer
-     * @param sex the sex related to the statisticalAnswer
-     * @param expertise the sex related to the statisticalAnswer
-     * @return the id of the statisticalAnswer just created
+     * Create a new statistical answer
+     * @param user the user related to the statistical answer
+     * @param product the product related to the statistical answer
+     * @param age the age related to the statistical answer
+     * @param sex the sex related to the statistical answer
+     * @param expertise the sex related to the statistical answer
+     * @return the id of the statistical answer just created
      */
     public int createStatisticalAnswer(User user, Product product, byte age, byte sex, String expertise)
     {
@@ -88,9 +63,10 @@ public class StatisticalAnswerServiceBean
         return statisticalAnswer.getId();
     }
 
+
     /**
-     * Remove a statisticalAnswer
-     * @param statisticalAnswerId the Id of the statisticalAnswer to remove
+     * Remove a statistical answer
+     * @param statisticalAnswerId the id of the statistical answer to remove
      */
     public void deleteStatisticalAnswer(int statisticalAnswerId)
     {

@@ -20,6 +20,8 @@ import javax.persistence.NonUniqueResultException;
 import javax.naming.*;
 
 
+//TODO clean
+
 @WebServlet("/CheckLogin")
 public class CheckLogin extends HttpServlet
 {
@@ -92,21 +94,8 @@ public class CheckLogin extends HttpServlet
         }
         else
         {
-            QueryService qService = null;
-            try
-            {
-                // Get the Initial Context for the JNDI lookup for a local EJB
-                InitialContext ic = new InitialContext();
-                // Retrieve the EJB using JNDI lookup
-                qService = (QueryService) ic.lookup("java:/openejb/local/QueryServiceLocalBean");
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
 
             request.getSession().setAttribute("user", user);
-            request.getSession().setAttribute("queryService", qService);
 
             if((int)user.getAdmin() != 0){
                 path = "/index.html";

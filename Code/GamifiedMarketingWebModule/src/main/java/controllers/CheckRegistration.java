@@ -23,6 +23,7 @@ import utils.Data;
 import javax.persistence.NonUniqueResultException;
 import javax.naming.*;
 
+//TODO clean
 
 @WebServlet("/CheckRegistration")
 public class CheckRegistration extends HttpServlet

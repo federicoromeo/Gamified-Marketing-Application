@@ -25,6 +25,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Date;
 
+//TODO clean
+
 @WebServlet("/GoToHomeUser")
 public class GoToHomeUser extends HttpServlet
 {

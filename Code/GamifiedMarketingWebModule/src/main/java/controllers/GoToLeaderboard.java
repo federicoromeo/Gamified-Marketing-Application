@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
+//TODO clean
 
 @WebServlet("/GoToLeaderboard")
 public class GoToLeaderboard extends HttpServlet {

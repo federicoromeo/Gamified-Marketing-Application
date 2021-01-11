@@ -56,7 +56,6 @@ public class CancelQuestionnaire extends HttpServlet
         MarketingQuestion mq;
         Product product;
 
-
         //get parameters from the context, only the ones needed to log
 
         //user
@@ -81,9 +80,6 @@ public class CancelQuestionnaire extends HttpServlet
         {
             System.out.println("Error in logging the response");
         }
-
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

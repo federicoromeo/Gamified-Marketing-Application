@@ -22,6 +22,8 @@ import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Date;
 
+//TODO clean
+
 @WebServlet("/GoToHomeAdmin")
 public class GoToHomeAdmin extends HttpServlet
 {

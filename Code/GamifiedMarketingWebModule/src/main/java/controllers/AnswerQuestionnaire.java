@@ -87,7 +87,6 @@ public class AnswerQuestionnaire extends HttpServlet {
             expertiseLevel = null;
 
         //get marketing mandatory parameters from the form
-
         numberOfResponses = Integer.parseInt(request.getParameter("numberofresponses"));
         System.out.println(numberOfResponses);
 
@@ -152,9 +151,7 @@ public class AnswerQuestionnaire extends HttpServlet {
         //create the statistical answer
         try
         {
-            //TODO da cambiare
             saId = statisticalAnswerServiceBean.createStatisticalAnswer(user, product, (byte)(age!=null? 1 : 0), (byte)(sex!=null? 1 : 0), expertiseLevel);
-            //qua dovrebbe scattare trigger
         }
         catch(Exception e)
         {

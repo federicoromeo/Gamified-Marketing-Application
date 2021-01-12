@@ -20,8 +20,6 @@ import javax.persistence.NonUniqueResultException;
 import javax.naming.*;
 
 
-//TODO clean
-
 @WebServlet("/CheckLogin")
 public class CheckLogin extends HttpServlet
 {
@@ -29,13 +27,16 @@ public class CheckLogin extends HttpServlet
 
     private TemplateEngine templateEngine;
 
-    @EJB(name="UserServiceEJB")  //prima era services/UserService
+
+    @EJB(name="UserServiceBean")
     private UserServiceBean userService;
+
 
     public CheckLogin()
     {
         super();
     }
+
 
     public void init() throws ServletException
     {
@@ -51,7 +52,11 @@ public class CheckLogin extends HttpServlet
     {
         String username = null;
         String password = null;
+        User user = null;
+        String path=null;
 
+
+        //get username and password: mandatory parameters from the form
         try
         {
             username = StringEscapeUtils.escapeJava(request.getParameter("username"));
@@ -63,27 +68,24 @@ public class CheckLogin extends HttpServlet
         }
         catch (Exception e)
         {
-            //DEBUG e.printStackTrace();
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing credential value");
             return;
         }
 
-        User user = null;
+
+        //check credentials in the database
         try
         {
             user = userService.checkCredentials(username, password);
         }
         catch (CredentialsException | NonUniqueResultException e)
         {
-            //DEBUG e.printStackTrace();
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Could not check credentials");
             return;
         }
 
-        // If the user exists, add info to the session and go to home page,
+        // If the user exists and it is not admin, add info to the session and go to home page,
         // otherwise show login page with error message
-
-        String path;
         if (user == null)
         {
             path = "/index.html";

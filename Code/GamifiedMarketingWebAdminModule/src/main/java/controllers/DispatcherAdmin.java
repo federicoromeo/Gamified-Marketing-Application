@@ -16,11 +16,9 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.ProductServiceBean;
 import utils.Counter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 
-//TODO clean
 
 @WebServlet("/DispatcherAdmin")
 @MultipartConfig
@@ -46,14 +44,11 @@ public class DispatcherAdmin extends HttpServlet {
         templateResolver.setSuffix(".html");
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         String choice = null;
         String path = null;
         List<Product> pastProducts = null;
-
-        ServletContext servletContext = getServletContext();
-        final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
         if ( !request.getParameter("button").equals("") &&
              !request.getParameter("button").isEmpty() &&
@@ -62,10 +57,13 @@ public class DispatcherAdmin extends HttpServlet {
             choice = request.getParameter("button");
         }
 
-        if (choice != null) {
+        ServletContext servletContext = getServletContext();
+        final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
-            switch(choice) {
-
+        if (choice != null)
+        {
+            switch(choice)
+            {
                 case "insert-button":
                     System.out.println( LocalDate.now());
                     ctx.setVariable("now", LocalDate.now());
@@ -74,7 +72,6 @@ public class DispatcherAdmin extends HttpServlet {
 
                 case "inspect-button":
                     pastProducts = productService.findPastProducts();
-                    //pastProducts = productService.findAll();
                     ctx.setVariable("pastProducts", pastProducts);
                     ctx.setVariable("counter", new Counter());
                     path = "/WEB-INF/inspection.html";
@@ -82,7 +79,6 @@ public class DispatcherAdmin extends HttpServlet {
 
                 case "delete-button":
                     pastProducts = productService.findPastProducts();
-                    //pastProducts = productService.findAll();
                     ctx.setVariable("pastProducts", pastProducts);
                     path = "/WEB-INF/deletion.html";
                     break;
@@ -94,7 +90,8 @@ public class DispatcherAdmin extends HttpServlet {
 
             templateEngine.process(path, ctx, response.getWriter());
         }
-        else{
+        else
+        {
             path = "/WEB-INF/home_admin.html";
             templateEngine.process(path, ctx, response.getWriter());
         }

@@ -1,5 +1,8 @@
 package utils;
 
+/**
+ * Auxiliary class counter useful for making some magic with thymeleaf
+ */
 public class Counter
 {
     private int count;

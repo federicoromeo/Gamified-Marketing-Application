@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import entities.MarketingAnswer;
 import entities.MarketingQuestion;
 import entities.User;
@@ -25,7 +24,6 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Date;
 
-//TODO clean
 
 @WebServlet("/GoToHomeUser")
 public class GoToHomeUser extends HttpServlet
@@ -62,10 +60,9 @@ public class GoToHomeUser extends HttpServlet
     {
         Product productOfTheDay = null;
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        boolean doQuestionnaire=true;
-
-        ServletContext servletContext = this.getServletContext();
-        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+        boolean doQuestionnaire = true;
+        User user = null;
+        String image = null;
 
         try
         {
@@ -79,16 +76,17 @@ public class GoToHomeUser extends HttpServlet
         if (productOfTheDay == null)
             productOfTheDay = this.productService.findDefaultNullImage();
 
-        String image = Base64.getEncoder().encodeToString(productOfTheDay.getImage());
+        image = Base64.getEncoder().encodeToString(productOfTheDay.getImage());
 
-        //List<Integer> iteration = new ArrayList<>();
-
-        User user = (User) request.getSession().getAttribute("user");
+        user = (User) request.getSession().getAttribute("user");
 
         if(questionnaireAlreadyMade(user, productOfTheDay) || user.getBlocked()==1)
             doQuestionnaire=false;
 
         List<MarketingQuestion> questions = marketingQuestionService.findMarketingQuestionsByProduct(productOfTheDay);
+
+        ServletContext servletContext = this.getServletContext();
+        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
         String path = "/WEB-INF/home_user.html";
         ctx.setVariable("doQuestionnaire", doQuestionnaire);
@@ -96,7 +94,6 @@ public class GoToHomeUser extends HttpServlet
         ctx.setVariable("questions", questions);
         ctx.setVariable("image", image);
         ctx.setVariable("counter", new Counter());
-        //ctx.setVariable("iteration", iteration);
         this.templateEngine.process(path, ctx, response.getWriter());
     }
 
@@ -106,6 +103,12 @@ public class GoToHomeUser extends HttpServlet
     }
 
 
+    /**
+     * Checks if the user already made the questionnaire
+     * @param user user
+     * @param product of the day
+     * @return boolean
+     */
     public Boolean questionnaireAlreadyMade(User user, Product product){
 
         if(product==null || user==null)
@@ -128,7 +131,7 @@ public class GoToHomeUser extends HttpServlet
          */
 
         for(MarketingQuestion mq: questions){
-            List<MarketingAnswer> answers=marketingAnswerService.findMarketingAnswersByUserMarketingQuestion(user, mq);
+            List<MarketingAnswer> answers = marketingAnswerService.findMarketingAnswersByUserMarketingQuestion(user, mq);
 
             if(answers!=null && !answers.isEmpty()) {
                 return true;

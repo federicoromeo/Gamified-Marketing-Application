@@ -153,4 +153,5 @@ public class ProductServiceBean
     {
         return findProductOfTheDay(date) != null;
     }
+
 }

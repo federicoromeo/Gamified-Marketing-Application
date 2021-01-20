@@ -1,28 +1,20 @@
 package controllers;
 
 import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import entities.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.*;
-import java.time.LocalDate;
-import java.util.Base64;
 import java.util.Date;
 
-//TODO clean
 
 @WebServlet("/GoToHomeAdmin")
 public class GoToHomeAdmin extends HttpServlet
@@ -53,7 +45,6 @@ public class GoToHomeAdmin extends HttpServlet
     {
         ServletContext servletContext = this.getServletContext();
         WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-        //ctx.setVariable("createdProduct", productService.findProductOfTheDay(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))) != null);
         ctx.setVariable("createdProduct", productService.findProductOfTheDay(new Date()) != null);
         String path = "/WEB-INF/home_admin.html";
         this.templateEngine.process(path, ctx, response.getWriter());

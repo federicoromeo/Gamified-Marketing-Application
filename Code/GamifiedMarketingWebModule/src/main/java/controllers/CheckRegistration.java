@@ -23,8 +23,6 @@ import utils.Data;
 import javax.persistence.NonUniqueResultException;
 import javax.naming.*;
 
-//TODO clean
-
 @WebServlet("/CheckRegistration")
 public class CheckRegistration extends HttpServlet
 {
@@ -32,7 +30,7 @@ public class CheckRegistration extends HttpServlet
 
     private TemplateEngine templateEngine;
 
-    @EJB(name="UserServiceEJB")  //prima era services/UserService
+    @EJB(name="UserServiceEJB")
     private UserServiceBean userService;
 
     public CheckRegistration()
@@ -100,8 +98,8 @@ public class CheckRegistration extends HttpServlet
             e.printStackTrace();
         }
 
-        // If the user exists, add info to the session and go to home page,
-        // otherwise show login page with error message
+        // If the user already exists, show login page with error message
+        // otherwise add info to the session and go to home page
 
         String path;
         User newUser = null;
@@ -119,7 +117,6 @@ public class CheckRegistration extends HttpServlet
         //the username is not taken   --> OK!
         else
         {
-            //QueryService qService = null;
             try
             {
                 newUser = userService.createUser(username, password, email, sex, date);
@@ -136,16 +133,9 @@ public class CheckRegistration extends HttpServlet
                     {
                     System.out.println("created user " + newUser.getUsername() + " with id: " + newUser.getId());
                     request.getSession().setAttribute("user", newUser);
-                    //request.getSession().setAttribute("queryService", qService);
                     path = getServletContext().getContextPath() + "/GoToHomeUser";
                     response.sendRedirect(path);
                 }
-
-                /* Get the Initial Context for the JNDI lookup for a local EJB
-                InitialContext ic = new InitialContext();
-                // Retrieve the EJB using JNDI lookup
-                qService = (QueryService) ic.lookup("java:/openejb/local/QueryServiceLocalBean");
-                */
             }
             catch (Exception e)
             {

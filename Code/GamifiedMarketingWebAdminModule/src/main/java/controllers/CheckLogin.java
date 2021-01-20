@@ -17,7 +17,6 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.*;
 import javax.persistence.NonUniqueResultException;
-import javax.naming.*;
 
 
 @WebServlet("/CheckLogin")
@@ -27,10 +26,8 @@ public class CheckLogin extends HttpServlet
 
     private TemplateEngine templateEngine;
 
-
     @EJB(name="UserServiceBean")
     private UserServiceBean userService;
-
 
     public CheckLogin()
     {
@@ -52,7 +49,7 @@ public class CheckLogin extends HttpServlet
         String username = null;
         String password = null;
         User user = null;
-        String path=null;
+        String path = null;
 
         //get username and password: mandatory parameters from the form
         try
@@ -69,7 +66,6 @@ public class CheckLogin extends HttpServlet
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing credential value");
             return;
         }
-
 
         //check credentials in the database
         try
@@ -97,17 +93,18 @@ public class CheckLogin extends HttpServlet
         {
             request.getSession().setAttribute("user", user);
 
-            if((int)user.getAdmin() != 0){
+            if((int)user.getAdmin() != 0)
+            {
                 path = getServletContext().getContextPath() + "/GoToHomeAdmin";
                 response.sendRedirect(path);
             }
-            else {
+            else
+            {
                 path = "/index.html";
                 ServletContext servletContext = getServletContext();
                 final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
                 ctx.setVariable("errormessage", "You tried to log as an USER account!");
                 templateEngine.process(path, ctx, response.getWriter());
-
             }
         }
     }

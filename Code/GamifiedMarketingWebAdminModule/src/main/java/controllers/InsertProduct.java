@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
 
+
 @WebServlet("/InsertProduct")
 @MultipartConfig
 public class InsertProduct extends HttpServlet {
@@ -78,6 +79,13 @@ public class InsertProduct extends HttpServlet {
         if(productService.productAlreadyCreatedForTheDate(date))
         {
             errorAndRefresh("There is already a product for that day! Please change date or delete the old one first.", request, response);
+            return;
+        }
+
+        //server side check if product date is invalid
+        if(date.before(new Date()))
+        {
+            errorAndRefresh("Please select a valid date!", request, response);
             return;
         }
 

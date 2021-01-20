@@ -1,7 +1,5 @@
 package controllers;
 
-import entities.MarketingAnswer;
-import entities.MarketingQuestion;
 import entities.Product;
 import entities.User;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -9,11 +7,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import services.MarketingAnswerServiceBean;
-import services.MarketingQuestionServiceBean;
 import services.ProductServiceBean;
-import services.UserServiceBean;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,10 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
 
-//TODO clean
 
 @WebServlet("/GoToCompileQuestionnaire")
 public class GoToCompileQuestionnaire extends HttpServlet {
@@ -36,8 +27,6 @@ public class GoToCompileQuestionnaire extends HttpServlet {
 
     @EJB(name="ProductServiceEJB")
     private ProductServiceBean productService;
-
-
 
     public GoToCompileQuestionnaire() {
     }
@@ -56,45 +45,45 @@ public class GoToCompileQuestionnaire extends HttpServlet {
 
         String product = null;
         int productId = 0;
+        User user = null;
 
-
-        ServletContext servletContext = this.getServletContext();
-        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-
-        try {
+        try
+        {
             product = StringEscapeUtils.escapeJava(request.getParameter("product"));
 
             if (product == null || product.isEmpty())
                 throw new Exception("Missing informations about the product!");
 
             productId = Integer.parseInt(product);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+
+        } catch (Exception e)
+        {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Incorrect param values");
         }
 
         Product productOfTheDay = null;
 
-        try {
+        try
+        {
             productOfTheDay = productService.find(productId);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (Exception e)
+        {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Not got product");
         }
 
+        user = (User) request.getSession().getAttribute("user");
 
-        //check if the user has already made the questionnaire of the day or he is blocked
+        ServletContext servletContext = this.getServletContext();
+        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
-        User user = (User) request.getSession().getAttribute("user");
-        Boolean doQuestionnaire=(Boolean)ctx.getVariable("doQuestionnaire");
+        //check if the user already made the questionnaire of the day or he is blocked
+        Boolean doQuestionnaire = (Boolean)ctx.getVariable("doQuestionnaire");
 
-        if((doQuestionnaire!=null && !doQuestionnaire) || user.getBlocked()==1){
-
+        if((doQuestionnaire!=null && !doQuestionnaire) || user.getBlocked()==1)
             request.getRequestDispatcher("/GoToHomeUser").forward(request, response);
-        }
-        else {
 
-
+        else
+        {
             String path = "/WEB-INF/questionnaire.html";
             ctx.setVariable("product", productOfTheDay);
             this.templateEngine.process(path, ctx, response.getWriter());

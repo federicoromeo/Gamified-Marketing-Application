@@ -55,7 +55,6 @@ public class CheckLogin extends HttpServlet
         User user = null;
         String path=null;
 
-
         //get username and password: mandatory parameters from the form
         try
         {

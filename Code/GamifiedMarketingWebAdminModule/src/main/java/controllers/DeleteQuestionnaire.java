@@ -15,10 +15,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.ProductServiceBean;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.List;
 
-//TODO clean
 
 @WebServlet("/DeleteQuestionnaire")
 @MultipartConfig
@@ -35,8 +33,8 @@ public class DeleteQuestionnaire extends HttpServlet {
         super();
     }
 
-    public void init() throws ServletException {
-
+    public void init() throws ServletException
+    {
         ServletContext servletContext = getServletContext();
         ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
         templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -45,13 +43,11 @@ public class DeleteQuestionnaire extends HttpServlet {
         templateResolver.setSuffix(".html");
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         Integer productId = -1;
+        List<Product> pastProducts = null;
         String path = null;
-
-        ServletContext servletContext = getServletContext();
-        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 
         if (!request.getParameter("product").equals("") &&
             !request.getParameter("product").isEmpty() &&
@@ -60,26 +56,30 @@ public class DeleteQuestionnaire extends HttpServlet {
             productId = Integer.parseInt(request.getParameter("product"));
         }
 
-        if (productId!=-1 && productId!=2)      // 2 is default
+        if (productId!=-1 && productId!=2)      // 2 is default, undeletable
         {
-            try {
+            try
+            {
                 productService.deleteProduct(productId);
 
-            }catch(Exception e){
-                System.out.println("/n/n/n/n/n/n"+e.getClass());
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getClass());
             }
         }
 
-        List<Product> pastProducts = null;
         pastProducts = productService.findPastProducts();
-        //List<Product> pastProducts = productService.findAll();
 
+        ServletContext servletContext = getServletContext();
+        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
         ctx.setVariable("pastProducts", pastProducts);
         path = "/WEB-INF/deletion.html";
         this.templateEngine.process(path, ctx, response.getWriter());
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         doPost(request, response);
     }
 

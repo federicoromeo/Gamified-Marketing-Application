@@ -1,8 +1,6 @@
 package controllers;
 
 import entities.Points;
-import entities.Product;
-import entities.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -10,7 +8,6 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.PointsServiceBean;
 import services.ProductServiceBean;
 import services.UserServiceBean;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
-//TODO clean
 
 @WebServlet("/GoToLeaderboard")
 public class GoToLeaderboard extends HttpServlet {
@@ -53,13 +49,16 @@ public class GoToLeaderboard extends HttpServlet {
         templateResolver.setSuffix(".html");
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
 
-        int productId = Integer.parseInt(request.getParameter("productId"));
+        int productId;
         List<Points> pointsPerUser = new ArrayList<>();
 
-        if(productId > 0){
+        productId = Integer.parseInt(request.getParameter("productId"));
 
+        if(productId > 0)
+        {
             try
             {
                 productServiceBean.updateProduct(productId);
@@ -68,30 +67,12 @@ public class GoToLeaderboard extends HttpServlet {
                 for(Points p : pointsPerUser)
                     System.out.println(p.getUserByUserId().getUsername()+" "+ p.getTotal());
 
-                System.out.println("\n"+pointsPerUser);
+                //System.out.println("\n"+pointsPerUser);
             }
             catch(Exception e)
             {
                 e.printStackTrace();
             }
-
-
-            /*
-            Map<String,Integer> userAndPoints = new HashMap<>();
-
-            for(Points p : pointsPerUser)
-            {
-                try
-                {
-                    userAndPoints.put(p.getUserByUserId().getUsername(), p.getTotal());
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-
-             */
 
             String path = "/WEB-INF/leaderboard.html";
             ServletContext servletContext = this.getServletContext();
@@ -106,8 +87,8 @@ public class GoToLeaderboard extends HttpServlet {
 
     }
 
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         doPost(request,response);
     }
 

@@ -1,0 +1,15 @@
+Log (id, time, submitted, user, product)
+
+MarketingAnswer (id, text, user, marketingquestion)
+
+MarketingQuestion(id, text, product, marketinganswers, product)
+
+Points (id, total, user, product)
+
+Product (id, name, image, date, logs, marketingquestions, points, statisticalanswers)
+
+StatisticalAnswer (id, age, sex, expertise, user, product)
+
+User (id, admin, blocked, username, email, password, birthDate, sex, logs, marketinganswers, points, statisticalanswers)
+
+OffensiveWord (id, word)

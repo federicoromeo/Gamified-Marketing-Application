@@ -1,6 +1,5 @@
 package controllers;
 
-import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import services.LogServiceBean;
@@ -8,7 +7,6 @@ import entities.*;
 import org.thymeleaf.TemplateEngine;
 import services.MarketingQuestionServiceBean;
 import services.ProductServiceBean;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
+
 
 @WebServlet("/CancelQuestionnaire")
 public class CancelQuestionnaire extends HttpServlet
@@ -61,10 +60,8 @@ public class CancelQuestionnaire extends HttpServlet
         //user
         user = (User) request.getSession().getAttribute("user");
 
-        //the first question
-
+        //product id
         pId = Integer.parseInt(request.getParameter("product"));
-        System.out.println("product: "+pId);
 
         //fetch the product
         product = productServiceBean.find(pId);

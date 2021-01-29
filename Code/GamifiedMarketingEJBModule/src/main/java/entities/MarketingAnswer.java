@@ -9,8 +9,6 @@ public class MarketingAnswer
 {
     private int id;
     private String text;
-    private int userId;
-    private int marketingquestionId;
     private User userByUserId;
     private MarketingQuestion marketingquestionByMarketingquestionId;
 
@@ -25,7 +23,6 @@ public class MarketingAnswer
     }
 
 
-    @Basic
     @Column(name = "text", nullable = false, length = 255)
     public String getText() {
         return text;
@@ -36,30 +33,8 @@ public class MarketingAnswer
     }
 
 
-    @Basic
-    @Column(name = "userId", nullable = false)
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-
-    @Basic
-    @Column(name = "marketingquestionId", nullable = false)
-    public int getMarketingquestionId() {
-        return marketingquestionId;
-    }
-
-    public void setMarketingquestionId(int marketingquestionId) {
-        this.marketingquestionId = marketingquestionId;
-    }
-
-
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "userId", referencedColumnName = "id")
+    @JoinColumn(name = "userId")
     public User getUserByUserId() {
         return userByUserId;
     }
@@ -70,7 +45,7 @@ public class MarketingAnswer
 
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "marketingquestionId", referencedColumnName = "id")
+    @JoinColumn(name = "marketingquestionId")
     public MarketingQuestion getMarketingquestionByMarketingquestionId()
     {
         return marketingquestionByMarketingquestionId;
@@ -79,32 +54,5 @@ public class MarketingAnswer
     public void setMarketingquestionByMarketingquestionId(MarketingQuestion marketingquestionByMarketingquestionId)
     {
         this.marketingquestionByMarketingquestionId = marketingquestionByMarketingquestionId;
-    }
-
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MarketingAnswer that = (MarketingAnswer) o;
-
-        if (id != that.id) return false;
-        if (userId != that.userId) return false;
-        if (marketingquestionId != that.marketingquestionId) return false;
-        if (text != null ? !text.equals(that.text) : that.text != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int result = id;
-        result = 31 * result + (text != null ? text.hashCode() : 0);
-        result = 31 * result + userId;
-        result = 31 * result + marketingquestionId;
-        return result;
     }
 }

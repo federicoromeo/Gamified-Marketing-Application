@@ -11,8 +11,6 @@ public class StatisticalAnswer {
     private byte age;
     private byte sex;
     private String expertise;
-    private int userId;
-    private int productId;
     private User userByUserId;
     private Product productByProductId;
 
@@ -27,7 +25,6 @@ public class StatisticalAnswer {
     }
 
 
-    @Basic
     @Column(name = "age", nullable = true)
     public byte getAge() {
         return age;
@@ -38,7 +35,6 @@ public class StatisticalAnswer {
     }
 
 
-    @Basic
     @Column(name = "sex", nullable = true)
     public byte getSex() {
         return sex;
@@ -49,7 +45,6 @@ public class StatisticalAnswer {
     }
 
 
-    @Basic
     @Column(name = "expertise", nullable = true)
     public String getExpertise() {
         return expertise;
@@ -59,31 +54,8 @@ public class StatisticalAnswer {
         this.expertise = expertise;
     }
 
-
-    @Basic
-    @Column(name = "userId", nullable = false)
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-
-    @Basic
-    @Column(name = "productId", nullable = false)
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "userId", referencedColumnName = "id")//, nullable = false)
+    @JoinColumn(name = "userId")//, nullable = false)
     public User getUserByUserId() {
         return userByUserId;
     }
@@ -92,9 +64,8 @@ public class StatisticalAnswer {
         this.userByUserId = userByUserId;
     }
 
-
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "productId", referencedColumnName = "id")//, nullable = false)
+    @JoinColumn(name = "productId")//, nullable = false)
     public Product getProductByProductId() {
         return productByProductId;
     }

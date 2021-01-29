@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name = "product", schema = "gamified_db")
 @NamedQueries({
     @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p"),
-    @NamedQuery(name = "Product.getOrderedPoints", query = "Select po FROM Product pr, Points po WHERE pr.id = ?1 AND po.productId = pr.id ORDER BY po.total DESC") })
+    @NamedQuery(name = "Product.getOrderedPoints", query = "Select po FROM Product pr, Points po WHERE pr.id = ?1 AND po.productByProductId.id = pr.id ORDER BY po.total DESC") })
 public class Product implements Serializable {
 
     private int id;
@@ -36,8 +36,6 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-
-    @Basic
     @Column(name = "name", nullable = false, length = 255)
     public String getName()
     {
@@ -48,7 +46,6 @@ public class Product implements Serializable {
     {
         this.name = name;
     }
-
 
     @Lob
     @Column(name = "image", nullable = false)
@@ -62,8 +59,6 @@ public class Product implements Serializable {
         this.image = image;
     }
 
-
-    @Basic
     @Temporal(TemporalType.DATE)
     @Column(name = "date", unique = true, nullable = false)
     public Date getDate()

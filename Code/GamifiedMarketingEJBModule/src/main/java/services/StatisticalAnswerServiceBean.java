@@ -51,8 +51,8 @@ public class StatisticalAnswerServiceBean
     public int createStatisticalAnswer(User user, Product product, byte age, byte sex, String expertise)
     {
         StatisticalAnswer statisticalAnswer=new StatisticalAnswer();
-        statisticalAnswer.setUserId(user.getId());
-        statisticalAnswer.setProductId(product.getId());
+        statisticalAnswer.setUserByUserId(user);
+        statisticalAnswer.setProductByProductId(product);
         statisticalAnswer.setAge(age);
         statisticalAnswer.setSex(sex);
         statisticalAnswer.setExpertise(expertise);

@@ -79,11 +79,13 @@ public class ProductServiceBean
         Date today = new Date();
 
         return em
-                        .createNamedQuery("Product.findAll", Product.class)
-                        .getResultList()
-                        .stream()
-                        .filter(x -> x.getDate().before(today) && x.getId()!=2)
-                        .collect(Collectors.toList());
+                .createNamedQuery("Product.findAll", Product.class)
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
+                .getResultList()
+                .stream()
+                .filter(x -> x.getDate().before(today) && x.getId()!=2)
+                .filter(x -> x.getId() != findProductOfTheDay(today).getId())
+                .collect(Collectors.toList());
     }
 
 
@@ -107,7 +109,7 @@ public class ProductServiceBean
      * @param date the day in which the product is scheduled to be "product of the day"
      * @return the id of the product just created
      */
-    public int createProduct(String name, byte[] image, Date date) throws  Exception
+    public int createProduct(String name, byte[] image, Date date)
     {
         Product product = new Product();
         product.setName(name);
@@ -136,11 +138,11 @@ public class ProductServiceBean
     public void updateProduct(int productId)
     {
         Product product = em.createNamedQuery("Product.findAll", Product.class)
-                                .setHint("javax.persistence.cache.storeMode", "REFRESH")
-                                .getResultList()
-                                .stream()
-                                .findFirst()
-                                .orElse(null);
+                .setHint("javax.persistence.cache.storeMode", "REFRESH")
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 
 
@@ -153,5 +155,4 @@ public class ProductServiceBean
     {
         return findProductOfTheDay(date) != null;
     }
-
 }

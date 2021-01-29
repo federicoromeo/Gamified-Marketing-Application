@@ -39,7 +39,6 @@ public class User {
     }
 
 
-    @Basic
     @Column(name = "username", nullable = false)
     public String getUsername() {
         return username;
@@ -50,7 +49,6 @@ public class User {
     }
 
 
-    @Basic
     @Temporal(TemporalType.DATE)
     @Column(name = "birthDate", unique = true, nullable = false)
     public Date getBirthDate()
@@ -64,7 +62,6 @@ public class User {
     }
 
 
-    @Basic
     @Column(name = "sex", nullable = true)
     public String getSex() {
         return sex;
@@ -75,7 +72,6 @@ public class User {
     }
 
 
-    @Basic
     @Column(name = "admin", nullable = false)
     public byte getAdmin() {
         return admin;
@@ -86,7 +82,6 @@ public class User {
     }
 
 
-    @Basic
     @Column(name = "blocked", nullable = false)
     public byte getBlocked() {
         return blocked;
@@ -97,7 +92,6 @@ public class User {
     }
 
 
-    @Basic
     @Column(name = "email", nullable = false)
     public String getEmail() {
         return email;
@@ -108,7 +102,6 @@ public class User {
     }
 
 
-    @Basic
     @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;

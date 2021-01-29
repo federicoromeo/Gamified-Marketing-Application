@@ -20,8 +20,6 @@ public class OffensiveWord {
         this.id = id;
     }
 
-
-    @Basic
     @Column(name = "word", nullable = false, length = 255)
     public String getWord() {
         return word;

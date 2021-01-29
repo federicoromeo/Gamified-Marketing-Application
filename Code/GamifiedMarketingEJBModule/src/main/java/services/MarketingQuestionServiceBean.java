@@ -4,7 +4,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import entities.*;
@@ -54,7 +53,7 @@ public class MarketingQuestionServiceBean
                 .setHint("javax.persistence.cache.storeMode", "REFRESH")
                 .getResultList()
                 .stream()
-                .filter(x -> x.getProductId()==product.getId())
+                .filter(x -> x.getProductByProductId().getId() == product.getId())
                 .collect(Collectors.toList());
     }
 
@@ -69,7 +68,6 @@ public class MarketingQuestionServiceBean
     {
         MarketingQuestion marketingQuestion = new MarketingQuestion();
         marketingQuestion.setText(text);
-        marketingQuestion.setProductId(product.getId());
         marketingQuestion.setProductByProductId(product); //added fede
 
         em.persist(marketingQuestion);
@@ -78,18 +76,5 @@ public class MarketingQuestionServiceBean
         System.out.println("Created question " + marketingQuestion.getId());
         return marketingQuestion.getId();
     }
-
-
-    /**
-     * Remove a question
-     * @param marketingQuestionId the id of the marketingQuestion to remove
-     */
-    public void deleteMarketingQuestion(int marketingQuestionId)
-    {
-        Optional
-                .of(em.find(MarketingAnswer.class, marketingQuestionId))
-                .ifPresent(p -> em.remove(p));
-    }
-
 }
 

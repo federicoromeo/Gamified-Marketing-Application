@@ -4,9 +4,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import entities.*;
 
@@ -30,76 +27,6 @@ public class LogServiceBean
         return em
                 .find(Log.class, logId);
     }
-
-
-    /**
-     * Get logs of a user
-     * @param user the user for which we want to find the logs
-     * @return the list of the user's logs, possibly empty
-     */
-    public List<Log> findLogsByUser(User user)
-    {
-        return em
-                .createNamedQuery("Log.findAll", Log.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getUserId()==user.getId())
-                .collect(Collectors.toList());
-    }
-
-
-    /**
-     * Get logs of a product
-     * @param product the product for which we want to find the logs
-     * @return the list of the product's logs, possibly empty
-     */
-    public List<Log> findLogsByProduct(Product product)
-    {
-        return em
-                .createNamedQuery("Log.findAll", Log.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getProductId()==product.getId())
-                .collect(Collectors.toList());
-
-    }
-
-
-    /**
-     * Get logs of a user for a product
-     * @param user the user for which we want to find the logs
-     * @param product the id of the user for which we want find the logs
-     * @return the list of the user and product' logs, possibly empty
-     */
-    public List<Log> findLogsByUserProduct(User user, Product product)
-    {
-        return em
-                .createNamedQuery("Log.findAll", Log.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getUserId()==user.getId())
-                .filter(x -> x.getProductId()==product.getId())
-                .collect(Collectors.toList());
-
-
-    }
-
-
-    /**
-     * Get submitted or cancelled logs
-     * @param submitted indicates if we want submitted or cancelled logs
-     * @return the list of submitted or cancelled logs, possibly empty
-     */
-    public List<Log> findSubmittedCancelledLogs(byte submitted)
-    {
-        return em
-                .createNamedQuery("Log.findAll", Log.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getSubmitted()==submitted)
-                .collect(Collectors.toList());
-    }
-
 
     /**
      * Get all logs
@@ -144,8 +71,8 @@ public class LogServiceBean
     public int createLog(User user, Product product, byte submitted, Timestamp timestamp)
     {
         Log log = new Log();
-        log.setUserId(user.getId());
-        log.setProductId(product.getId());
+        log.setUserByUserId(user);
+        log.setProductByProductId(product);
         log.setSubmitted(submitted);
         log.setTime(timestamp);
 
@@ -153,17 +80,5 @@ public class LogServiceBean
         em.flush();
 
         return log.getId();
-    }
-
-
-    /**
-     * Remove a log
-     * @param logId the Id of the log to remove
-     */
-    public void deleteLog(int logId)
-    {
-        Optional
-                .of(em.find(Log.class, logId))
-                .ifPresent(p -> em.remove(p));
     }
 }

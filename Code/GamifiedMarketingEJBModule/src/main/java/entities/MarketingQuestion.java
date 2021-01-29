@@ -10,7 +10,6 @@ public class MarketingQuestion
 {
     private int id;
     private String text;
-    private int productId;
     private Collection<MarketingAnswer> marketinganswersById;
     private Product productByProductId;
 
@@ -26,8 +25,6 @@ public class MarketingQuestion
         this.id = id;
     }
 
-
-    @Basic
     @Column(name = "text", nullable = false, length = 255)
     public String getText() {
         return text;
@@ -37,21 +34,9 @@ public class MarketingQuestion
         this.text = text;
     }
 
-
-    @Basic
-    @Column(name = "productId", nullable = false)
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-
     @OneToMany(mappedBy = "marketingquestionByMarketingquestionId",
             fetch = FetchType.EAGER,
-            cascade = {CascadeType.REMOVE, CascadeType.REFRESH },
+            cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST },
             orphanRemoval = true)
     public Collection<MarketingAnswer> getMarketinganswersById() {
         return marketinganswersById;
@@ -64,37 +49,12 @@ public class MarketingQuestion
 
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "productId", referencedColumnName = "id")
+    @JoinColumn(name = "productId")
     public Product getProductByProductId() {
         return productByProductId;
     }
 
     public void setProductByProductId(Product productByProductId) {
         this.productByProductId = productByProductId;
-    }
-
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MarketingQuestion that = (MarketingQuestion) o;
-
-        if (id != that.id) return false;
-        if (productId != that.productId) return false;
-        if (text != null ? !text.equals(that.text) : that.text != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int result = id;
-        result = 31 * result + (text != null ? text.hashCode() : 0);
-        result = 31 * result + productId;
-        return result;
     }
 }

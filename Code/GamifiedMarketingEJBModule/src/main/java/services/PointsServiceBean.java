@@ -38,57 +38,6 @@ public class PointsServiceBean
                 .createNamedQuery("Points.findAll", Points.class)
                 .getResultList();
     }
-
-
-    /**
-     * Get points of a product
-     * @param productId the id of the product for which we want to find the points
-     * @return the list of the product's points, possibly empty
-     */
-    public List<Points> findPointsByProduct(int productId)
-    {
-        return em
-                .createNamedQuery("Points.findAll", Points.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getProductId()==productId)
-                .collect(Collectors.toList());
-    }
-
-
-    /**
-     * Get the points of a user
-     * @param user the user for which we want to find the points
-     * @return the list of the user's points, possibly empty
-     */
-    public List<Points> findPointsByUser(User user)
-    {
-        return em
-                .createNamedQuery("Points.findAll", Points.class)
-                .getResultList()
-                .stream()
-                .filter(x -> x.getUserId()==(user.getId()))
-                .collect(Collectors.toList());
-    }
-
-
-    /**
-     * Create a new points
-     * @param user the user which refer the points
-     * @param product the product which refer the points
-     * @param total the total number of points
-     * @return the id of the points just created
-     */
-    public int createPoints(User user, Product product, int total)
-    {
-        Points points=new Points();
-        points.setUserId(user.getId());
-        points.setProductId(product.getId());
-        points.setTotal(total);
-
-        em.persist(points);
-        em.flush();
-
-        return points.getId();
-    }
 }
+
+

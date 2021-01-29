@@ -27,7 +27,7 @@ END
 ********Trigger per calcolare i punti della sezione 2:
         NB:il trigger calcola correttamente i punti solo se non vi solo valori di default in statistical answer
 
-       CREATE DEFINER=`root`@`localhost` TRIGGER `statisticalanswer_AFTER_INSERT` AFTER INSERT ON `statisticalanswer` FOR EACH ROW BEGIN
+   CREATE DEFINER=`root`@`localhost` TRIGGER `statisticalanswer_AFTER_INSERT` AFTER INSERT ON `statisticalanswer` FOR EACH ROW BEGIN
    DECLARE pointsToAdd integer;
 
 

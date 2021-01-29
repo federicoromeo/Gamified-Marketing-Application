@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.Points;
+import entities.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -52,38 +53,33 @@ public class GoToLeaderboard extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
 
-        int productId;
-        List<Points> pointsPerUser = new ArrayList<>();
+        Product productOfTheDay = null;
+        List<Points> pointsPerUser = null;
 
-        productId = Integer.parseInt(request.getParameter("productId"));
-
-        if(productId > 0)
+        try
         {
-            try
-            {
-                productServiceBean.updateProduct(productId);
-                pointsPerUser = productServiceBean.findLeaderboardByProductId(productId);
+            //productServiceBean.updateProduct(productId);
+            productOfTheDay = productServiceBean.findProductOfTheDay(new Date());
+            pointsPerUser = productServiceBean.findLeaderboardByProductId(productOfTheDay.getId());
 
-                for(Points p : pointsPerUser)
-                    System.out.println(p.getUserByUserId().getUsername()+" "+ p.getTotal());
+            /*
+            for(Points p : pointsPerUser)
+                System.out.println(p.getUserByUserId().getUsername()+" "+ p.getTotal());
 
-                //System.out.println("\n"+pointsPerUser);
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
+             */
 
-            String path = "/WEB-INF/leaderboard.html";
-            ServletContext servletContext = this.getServletContext();
-            WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-            ctx.setVariable("pointsList", pointsPerUser);
-            this.templateEngine.process(path, ctx, response.getWriter());
+            //System.out.println("\n"+pointsPerUser);
         }
-        else
+        catch(Exception e)
         {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bad product id");
+            e.printStackTrace();
         }
+
+        String path = "/WEB-INF/leaderboard.html";
+        ServletContext servletContext = this.getServletContext();
+        WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+        ctx.setVariable("pointsList", pointsPerUser);
+        this.templateEngine.process(path, ctx, response.getWriter());
 
     }
 

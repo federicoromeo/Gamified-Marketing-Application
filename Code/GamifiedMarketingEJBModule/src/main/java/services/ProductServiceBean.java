@@ -135,17 +135,6 @@ public class ProductServiceBean
     }
 
 
-    public void updateProduct(int productId)
-    {
-        Product product = em.createNamedQuery("Product.findAll", Product.class)
-                .setHint("javax.persistence.cache.storeMode", "REFRESH")
-                .getResultList()
-                .stream()
-                .findFirst()
-                .orElse(null);
-    }
-
-
     /**
      * Check if a product for a given date is already present
      * @param date the date

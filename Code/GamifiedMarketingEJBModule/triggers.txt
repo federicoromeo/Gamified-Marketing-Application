@@ -56,3 +56,34 @@ END
                     avviene in teoria solamante l'inserimento di una marketingQuestion che scatena il precedente trigger.
                     Il caso è comunque considerato per mettersi al riparo nel caso in cui il dbms processi i trigger o
                     l'inserimento delle tuple con ordine differente da quanto aspettato
+
+
+*******This trigger checks that the answer does not contain any offensive word, and in this case it blocks the user and prevents the insertion of these answer.
+*******NOT USED
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `marketinganswer_BEFORE_INSERT`
+BEFORE INSERT ON `marketinganswer`
+FOR EACH ROW BEGIN
+
+
+    IF EXISTS (SELECT *
+   		FROM offensiveword o
+           		WHERE CHARINDEX(o.name, NEW.text)>0)
+   	 THEN
+   		 
+        	UPDATE user u
+   		 SET u.blocked=1
+   		 WHERE u.id=NEW.userId;
+       	 
+        	signal sqlstate '45000' set message_text = 
+'Offensive word identified, user is now blocked';
+    
+  	END IF;
+END
+
+
+NB: we didn’t add this trigger to our database’s procedures because we considered to have a low number 
+of offensive word stored, therefore we decided to handle this control backend. In fact, in the servlet 
+“AnswerQuestionnaire”, before inserting the marketing answers we retrieve from the database all the offensive
+ words, and check whether they are present or not in them. In that case, we rollback the insertion of the answers.
+In case of an high number of offensive word stored in the database, we can implement this trigger.

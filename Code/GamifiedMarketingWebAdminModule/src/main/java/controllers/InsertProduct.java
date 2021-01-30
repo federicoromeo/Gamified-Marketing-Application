@@ -3,6 +3,7 @@ package controllers;
 import javax.ejb.EJB;
 import entities.MarketingQuestion;
 import entities.Product;
+import org.apache.commons.lang3.time.DateUtils;
 import org.thymeleaf.context.WebContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -64,7 +65,7 @@ public class InsertProduct extends HttpServlet {
         String name;
         byte[] image;
         int numberOfQuestions, newProductId, mqId;
-        List<String> questions = new ArrayList<>();;
+        List<String> questions = new ArrayList<>();
         Product newProduct;
         MarketingQuestion mqRef;
         List<MarketingQuestion> allQuestions = new ArrayList<>();
@@ -83,7 +84,7 @@ public class InsertProduct extends HttpServlet {
         }
 
         //server side check if product date is invalid
-        if(date.before(new Date()))
+        if(date.before(new Date()) && !DateUtils.isSameDay(date, new Date()))
         {
             errorAndRefresh("Please select a valid date!", request, response);
             return;

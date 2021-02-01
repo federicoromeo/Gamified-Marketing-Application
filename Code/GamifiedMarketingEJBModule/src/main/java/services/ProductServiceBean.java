@@ -6,7 +6,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Date;
 import java.util.*;
 import java.util.stream.Collectors;
-
+import org.apache.commons.lang3.time.DateUtils;
 import entities.*;
 import utils.Data;
 
@@ -84,7 +84,8 @@ public class ProductServiceBean
                 .getResultList()
                 .stream()
                 .filter(x -> x.getDate().before(today) && x.getId()!=2)
-                .filter(x -> x.getId() != findProductOfTheDay(today).getId())
+                //.filter(x -> x.getId() != findProductOfTheDay(today).getId())
+                .filter(x -> !DateUtils.isSameDay(x.getDate(), new Date()))
                 .collect(Collectors.toList());
     }
 

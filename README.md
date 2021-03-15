@@ -38,3 +38,5 @@ preceding the current date.
 * EJB (stateless or stateful) for the business objects
 * JPA for object relational mapping and transaction management
 * Triggers and constraints for database-level business constraints and rules.
+
+<p>Click <a href="https://github.com/federicoromeo/Gamified-Marketing-Application/blob/main/Documents/DB2%20-%20Optional%20Project.pdf" title="Title">here</a> for a detailed presentation of the project.</p> 

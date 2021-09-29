@@ -1,6 +1,6 @@
 # Gamified Marketing Application
 
-An application deals with gamified consumer data collection. 
+An application that deals with gamified consumer data collection. 
 
 
 ### User
@@ -34,7 +34,7 @@ preceding the current date.
 ## Technologies
 * MySQL DBMS
 * TomEE JEE application/web server
-* Java servlet and templating (JSP, JSTL or Thymeleaf) for the user interface
+* Java servlet and templating (Thymeleaf) for the user interface
 * EJB (stateless or stateful) for the business objects
 * JPA for object relational mapping and transaction management
 * Triggers and constraints for database-level business constraints and rules.
